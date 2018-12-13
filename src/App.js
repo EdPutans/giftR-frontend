@@ -49,24 +49,25 @@ class App extends Component {
 
 
   render() {
+    const {currentUser, navBarItem} = this.state
     return (
       <div>
         <Route path='' component={ props => <Navbar { ...props }
           handleItemClick={ this.handleNavBarChange }
-          activeItem={ this.state.navBarItem }
+          activeItem={ navBarItem }
         /> } />
         <Switch>
           {/* because user is signed out, we currently only work on these ;p */ }
           <Route path='/friends' component={ props => <h1> Under construction - friends </h1> } />
           <Route path='/secret_santa' component={ props => <h1> Under construction - santa</h1> } />
-          <Route path='/profile' component={ props => <h1> Under construction - profile</h1> } />
+          <Route path='/profile' component={ props => <Signup {...props} user={currentUser} /> } />
           <Route path='/login' component={ props => <Login { ...props } /> } />
           <Route path='/signup' component={ props => <Signup { ...props } /> } />
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/wishlist' component={ props => <Wishlist 
                       { ...props } 
-                      currentUser={ this.state.currentUser }
-                      wishes={ this.state.currentUser.gifts } /> } />
+                      currentUser={ currentUser }
+                      wishes={ currentUser.gifts } /> } />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />
         </Switch>
       </div>
