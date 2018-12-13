@@ -4,6 +4,7 @@ import { Route, Switch} from 'react-router-dom'
 
 
 import Login from './containers/Login'
+import WishForm from './components/WishForm'
 import Welcome from './containers/Welcome'
 import Signup from './containers/Signup'
 import HomePage from './containers/HomePage'
@@ -42,11 +43,16 @@ class App extends Component {
 
   // ----------- redirectors ----------- //
 
-  handleNavBarChange = (name) => {
-    this.setState({ navBarItem: name })
-    this.props.history.push(`/${name}`)
+  handleNavBarChange = (item) => {
+    this.setState({ navBarItem: item })
+    this.props.history.push(`/${item}`)
   }
 
+// --------- prop functions ----------//
+
+
+  handleEditProfile = () => {}
+  handleSignup = () => {}
 
   render() {
     const {currentUser, navBarItem} = this.state
@@ -59,16 +65,20 @@ class App extends Component {
         <Switch>
           {/* because user is signed out, we currently only work on these ;p */ }
           <Route path='/friends' component={ props => <h1> Under construction - friends </h1> } />
-          <Route path='/secret_santa' component={ props => <h1> Under construction - santa</h1> } />
-          <Route path='/profile' component={ props => <Signup {...props} user={currentUser} /> } />
+          <Route path='/santa' component={ props => <h1> Under construction - santa</h1> } />
+          <Route path='/profile' component={ props => <Signup {...props}
+                                                  user={currentUser} 
+                                                  handleSubmit={this.handleEditProfile}
+                                                  /> } />
           <Route path='/login' component={ props => <Login { ...props } /> } />
-          <Route path='/signup' component={ props => <Signup { ...props } /> } />
+          <Route path='/signup' component={ props => <Signup { ...props } handleSubmit={this.handleSignup} /> } />
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/wishlist' component={ props => <Wishlist 
                       { ...props } 
                       currentUser={ currentUser }
                       wishes={ currentUser.gifts } /> } />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />
+          <Route exact path='/new_wish' component={ props => <WishForm { ...props } /> } />
         </Switch>
       </div>
     )

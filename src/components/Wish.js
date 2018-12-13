@@ -25,7 +25,7 @@ export default class Wish extends React.Component {
                 </Card.Content>
                     
                 <Card.Content extra>
-                    Rating: {wish.rating || "none"}
+                    Rating: {wish.rating || "None"}
                 </Card.Content>
             </Card>
         </div>)
