@@ -14,14 +14,22 @@ import * as adapter from './Adapter'
 class App extends Component {
 
   state = {
+    navBarItem: '',
     currentUser: null,
   }
 
+  handleNavBarChange = (name) => {
+    this.setState({ navBarItem: name })
+    this.props.history.push(`/${name}`)
+  }
 
   render() {
     return (
         <div>
-          <Route path='' component={props => <Navbar {...props}/>}/>
+          <Route path='' component={props => <Navbar {...props}
+                                                handleItemClick={this.handleNavBarChange}
+                                                activeItem = {this.state.navBarItem}
+                                                />}/>
             <Switch>
               {/* because user is signed out, we currently only work on these ;p */}
                 <Route path='/friends' component={props => <h1> Under construction - friends </h1> } />
