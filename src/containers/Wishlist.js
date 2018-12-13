@@ -5,12 +5,15 @@ import { Button, Icon } from 'semantic-ui-react'
 export default class Wishlist extends React.Component {
 
 
+
     handleClick =() => this.props.history.push('/new_wish')
     render() {
-        return (
+        let currentUser = this.props.currentUser ? this.props.currentUser : JSON.parse(localStorage.currentUser)
+        if (this.props.currentUser){
+            return (
             <div>
-                { this.props.wishes.map(w => <Wish key={ w.id } wish={ w } user={ this.props.currentUser } />) }
-                <div>
+                { this.props.wishes.map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
+                <div> 
                         <Button
                             className="circular"
                             color="teal"
@@ -27,5 +30,6 @@ export default class Wishlist extends React.Component {
                         </Button>
                 </div>
             </div>)
+        }
     }
 }

@@ -10,6 +10,7 @@ import Signup from './containers/Signup'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import Wishlist from './containers/Wishlist'
+import Loading from './components/Loading'
 import './App.css';
 import * as adapter from './Adapter'
 
@@ -21,21 +22,38 @@ class App extends Component {
     currentUser: null,
     users: []
   }
-
-
-  componentDidMount = () => {
-    // this needs to be refactored to store ID and PW, find user using those upon mounting.
-    // for now uses users[0] as currentUser
+  componentWillReceiveProps(){
+    console.log("PROPPING!!!!!")
+    console.log('current user: ', this.state.currentUser)
     return adapter.getUsers()
       .then(users => this.setState({ users }))
       .then(() => {
-        console.log('state users:', this.state.users)
-
         if (!localStorage.currentUser) {
           this.setState({ currentUser: this.state.users[0] })
-          this.setUserToLocalStorage(this.state.currentUser)
+          console.log('mounted, currentUser:', this.state.currentUser)
+          this.setUserToLocalStorage(this.state.users[0])
         } else {
           this.setState({ currentUser: JSON.parse(localStorage.currentUser) })
+          console.log('mounted 2, currentUser:', this.state.currentUser)
+        }
+      })
+      .then(() => this.setState({ currentUser: this.state.users[0] })
+      )
+  }
+
+  componentDidMount (){
+    console.log("MOUNTING!!!!!!")
+    console.log('current user: ',this.state.currentUser)
+    return adapter.getUsers()
+      .then(users => this.setState({ users }))
+      .then(() => {
+        if (!localStorage.currentUser) {
+          this.setState({ currentUser: this.state.users[0] })
+          console.log('mounted, currentUser:', this.state.currentUser)
+          this.setUserToLocalStorage(this.state.users[0])
+        } else {
+          this.setState({ currentUser: JSON.parse(localStorage.currentUser) })
+          console.log('mounted 2, currentUser:', this.state.currentUser)
         }
       })
       .then(() => this.setState({ currentUser: this.state.users[0] })
@@ -49,7 +67,8 @@ class App extends Component {
 
   setUserToLocalStorage=(user)=>{
     let deepUserCopy = {...user}
-    localStorage.setItem('currentUser',JSON.stringify(deepUserCopy))
+    console.log('deep copy', deepUserCopy)
+    localStorage.setItem('currentUser', JSON.stringify(deepUserCopy))
   }
 
   refreshCurrentUser=(id)=>{
@@ -89,11 +108,12 @@ class App extends Component {
 
 
   render() {
+      console.log("RENDERING!!!!!!")
     const { currentUser, navBarItem } = this.state
-    if(!localStorage.currentUser){
-      return (<div>Welcome page.</div>)
-    }else{
-    return (
+    // if(!localStorage.currentUser){
+    //   // return <Route path='' component ={<div>YOURE NOT LOGGED IN</div>} />
+    // }else{
+    if (this.state.currentUser){return (
       <div>
         <Route path='' component={ props => <Navbar { ...props }
           handleItemClick={ this.handleNavBarChange }
@@ -113,7 +133,8 @@ class App extends Component {
           <Route exact path='/wishlist' component={ props => <Wishlist
                 { ...props }
                 currentUser={ currentUser }
-                wishes={ currentUser.gifts } /> } 
+                wishes={ currentUser.gifts }
+             /> } 
           />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />
           <Route exact path='/new_wish' component={ props =>
@@ -121,7 +142,8 @@ class App extends Component {
           />
         </Switch>
       </div>
-    )}
+    )
+    } else { return <Loading />}
   }
 }
 

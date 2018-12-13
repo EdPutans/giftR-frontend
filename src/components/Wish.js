@@ -20,7 +20,7 @@ export default class Wish extends React.Component {
                         <Card.Description><a href={ wish.url }>Purchase here!</a></Card.Description> : <Card.Description>No purchase link provided</Card.Description>
                     }
 
-                    { user.id === wish.user_id && <Button size="mini" floated="right" basic color="red">Delete</Button> }
+                    
                     { user.id === wish.user_id && <Button floated="right" size="mini" color="teal">Edit</Button>}
                 </Card.Content>
                     
