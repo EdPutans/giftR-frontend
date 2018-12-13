@@ -7,22 +7,21 @@ import { Menu, Input } from 'semantic-ui-react'
 
     render() {
         return (<div>
-            <Menu inverted>
+            <Menu fluid>
                 <Menu.Item   
                     name='home'
                     active={ this.props.activeItem === 'home' }
                     onClick={() => this.props.handleItemClick("home") }
-                />
-                <Input className='icon' icon='search' placeholder='Search...' />
+                /> 
                 <Menu.Item
                     name='friends'
                     active={ this.props.activeItem === 'friends' }
                     onClick={() => this.props.handleItemClick("friends") }
                 />
                 <Menu.Item 
-                    name='Secret Santa' 
-                    active={ this.props.activeItem === 'Secret Santa' } 
-                    onClick={() => this.props.handleItemClick("secret_santa") } 
+                    name='Santa' 
+                    active={ this.props.activeItem === 'Santa' } 
+                    onClick={ () => this.props.handleItemClick("Santa") } 
                 />
                 <Menu.Item
                     name='profile'
@@ -34,7 +33,6 @@ import { Menu, Input } from 'semantic-ui-react'
                     active={ this.props.activeItem === 'wishlist' }
                     onClick={ () => this.props.handleItemClick("wishlist") }
                 />    
-                )) }
             </Menu>
         </div>)
     }

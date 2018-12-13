@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { BrowserRouter, withRouter, Route, Switch, Redirect } from 'react-router-dom'
-
+import { Route, Switch} from 'react-router-dom'
+// import { BrowserRouter, withRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 
 import Login from './containers/Login'
@@ -22,11 +22,13 @@ class App extends Component {
   }
 
   componentDidMount = () => {
+    // this needs to be refactored to store ID and PW, find user using those upon mounting.
+      // for now uses users[0] as currentUser
     return adapter.getUsers()
       .then(users => this.setState({ users }))
       .then(() => {
         console.log('state users:', this.state.users)
-        // for now uses users[0] as currentUser
+      
         if (!localStorage.currentUser){
           this.setState({ currentUser: this.state.users[0] })
           localStorage.setItem('currentUser', JSON.stringify(this.state.currentUser))
@@ -61,7 +63,10 @@ class App extends Component {
           <Route path='/login' component={ props => <Login { ...props } /> } />
           <Route path='/signup' component={ props => <Signup { ...props } /> } />
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
-          <Route exact path='/wishlist' component={ props => <Wishlist { ...props } wishes={ this.state.currentUser.gifts } /> } />
+          <Route exact path='/wishlist' component={ props => <Wishlist 
+                      { ...props } 
+                      currentUser={ this.state.currentUser }
+                      wishes={ this.state.currentUser.gifts } /> } />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />
         </Switch>
       </div>

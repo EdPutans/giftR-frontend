@@ -7,7 +7,7 @@ export default class Wishlist extends React.Component {
     render() {
         return (
         <div>
-            {this.props.wishes.map(w => <Wish wish={w}/>)  }
+            {this.props.wishes.map(w => <Wish key={w.id} wish={w} user={this.props.currentUser}/> )  }
         </div>)
     }
 }
