@@ -3,12 +3,11 @@ const giftsURL = "http://localhost:3000/api/v1/gifts"
 
 export const e = 123
 
-
 // Getters
 export const getUsers = () => fetch(usersURL).then(resp=> resp.json())
 export const getGifts = () => fetch(giftsURL).then(resp => resp.json())
 
-
+export const getUser = (id) => fetch(`${usersURL}/${id}`).then(resp => resp.json())
 // Posters
 export const postUser = (userObject) => fetch(usersURL,{
     method: 'POST',

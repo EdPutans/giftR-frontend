@@ -21,7 +21,7 @@ export default class Wish extends React.Component {
                     }
 
                     { user.id === wish.user_id && <Button size="mini" floated="right" basic color="red">Delete</Button> }
-                    { user.id === wish.user_id && <Button floated="right" size="mini" color="blue">Edit</Button>}
+                    { user.id === wish.user_id && <Button floated="right" size="mini" color="teal">Edit</Button>}
                 </Card.Content>
                     
                 <Card.Content extra>

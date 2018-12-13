@@ -1,10 +1,15 @@
 import React from 'react'
-import { Form, Button, Radio, Icon, Label } from 'semantic-ui-react'
+import { Form, Button, Radio, Label } from 'semantic-ui-react'
 
 export default class WishForm extends React.Component {
 
     state = {
-        rating: 0
+        rating: 0,
+        name: '',
+        description: '',
+        url: '',
+        img_url: '',
+        price: 0
     }
 
     selection = [
@@ -16,6 +21,17 @@ export default class WishForm extends React.Component {
     ]
 
     setStars = (num) => this.setState({ rating: parseInt(num) })
+
+    handleSubmit = () => {
+        let {name, description, url, img_url, price, rating} = this.state
+        url = !url.includes("http://") || !url.includes("https://")? "http://"+url : url
+        console.log('edited url:', url)
+        const newWish ={
+            name, description, url, img_url, price, rating
+        }
+        
+        this.props.handleSubmit(newWish)
+    }
 
     render() {
         return (<div>
@@ -69,7 +85,7 @@ export default class WishForm extends React.Component {
                                 control={ Radio }
                                 label={ s.label }
                                 value={ s.value }
-                                checked={ this.state.stars === s.value }
+                                checked={ this.state.rating === s.value }
                                 onChange={ () => this.setStars(s.value) }
                             />
                         ) }
@@ -78,7 +94,7 @@ export default class WishForm extends React.Component {
                 </Label>
 
             </Form><br />
-            <Button>Make a wish!</Button>
+            <Button color="teal" onClick={this.handleSubmit}>Make a wish!</Button>
         </div>)
     }
 }
