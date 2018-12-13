@@ -12,15 +12,20 @@ export default class Wish extends React.Component {
                 <Card.Content>
                     <Card.Header><Icon name='star' />{wish.name}</Card.Header>
                     <Card.Meta>
-                        <span className='date'>£XX.XX</span>
+                        <span className='price'>£ { wish.price || "Price unspecified"} </span>
                     </Card.Meta>
-                    <Card.Description>{wish.description || "no description provided"}</Card.Description>
-                    <Card.Description><a href={wish.url}>Purchase here!</a></Card.Description>
-                    { user.id === wish.user_id && <Button floated="right" size="mini" color="blue">Edit</Button>}
+                    <Card.Description>{wish.description || "No description provided"} </Card.Description>
+
+                    {wish.url? 
+                        <Card.Description><a href={ wish.url }>Purchase here!</a></Card.Description> : <Card.Description>No purchase link provided</Card.Description>
+                    }
+
                     { user.id === wish.user_id && <Button size="mini" floated="right" basic color="red">Delete</Button> }
+                    { user.id === wish.user_id && <Button floated="right" size="mini" color="blue">Edit</Button>}
                 </Card.Content>
+                    
                 <Card.Content extra>
-                    Render stars here!
+                    Rating: {wish.rating || "none"}
                 </Card.Content>
             </Card>
         </div>)
