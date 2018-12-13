@@ -8,9 +8,7 @@ export default class HomePage extends React.Component {
     render() {
         return (
         <div>
-            <Wish />
-            <Wish />
-            <Wish />
+            
         </div>
         )
     }

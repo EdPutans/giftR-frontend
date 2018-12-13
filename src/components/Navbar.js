@@ -28,6 +28,11 @@ import { Menu, Input } from 'semantic-ui-react'
                     name='profile'
                     active={ this.props.activeItem === 'profile' }
                     onClick={() => this.props.handleItemClick("profile") }
+                />
+                <Menu.Item
+                    name='wishlist'
+                    active={ this.props.activeItem === 'wishlist' }
+                    onClick={ () => this.props.handleItemClick("wishlist") }
                 />    
                 )) }
             </Menu>

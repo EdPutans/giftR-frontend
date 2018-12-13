@@ -6,7 +6,6 @@ export const e = 123
 
 // Getters
 export const getUsers = () => fetch(usersURL).then(resp=> resp.json())
-
 export const getGifts = () => fetch(giftsURL).then(resp => resp.json())
 
 
