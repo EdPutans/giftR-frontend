@@ -29,7 +29,6 @@ export default class WishForm extends React.Component {
         const newWish ={
             name, description, url, img_url, price, rating
         }
-        
         this.props.handleSubmit(newWish)
     }
 

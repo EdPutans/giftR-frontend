@@ -21,11 +21,14 @@ class App extends Component {
   state = {
     navBarItem: '',
     currentUser: null,
+    wishes: [],
     users: []
   }
   
 
   componentDidMount (){
+   
+    adapter.getWishes().then(r => this.setState({wishes: r}))
     const user= localStorage.getItem('user')
     const unUser= JSON.parse(user)
     console.log(unUser)
@@ -37,19 +40,6 @@ class App extends Component {
         this.setState({currentUser: data})
       }
     })
-
-    // return adapter.getUsers()
-    //   .then(users => this.setState({ users }))
-    //   .then(() => {
-    //     if (!localStorage.currentUser) {
-    //       // this.setState({ currentUser: this.state.users[0] })
-    //       console.log('mounted, currentUser:', this.state.currentUser)
-    //       // this.setUserToLocalStorage(this.state.users[0])
-    //     } else {
-    //       this.setState({ currentUser: JSON.parse(localStorage.currentUser) })
-    //       console.log('mounted 2, currentUser:', this.state.currentUser)
-    //     }
-    //   })
   }
 
 
@@ -64,8 +54,8 @@ class App extends Component {
     return adapter.getUser(id)
       .then(user => {
         this.setState({currentUser:user})
-        this.setUserToLocalStorage(user)
-                    })
+
+      })
   }
 
   // ----------- redirectors ----------- //
@@ -81,8 +71,11 @@ class App extends Component {
   handleNewWish = (wish) => {
     wish.user_id = this.state.currentUser.id
     return adapter.postGift(wish)
-      .then(wish => this.refreshCurrentUser(wish.user_id))
+      .then(wish => {
+        this.setState({ wishes: [...this.state.wishes, wish] })
+      })
       .then(this.props.history.push('/wishlist'))
+      
   }
 
   authenticate = (email, password) => {
@@ -113,7 +106,9 @@ class App extends Component {
   }
 
   render() {
-    const { currentUser, navBarItem } = this.state
+    
+    const { currentUser, navBarItem, loading } = this.state
+
     if (this.state.currentUser){
       return (
       <div>
@@ -134,7 +129,7 @@ class App extends Component {
           <Route exact path='/wishlist' component={ props => <Wishlist
                 { ...props }
                 currentUser={ currentUser }
-                wishes={ currentUser.gifts }
+                wishes={ this.state.wishes }
              /> } 
           />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />
@@ -146,6 +141,7 @@ class App extends Component {
       </div>
     )
     } else { return (
+      
     <Switch>
       <Route exact path='/' component={ props => <Welcome { ...props } /> } />
       <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />

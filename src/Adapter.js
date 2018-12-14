@@ -12,17 +12,29 @@ export const signin= (email, password) => {
     }).then(resp => resp.json())
 }
 
-export const validate = ( ) => {
-    return fetch('http://localhost:3000/api/v1/validate',{
+
+export const validate = () => {
+    return fetch('http://localhost:3000/api/v1/validate', {
         headers: {
-            'Content-Type' : 'application/json',
+            'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
         },
-    }).then(resp=> resp.json())
-    
+    }).then(resp => resp.json())
+
 }
 
+
 // Getters
+export const getWishes = () => {
+    return fetch('http://localhost:3000/api/v1/get_items', {
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': localStorage.getItem('token')
+        },
+    }).then(resp => resp.json())
+}
+
+
 export const getUsers = () => fetch(usersURL).then(resp=> resp.json())
 export const getGifts = () => fetch(giftsURL).then(resp => resp.json())
 
