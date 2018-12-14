@@ -8,7 +8,7 @@ export default class Wishlist extends React.Component {
 
     handleClick =() => this.props.history.push('/new_wish')
     render() {
-        let currentUser = this.props.currentUser ? this.props.currentUser : JSON.parse(localStorage.currentUser)
+        let currentUser = this.props.currentUser 
         if (this.props.currentUser){
             return (
             <div>
