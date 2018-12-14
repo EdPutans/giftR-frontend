@@ -42,21 +42,21 @@ handleChange = (value, type) => {
 // pass different props to the function to sign up or to edit the user.
 
     render() {
-        const { user } = this.props
+        
         return (
         <div>
             <Form>
                 <Form.Field>
-                    <input onChange={event => this.handleChange(event.target.value, "first_name")} placeholder={user.first_name || 'First Name'}/>
+                    <input onChange={event => this.handleChange(event.target.value, "first_name")} placeholder ='First Name'/>
                 </Form.Field>
                 <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ user.last_name || 'Last Name' } />
+                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={'Last Name' } />
                 </Form.Field>
                 <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ user.email || 'Email' } type="email" />
+                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={'Email' } type="email" />
                 </Form.Field>
                 <Form.Field>
-                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ user.age || "Age"} />
+                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={"Age"} />
                 </Form.Field>
                  <Form.Field>
                         <input onChange={ event => this.handleChange(event.target.value, "password")} placeholder='Password' type="password" />
@@ -68,7 +68,7 @@ handleChange = (value, type) => {
                 
                 <Button onClick={this.handleSubmit}type='submit'>Submit</Button>
             </Form>
-                { !user && <a href="/login">Already a member? Log in here!</a>}
+                { !this.props.user && <a href="/login">Already a member? Log in here!</a>}
         </div>
         )
     }

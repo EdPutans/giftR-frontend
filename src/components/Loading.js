@@ -7,7 +7,8 @@ export default class Loading extends React.Component {
             <div>
 
                 <Loader style={{marginTop: "15em"}} active inline='centered' />
-                This is where Ed may or may not put a crispy animation
+                This is where Ed may or may not put a crispy animation.
+                (Ed, if this loads indefinitely, you forgot to turn on postgresql. You donut!)
             </div>
         )
     }

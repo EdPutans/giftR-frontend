@@ -22,24 +22,24 @@ class App extends Component {
     currentUser: null,
     users: []
   }
-  componentWillReceiveProps(){
-    console.log("PROPPING!!!!!")
-    console.log('current user: ', this.state.currentUser)
-    return adapter.getUsers()
-      .then(users => this.setState({ users }))
-      .then(() => {
-        if (!localStorage.currentUser) {
-          this.setState({ currentUser: this.state.users[0] })
-          console.log('mounted, currentUser:', this.state.currentUser)
-          this.setUserToLocalStorage(this.state.users[0])
-        } else {
-          this.setState({ currentUser: JSON.parse(localStorage.currentUser) })
-          console.log('mounted 2, currentUser:', this.state.currentUser)
-        }
-      })
-      .then(() => this.setState({ currentUser: this.state.users[0] })
-      )
-  }
+  // componentWillReceiveProps(){
+  //   console.log("PROPPING!!!!!")
+  //   console.log('current user: ', this.state.currentUser)
+  //   return adapter.getUsers()
+  //     .then(users => this.setState({ users }))
+  //     .then(() => {
+  //       if (!localStorage.currentUser) {
+  //         this.setState({ currentUser: this.state.users[0] })
+  //         console.log('mounted, currentUser:', this.state.currentUser)
+  //         this.setUserToLocalStorage(this.state.users[0])
+  //       } else {
+  //         this.setState({ currentUser: JSON.parse(localStorage.currentUser) })
+  //         console.log('mounted 2, currentUser:', this.state.currentUser)
+  //       }
+  //     })
+  //     .then(() => this.setState({ currentUser: this.state.users[0] })
+  //     )
+  // }
 
   componentDidMount (){
     console.log("MOUNTING!!!!!!")
@@ -48,16 +48,16 @@ class App extends Component {
       .then(users => this.setState({ users }))
       .then(() => {
         if (!localStorage.currentUser) {
-          this.setState({ currentUser: this.state.users[0] })
+          // this.setState({ currentUser: this.state.users[0] })
           console.log('mounted, currentUser:', this.state.currentUser)
-          this.setUserToLocalStorage(this.state.users[0])
+          // this.setUserToLocalStorage(this.state.users[0])
         } else {
           this.setState({ currentUser: JSON.parse(localStorage.currentUser) })
           console.log('mounted 2, currentUser:', this.state.currentUser)
         }
       })
-      .then(() => this.setState({ currentUser: this.state.users[0] })
-      )
+      // .then(() => this.setState({ currentUser: this.state.users[0] })
+      // )
   }
 
 
@@ -104,8 +104,18 @@ class App extends Component {
   }
 
 
-
-
+  handleLogin = (email, password) =>{
+    return adapter.signin(email,password).then(r=> {
+      if(r.error){
+        alert(r.error)
+      }else{
+        this.setState({currentUser:r})
+        localStorage.clear()
+        this.setUserToLocalStorage(r)
+        this.props.history.push('/')
+    }
+  })
+  }
 
   render() {
       console.log("RENDERING!!!!!!")
@@ -113,7 +123,8 @@ class App extends Component {
     // if(!localStorage.currentUser){
     //   // return <Route path='' component ={<div>YOURE NOT LOGGED IN</div>} />
     // }else{
-    if (this.state.currentUser){return (
+    if (this.state.currentUser){
+      return (
       <div>
         <Route path='' component={ props => <Navbar { ...props }
           handleItemClick={ this.handleNavBarChange }
@@ -127,8 +138,6 @@ class App extends Component {
             user={ currentUser }
             handleSubmit={ this.handleEditProfile }
           /> } />
-          <Route path='/login' component={ props => <Login { ...props } /> } />
-          <Route path='/signup' component={ props => <Signup { ...props } handleSubmit={ this.handleSignup } /> } />
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/wishlist' component={ props => <Wishlist
                 { ...props }
@@ -143,7 +152,15 @@ class App extends Component {
         </Switch>
       </div>
     )
-    } else { return <Loading />}
+    } else { return (
+    <Switch>
+      {/* <Loading /> */}
+      <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
+      <Route exact path='/signup' component={ props => <Signup { ...props } handleSubmit={ this.handleSignup } /> } />
+      <Route path='/' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
+    </Switch>
+    )
+    }
   }
 }
 

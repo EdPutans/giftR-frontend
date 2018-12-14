@@ -9,6 +9,8 @@ export default class Login extends React.Component {
     }
 
     handleSubmit = () => {
+        const {email, password} = this.state
+        this.props.handleLogin(email,password)
     }    
 
 

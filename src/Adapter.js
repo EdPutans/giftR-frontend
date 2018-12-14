@@ -3,6 +3,15 @@ const giftsURL = "http://localhost:3000/api/v1/gifts"
 
 export const e = 123
 
+// signin
+export const signin= (email, password) => {
+    return fetch('http://localhost:3000/api/v1/signin', {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    }).then(resp => resp.json())
+}
+
 // Getters
 export const getUsers = () => fetch(usersURL).then(resp=> resp.json())
 export const getGifts = () => fetch(giftsURL).then(resp => resp.json())
