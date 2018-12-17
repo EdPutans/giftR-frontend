@@ -21,15 +21,14 @@ class App extends Component {
   state = {
     navBarItem: '',
     currentUser: null,
-    wishes: [],
+    gifts: [],
     users: []
   }
   
 
   componentDidMount (){
-   
-    adapter.getWishes().then(r => this.setState({wishes: r}))
-    const user= localStorage.getItem('user')
+  
+    const user = localStorage.getItem('currentUser')
     const unUser= JSON.parse(user)
     console.log(unUser)
     adapter.validate().then(data=>{
@@ -38,6 +37,7 @@ class App extends Component {
       }
       else {
         this.setState({currentUser: data})
+        adapter.getWishes().then(r => this.setState({ gifts: r }))
       }
     })
   }
@@ -46,7 +46,7 @@ class App extends Component {
 
   setUserToLocalStorage=(user)=>{
     localStorage.setItem('email', user.email)
-    localStorage.setItem('user', JSON.stringify(user))
+    localStorage.setItem('currentUser', JSON.stringify(user))
 
   }
 
@@ -90,7 +90,7 @@ class App extends Component {
       }else{
         this.setState({currentUser:r.user})
         localStorage.removeItem('currentUser')
-        localStorage.setItem('currentUser', r.user)
+        localStorage.setItem('currentUser', JSON.stringify(r.user))
         console.log('reeeeeeeeee', r)
         localStorage.setItem('token', r.token)
         this.props.history.push('/')
@@ -129,7 +129,7 @@ class App extends Component {
           <Route exact path='/wishlist' component={ props => <Wishlist
                 { ...props }
                 currentUser={ currentUser }
-                wishes={ this.state.wishes }
+                wishes={ this.state.gifts }
              /> } 
           />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />

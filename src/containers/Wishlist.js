@@ -5,7 +5,6 @@ import { Button, Icon } from 'semantic-ui-react'
 export default class Wishlist extends React.Component {
 
 
-
     handleClick =() => this.props.history.push('/new_wish')
     render() {
         let currentUser = this.props.currentUser 
