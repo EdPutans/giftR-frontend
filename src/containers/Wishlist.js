@@ -14,7 +14,9 @@ export default class Wishlist extends React.Component {
                 zIndex:1, 
                 paddingTop: "3em"
             }}>
-                { this.props.gifts.map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
+                { this.props.gifts
+                        .sort((a, b) => parseInt(a.price) - parseInt(b.price) )
+                    .map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
                 <div> <br /> <br ></br>
                         <Button
                             className="circular"
