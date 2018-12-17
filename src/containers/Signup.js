@@ -14,13 +14,13 @@ state = {
     repeat_password: ''
 }
 
-checkPassword = () =>{
+checkPasswords = () =>{
     const {password, repeat_password} = this.state
     return password === repeat_password ? true : false
 }
 
 handleSignup = () => {
-    if(this.checkPassword()){
+    if(this.checkPasswords()){
         const {first_name, last_name, email, age, password} = this.state
         let user = { first_name, last_name, email, age, password }
         return adapter.postUser(user)

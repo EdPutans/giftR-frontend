@@ -56,6 +56,15 @@ export const postGift = (giftObject) => fetch(giftsURL, {
     body: JSON.stringify(giftObject)
 }).then(resp => resp.json())
 
+export const updateUserById = (userObject) => fetch(`http://localhost:3000/api/v1/patch_by_id/${userObject.id}`, {
+    method: 'PATCH',
+    headers: {
+        "Content-Type": "application/json"
+    },
+    body: JSON.stringify(userObject)
+}).then(resp => resp.json())
+
+
 
 // Patchers
 export const patchUser = (userObject) => fetch(`${usersURL}/${userObject.id}`,{
