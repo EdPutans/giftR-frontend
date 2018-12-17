@@ -11,6 +11,7 @@ export default class Wish extends React.Component {
                 <Image src="" />
                 <Card.Content>
                     <Card.Header><Icon name='star' />{wish.name}</Card.Header>
+                    { user.id === wish.user_id && <Button floated="right" size="mini" color="teal">Edit</Button> }
                     <Card.Meta>
                         <span className='price'>£ { wish.price || "Price unspecified"} </span>
                     </Card.Meta>
@@ -21,7 +22,7 @@ export default class Wish extends React.Component {
                     }
 
                     
-                    { user.id === wish.user_id && <Button floated="right" size="mini" color="teal">Edit</Button>}
+                    
                 </Card.Content>
                     
                 <Card.Content extra>

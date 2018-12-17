@@ -21,23 +21,23 @@ class App extends Component {
   state = {
     navBarItem: '',
     currentUser: null,
-    gifts: [],
-    users: []
+    gifts: []
   }
   
 
   componentDidMount (){
-  
+    console.log('state current user', this.state.currentUser)
     const user = localStorage.getItem('currentUser')
     const unUser= JSON.parse(user)
-    console.log(unUser)
     adapter.validate().then(data=>{
       if(data.error){
           this.handleLogout()
       }
       else {
-        this.setState({currentUser: data})
-        adapter.getWishes().then(r => this.setState({ gifts: r }))
+        // this.setState({currentUser: data})
+        console.log('one', this.state.currentUser)
+        console.log('two', this.state.gifts)
+        adapter.getWishes().then(r => this.setState({ gifts: r })).then(this.setState({ currentUser: data }))
       }
     })
   }
@@ -47,16 +47,9 @@ class App extends Component {
   setUserToLocalStorage=(user)=>{
     localStorage.setItem('email', user.email)
     localStorage.setItem('currentUser', JSON.stringify(user))
-
   }
 
-  refreshCurrentUser=(id)=>{
-    return adapter.getUser(id)
-      .then(user => {
-        this.setState({currentUser:user})
-
-      })
-  }
+  
 
   // ----------- redirectors ----------- //
 
@@ -72,7 +65,7 @@ class App extends Component {
     wish.user_id = this.state.currentUser.id
     return adapter.postGift(wish)
       .then(wish => {
-        this.setState({ wishes: [...this.state.wishes, wish] })
+        this.setState({ gifts: [...this.state.gifts, wish] })
       })
       .then(this.props.history.push('/wishlist'))
       
@@ -97,6 +90,7 @@ class App extends Component {
         console.log('reeeeeeeeee', r)
         localStorage.setItem('token', r.token)
         this.props.history.push('/')
+        adapter.getWishes().then(r => this.setState({ gifts: r }))
     }
   })
   }
@@ -107,6 +101,7 @@ class App extends Component {
       this.setState({ currentUser: null })
       this.props.history.push('')
   }
+
 
 
 
@@ -126,10 +121,18 @@ class App extends Component {
         /> } />
         <Switch>
           {/* because user is signed out, we currently only work on these ;p */ }
-          <Route path='/friends' component={ props => <h1> Under construction - friends </h1> } />
-          <Route path='/santa' component={ props => <h1> Under construction - santa</h1> } />
+            <Route path='/friends' component={ props => <div style={ {
+              zIndex: 1,
+              paddingTop: "6em"
+            } }><h1> Under construction - friends </h1></div> } />
+            <Route path='/santa' component={ props => <div style={ {
+              zIndex: 1,
+              paddingTop: "6em"
+            } }><h1> Under construction - Secret santa </h1></div> } />
           <Route path='/profile' component={ props => <Profile { ...props }
             user={ currentUser }
+            currentUser={ currentUser }
+            handleLogin={ this.handleLogin }
             handleSubmit={ this.handleEditProfile }
             authenticate={ this.authenticate }
             logOut={this.handleLogout}
@@ -137,7 +140,7 @@ class App extends Component {
           <Route exact path='/wishlist' component={ props => <Wishlist
                 { ...props }
                 currentUser={ currentUser }
-                wishes={ this.state.gifts }
+                gifts={ this.state.gifts }
              /> } 
           />
           <Route exact path='/home' component={ props => <HomePage { ...props } /> } />

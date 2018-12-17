@@ -1,16 +1,11 @@
 import React from 'react'
 import { Form, Button, Label } from 'semantic-ui-react'
+import * as adapter from '../Adapter'
 
 export default class Profile extends React.Component {
 
     state = {
-        firstName: '',
-        lastName: '',
-        email: '',
-        age: '',
-        currentPassword: '',
-        newPassword: '',
-        repeatPassword: ''
+        
     }
 
     checkPasswordFields = () => {
@@ -19,18 +14,36 @@ export default class Profile extends React.Component {
     }
 
 
-    handleSubmit = (user) => {
-        const { firstName,lastName,email,age,currentPassword,newPassword,repeatPassword } = this.state
+    handleSubmit = () => {
+
+        const { first_name,last_name,email,age,old_password,new_password,repeat_password } = this.state
+        let user = {} 
+        user.id = this.props.user.id
         user.age = age? age : user.age
-        user.email = email ? email : user.email
-        user.first_name = firstName ? firstName : user.first_name
-        user.last_name = lastName ? lastName : user.last_name
-
-
+        user.first_name = first_name ? first_name : user.first_name
+        user.last_name = last_name ? last_name : user.last_name
+        adapter.signin(this.props.currentUser.email, old_password)
+            .then(resp1=>{
+                console.log('first respnse:', resp1)
+                if(resp1.error){
+                    alert("Response error")
+                }else{
+                    user.password = old_password
+                    user.email = this.props.currentUser.email
+                    console.log('patching user with this:', user)
+                    adapter.patchUser(user).then(resp2 =>{
+                        console.log('second resp:', resp2)
+                        if(resp2.error){
+                            alert('error patching user')
+                        }else{
+                           console.log('successfully updated')
+                           
+                            
+                        }
+                    })
+                }
+            })
         if(this.checkPasswordFields()){
-            
-            this.props.authenticate(email,currentPassword)
-
         }else{
             alert('Check your details')
         }
@@ -46,8 +59,10 @@ export default class Profile extends React.Component {
                 return this.setState({ email: value })
             case "age":
                 return this.setState({ age: value })
-            case "password":
-                return this.setState({ password: value })
+            case "old_password":
+                return this.setState({ old_password: value })
+            case "new_password":
+                return this.setState({ new_password: value })
             case "repeat_password":
                 return this.setState({ repeat_password: value })
             default:
@@ -60,9 +75,12 @@ export default class Profile extends React.Component {
     render() {
         const {user} = this.props
         return (
-            <div>
+            <div style={ {
+                zIndex: 1,
+                paddingTop: "4em"
+            } }>
                 <Form><br/>
-                    <Label>Change only values you would like changed.</Label><br />
+                   
                     <Form.Field>
                         <input onChange={ event => this.handleChange(event.target.value, "first_name") } placeholder={user.first_name} />
                     </Form.Field>
@@ -70,16 +88,16 @@ export default class Profile extends React.Component {
                         <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ user.last_name } />
                     </Form.Field>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ user.email } type="email" />
+                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ user.email } type="text" />
                     </Form.Field>
                     <Form.Field>
                         <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ user.age } />
                     </Form.Field>
                     <Form.Field>
-                        <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } placeholder='Current password' />
+                        <input type="password" onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />
                     </Form.Field>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "password") } placeholder='New password' type="password" />
+                        <input onChange={ event => this.handleChange(event.target.value, "new_password") } placeholder='New password' type="password" />
                     </Form.Field>
                     <Form.Field>
                         <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } placeholder='Repeat password' />

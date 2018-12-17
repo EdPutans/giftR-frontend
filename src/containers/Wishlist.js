@@ -8,20 +8,23 @@ export default class Wishlist extends React.Component {
     handleClick =() => this.props.history.push('/new_wish')
     render() {
         let currentUser = this.props.currentUser 
-        if (this.props.currentUser && this.props.wishes){
+        if (this.props.currentUser && this.props.gifts){
             return (
-            <div>
-                { this.props.wishes.map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
-                <div> 
+            <div style={{
+                zIndex:1, 
+                paddingTop: "3em"
+            }}>
+                { this.props.gifts.map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
+                <div> <br /> <br ></br>
                         <Button
                             className="circular"
                             color="teal"
                             onClick={this.handleClick}
                             floated="right"
                             style={ {
-                                position: 'absolute',
-                                right: '2em',
-                                bottom: '2em',
+                                position: 'fixed',
+                                right: '1em',
+                                bottom: '1em',
                                 textAlign: 'center'
                             } }
                         >
