@@ -1,7 +1,7 @@
 const usersURL = "http://localhost:3000/api/v1/users"
 const giftsURL = "http://localhost:3000/api/v1/gifts"
 
-export const e = 123
+export const test_const = 123
 
 // signin
 export const signin= (email, password) => {

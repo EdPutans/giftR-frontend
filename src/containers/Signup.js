@@ -1,6 +1,8 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
 
+import * as adapter from '../Adapter'
+
 export default class Signup extends React.Component {
 
 state = {
@@ -17,8 +19,15 @@ checkPassword = () =>{
     return password === repeat_password ? true : false
 }
 
+handleSignup = () => {
+    if(this.checkPassword()){
+        const {first_name, last_name, email, age, password} = this.state
+        let user = { first_name, last_name, email, age, password }
+        return adapter.postUser(user)
+            .then(user => this.props.handleLogin({email,password}))
+    }else{ alert('Passwords do not match, I believe')}
+}
 
-handleSubmit=()=>{}
 
 handleChange = (value, type) => {
     switch(type){
@@ -66,7 +75,7 @@ handleChange = (value, type) => {
                 </Form.Field>
 
                 
-                <Button onClick={this.handleSubmit}type='submit'>Submit</Button>
+                <Button onClick={this.handleSignup}type='submit'>Submit</Button>
             </Form>
                 { !this.props.user && <a href="/login">Already a member? Log in here!</a>}
         </div>

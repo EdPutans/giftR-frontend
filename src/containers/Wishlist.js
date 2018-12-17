@@ -8,7 +8,7 @@ export default class Wishlist extends React.Component {
     handleClick =() => this.props.history.push('/new_wish')
     render() {
         let currentUser = this.props.currentUser 
-        if (this.props.currentUser){
+        if (this.props.currentUser && this.props.wishes){
             return (
             <div>
                 { this.props.wishes.map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
@@ -29,6 +29,6 @@ export default class Wishlist extends React.Component {
                         </Button>
                 </div>
             </div>)
-        }
+        } 
     }
 }

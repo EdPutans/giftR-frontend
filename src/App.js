@@ -78,6 +78,9 @@ class App extends Component {
       
   }
 
+
+// -------------- log in/out, sign up --------------
+
   authenticate = (email, password) => {
     return adapter.signin(email,password)
   }
@@ -104,6 +107,11 @@ class App extends Component {
       this.setState({ currentUser: null })
       this.props.history.push('')
   }
+
+
+
+
+// ---------- rendering ----------
 
   render() {
     
@@ -145,7 +153,7 @@ class App extends Component {
     <Switch>
       <Route exact path='/' component={ props => <Welcome { ...props } /> } />
       <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
-      <Route exact path='/signup' component={ props => <Signup { ...props } handleSubmit={ this.handleSignup } /> } />
+      <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } /> } />
       <Route path='/' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
     </Switch>
     )
