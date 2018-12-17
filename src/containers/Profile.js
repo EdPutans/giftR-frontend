@@ -16,37 +16,49 @@ export default class Profile extends React.Component {
 
     handleSubmit = () => {
 
-        const { first_name,last_name,email,age,old_password,new_password,repeat_password } = this.state
-        let user = {} 
-        user.id = this.props.user.id
-        user.age = age? age : user.age
-        user.first_name = first_name ? first_name : user.first_name
-        user.last_name = last_name ? last_name : user.last_name
-        adapter.signin(this.props.currentUser.email, old_password)
-            .then(resp1=>{
-                console.log('first respnse:', resp1)
-                if(resp1.error){
-                    alert("Response error")
-                }else{
-                    user.password = old_password
-                    user.email = this.props.currentUser.email
-                    console.log('patching user with this:', user)
-                    adapter.patchUser(user).then(resp2 =>{
-                        console.log('second resp:', resp2)
-                        if(resp2.error){
-                            alert('error patching user')
-                        }else{
-                           console.log('successfully updated')
+        const { first_name,last_name, email, age, old_password, new_password, repeat_password } = this.state
+        // only if old password present
+        let user = this.props.user
+        let updatedUser = {}
+
+        updatedUser.id = this.props.user.id 
+        updatedUser.age = age? age : user.age
+        updatedUser.first_name = first_name ? first_name : user.first_name
+        updatedUser.last_name = last_name ? last_name : user.last_name
+        updatedUser.email = email? email : user.email
+        updatedUser.old_password = old_password
+        updatedUser.password = new_password
+        console.log('bfore:,',updatedUser)
+        adapter.updateUserById(updatedUser).then(r=>console.log(r))
+
+
+
+        // adapter.signin(this.props.currentUser.email, old_password)
+        //     .then(resp1=>{
+        //         console.log('first respnse:', resp1)
+        //         if(resp1.error){
+        //             alert("Response error")
+        //         }else{
+        //             user.password = old_password
+        //             user.email = this.props.currentUser.email
+        //             console.log('patching user with this:', user)
+        //             adapter.patchUser(user).then(resp2 =>{
+        //                 console.log('second resp:', resp2)
+        //                 if(resp2.error){
+        //                     alert('error patching user')
+        //                 }else{
+        //                    console.log('successfully updated')
                            
                             
-                        }
-                    })
-                }
-            })
-        if(this.checkPasswordFields()){
-        }else{
-            alert('Check your details')
-        }
+        //                 }
+        //             })
+        //         }
+        //     })
+
+        // if(this.checkPasswordFields()){
+        // }else{
+        //     alert('Check your details')
+        // }
      }
 
     handleChange = (value, type) => {

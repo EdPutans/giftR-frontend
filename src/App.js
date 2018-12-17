@@ -34,10 +34,10 @@ class App extends Component {
           this.handleLogout()
       }
       else {
-        // this.setState({currentUser: data})
+        this.setState({currentUser: data.user})
         console.log('one', this.state.currentUser)
         console.log('two', this.state.gifts)
-        adapter.getWishes().then(r => this.setState({ gifts: r })).then(this.setState({ currentUser: data }))
+        adapter.getWishes().then(r => this.setState({ gifts: r }))
       }
     })
   }
@@ -131,7 +131,8 @@ class App extends Component {
             } }><h1> Under construction - Secret santa </h1></div> } />
           <Route path='/profile' component={ props => <Profile { ...props }
             user={ currentUser }
-            currentUser={ currentUser }
+            gifts={this.state.gifts}
+            // currentUser={ currentUser }
             handleLogin={ this.handleLogin }
             handleSubmit={ this.handleEditProfile }
             authenticate={ this.authenticate }
