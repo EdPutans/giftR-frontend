@@ -1,6 +1,6 @@
 import React from 'react'
 import Wish from '../components/Wish'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button} from 'semantic-ui-react'
 
 export default class Wishlist extends React.Component {
 

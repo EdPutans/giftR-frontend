@@ -11,6 +11,7 @@ import Profile from './containers/Profile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import Wishlist from './containers/Wishlist'
+import EditWish from './components/EditWish'
 import Loading from './components/Loading'
 import './App.css';
 import * as adapter from './Adapter'
@@ -140,11 +141,13 @@ class App extends Component {
                 gifts={ this.state.gifts }
              /> } 
           />
-          <Route exact path='/home' component={ props => <HomePage { ...props } /> } />
+          <Route exact path='/' component={ props => <HomePage { ...props } /> } />
           <Route exact path='/new_wish' component={ props =>
-          <WishForm { ...props } handleSubmit={ this.handleNewWish } /> } 
+            <WishForm { ...props } handleSubmit={ this.handleNewWish } /> } 
           />
-          
+            <Route exact path='/edit_wish' component={ props =>
+              <EditWish { ...props } /> }
+            />
         </Switch>
       </div>
     )

@@ -3,6 +3,13 @@ import { Card, Image, Icon, Button } from 'semantic-ui-react'
 
 export default class Wish extends React.Component {
 
+    handleEdit =()=>{
+        this.props.history.push({
+            pathnme: '/edit_wish',
+            state: { wish: this.props.wish }
+        })
+    }
+
     render() {
         const {wish, user} = this.props
         return (<div>
@@ -11,7 +18,13 @@ export default class Wish extends React.Component {
                 <Image style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url :""} />
                 <Card.Content>
                     <Card.Header><Icon name='star' />{wish.name}</Card.Header>
-                    { user.id === wish.user_id && <Button floated="right" size="mini" color="teal">Edit</Button> }
+                    { user.id === wish.user_id && <Button 
+                        floated="right" 
+                        size="mini" 
+                        color="teal"
+                        onClick={this.handleEdit}
+                    >Edit</Button> 
+                        }
                     <Card.Meta>
                         <span className='price'>£ { wish.price || "Price unspecified"} </span>
                     </Card.Meta>
