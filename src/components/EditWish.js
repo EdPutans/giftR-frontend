@@ -25,7 +25,6 @@ export default class EditWish extends React.Component {
     handleSubmit = () => {
         let { name, description, url, img_url, price, rating } = this.state
         url = !url.includes("http://") || !url.includes("https://") ? "http://" + url : url
-        console.log('edited url:', url)
         const newWish = {
             name, description, url, img_url, price, rating
         }

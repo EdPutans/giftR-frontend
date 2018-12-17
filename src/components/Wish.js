@@ -8,7 +8,7 @@ export default class Wish extends React.Component {
         return (<div>
             <br />
             <Card fluid>
-                <Image src="" />
+                <Image src={wish.img_url? wish.img_url :""} />
                 <Card.Content>
                     <Card.Header><Icon name='star' />{wish.name}</Card.Header>
                     { user.id === wish.user_id && <Button floated="right" size="mini" color="teal">Edit</Button> }

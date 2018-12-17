@@ -26,7 +26,6 @@ class App extends Component {
   
 
   componentDidMount (){
-    console.log('state current user', this.state.currentUser)
     const user = localStorage.getItem('currentUser')
     const unUser= JSON.parse(user)
     adapter.validate().then(data=>{
@@ -35,8 +34,6 @@ class App extends Component {
       }
       else {
         this.setState({currentUser: data.user})
-        console.log('one', this.state.currentUser)
-        console.log('two', this.state.gifts)
         adapter.getWishes().then(r => this.setState({ gifts: r }))
       }
     })
@@ -87,7 +84,6 @@ class App extends Component {
         this.setState({currentUser:r.user})
         localStorage.removeItem('currentUser')
         localStorage.setItem('currentUser', JSON.stringify(r.user))
-        console.log('reeeeeeeeee', r)
         localStorage.setItem('token', r.token)
         this.props.history.push('/')
         adapter.getWishes().then(r => this.setState({ gifts: r }))

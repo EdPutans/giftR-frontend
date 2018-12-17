@@ -5,7 +5,7 @@ import * as adapter from '../Adapter'
 export default class Profile extends React.Component {
 
     state = {
-        
+        // starts off empty and only tracks field data
     }
 
     checkPasswordFields = () => {
@@ -14,51 +14,32 @@ export default class Profile extends React.Component {
     }
 
 
+
     handleSubmit = () => {
+        if(this.checkPasswordFields()){
+            const { first_name, last_name, email, age, old_password, new_password, repeat_password } = this.state
+            // only if old password present
+            let user = this.props.user
+            let updatedUser = {}
 
-        const { first_name,last_name, email, age, old_password, new_password, repeat_password } = this.state
-        // only if old password present
-        let user = this.props.user
-        let updatedUser = {}
-
-        updatedUser.id = this.props.user.id 
-        updatedUser.age = age? age : user.age
-        updatedUser.first_name = first_name ? first_name : user.first_name
-        updatedUser.last_name = last_name ? last_name : user.last_name
-        updatedUser.email = email? email : user.email
-        updatedUser.old_password = old_password
-        updatedUser.password = new_password
-        console.log('bfore:,',updatedUser)
-        adapter.updateUserById(updatedUser).then(r=>console.log(r))
-
-
-
-        // adapter.signin(this.props.currentUser.email, old_password)
-        //     .then(resp1=>{
-        //         console.log('first respnse:', resp1)
-        //         if(resp1.error){
-        //             alert("Response error")
-        //         }else{
-        //             user.password = old_password
-        //             user.email = this.props.currentUser.email
-        //             console.log('patching user with this:', user)
-        //             adapter.patchUser(user).then(resp2 =>{
-        //                 console.log('second resp:', resp2)
-        //                 if(resp2.error){
-        //                     alert('error patching user')
-        //                 }else{
-        //                    console.log('successfully updated')
-                           
-                            
-        //                 }
-        //             })
-        //         }
-        //     })
-
-        // if(this.checkPasswordFields()){
-        // }else{
-        //     alert('Check your details')
-        // }
+            updatedUser.id = this.props.user.id
+            updatedUser.age = age ? age : user.age
+            updatedUser.first_name = first_name ? first_name : user.first_name
+            updatedUser.last_name = last_name ? last_name : user.last_name
+            updatedUser.email = email ? email : user.email
+            updatedUser.old_password = old_password
+            updatedUser.password = new_password
+          
+            adapter.updateUserById(updatedUser)
+                .then(r => {
+                   
+                    r.error ? alert('Incorrect current password.')
+                        :
+                        this.props.history.push('/')
+                })
+        }else{
+            alert("Password fields don't match.")
+        }
      }
 
     handleChange = (value, type) => {
@@ -92,18 +73,18 @@ export default class Profile extends React.Component {
                 paddingTop: "4em"
             } }>
                 <Form><br/>
-                   
+                   <Label color='red'>Current password required to perform changes.</Label>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "first_name") } placeholder={user.first_name} />
+                        <input onChange={ event => this.handleChange(event.target.value, "first_name") } placeholder={'First name: ' + user.first_name} />
                     </Form.Field>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ user.last_name } />
+                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ "Last Name: " + user.last_name } />
                     </Form.Field>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ user.email } type="text" />
+                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ "Email: " + user.email } type="text" />
                     </Form.Field>
                     <Form.Field>
-                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ user.age } />
+                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } />
                     </Form.Field>
                     <Form.Field>
                         <input type="password" onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />

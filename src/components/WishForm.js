@@ -25,7 +25,6 @@ export default class WishForm extends React.Component {
     handleSubmit = () => {
         let {name, description, url, img_url, price, rating} = this.state
         url = !url.includes("http://") || !url.includes("https://")? "http://"+url : url
-        console.log('edited url:', url)
         const newWish ={
             name, description, url, img_url, price, rating
         }
@@ -33,7 +32,10 @@ export default class WishForm extends React.Component {
     }
 
     render() {
-        return (<div>
+        return (<div style={ {
+            zIndex: 1,
+            paddingTop: "4em"
+        } }>
             <Form>
                 <Form.Field>
                     <input 
