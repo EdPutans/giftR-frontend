@@ -19,7 +19,9 @@ export default class HomePage extends React.Component {
     findUsers = () =>{
         console.log('searching')
         return this.state.search && adapter.getUsersBySearchQuery(this.state.search)
-            .then(users=>this.setState({users}))
+            .then(users=>{
+              return  !users.error && this.setState({users})
+            })
     }
 
 
@@ -41,13 +43,12 @@ export default class HomePage extends React.Component {
                             textAlign: 'center'
                         } } 
                         className='icon' 
-                       
                         placeholder='Search users' 
                         onChange={event => this.handleChange(event) }
                         onSubmit={this.handleSubmit}
                     /> 
-                    <Button >
-                        <Icon onClick={ this.handleSubmit } name="search" />Search
+                    <Button type="submit" float onClick={ this.handleSubmit }>
+                        <Icon name="search" />Search
                     </Button>
             </div>
                 <SearchArea 

@@ -15,7 +15,7 @@ render(){
                 color='red' 
                 header={ 
                     (u.first_name ? u.first_name : "") + ' ' + (u.last_name ? u.last_name : "") } 
-                meta={u.gifts.length + "wishes total"}
+                meta={u.gifts.length + " wishes"}
             />
          </div>
         )}
