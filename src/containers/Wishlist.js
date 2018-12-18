@@ -27,22 +27,22 @@ export default class Wishlist extends React.Component {
                                 onClick={ this.props.resetUser}
                                 style={ {
                                     position: 'fixed',
-                                    left: '1em',
+                                    marginLeft: 'calc(50% - 98px)',
                                     bottom: '1em',
                                     textAlign: 'center'
                                 } }
                             >
-                                <h1>←</h1>
+                                <h5>← back to search resullts </h5>
                             </Button>
                             :
                             <Button
                                 className="circular"
+                                circular
                                 color="red"
                                 onClick={ this.createWish }
                                 style={ {
                                     marginLeft: 'calc(50% - 26px)',
                                     position: 'fixed',
-                                    
                                     bottom: '0.5em',
                                     textAlign: 'center'
                                 } }
