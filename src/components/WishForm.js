@@ -51,29 +51,32 @@ export default class WishForm extends React.Component {
     }
 
     render() {
-        return (<div style={ {
+        return (<div style={ !this.props.editing? {
             zIndex: 1,
             paddingTop: "4em"
-        } }>
+        } : { paddingTop: "1em"}}>
             <Form>
                 <Form.Field>
                     <input 
                         type="text" 
+                        maxlength="20" 
                         name="name" 
                         placeholder="Title" 
                         onChange={event=>this.setState({name: event.target.value})}
                         />
                 </Form.Field>
                 <Form.Field>
-                    <input
+                    <textarea
+                        maxlength="500" 
                         type="text"
                         name="description"
-                        placeholder="Description"
+                        placeholder="Description (up to 500 characters)"
                         onChange={ event => this.setState({ description: event.target.value }) }
                     />
                 </Form.Field>
                 <Form.Field>
                     <input
+                        maxlength="20" 
                         type="text"
                         name="url"
                         placeholder="Link to purchase"
@@ -82,6 +85,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
+                        maxlength="20" 
                         type="text"
                         name="img_url"
                         placeholder="Image link"
@@ -91,6 +95,7 @@ export default class WishForm extends React.Component {
                 <Form.Field>
                     <input
                         maxLength="2"
+                        maxlength="20" 
                         type="number"
                         name="price"
                         placeholder="Price"

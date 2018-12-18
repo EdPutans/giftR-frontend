@@ -18,7 +18,6 @@ export default class Profile extends React.Component {
     handleSubmit = () => {
         if(this.checkPasswordFields()){
             const { first_name, last_name, email, age, old_password, new_password, repeat_password } = this.state
-            // only if old password present
             let user = this.props.user
             let updatedUser = {}
 
@@ -73,18 +72,21 @@ export default class Profile extends React.Component {
                 paddingTop: "4em"
             } }>
                 <Form><br/>
-                   <Label color='red'>Current password required to perform changes.</Label>
+                   
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "first_name") } placeholder={'First name: ' + user.first_name} />
+                        <input
+                            onChange={ event => this.handleChange(event.target.value, "first_name") }
+                            placeholder={'First name: ' + user.first_name}
+                            maxlength="20"  />
                     </Form.Field>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ "Last Name: " + user.last_name } />
+                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ "Last Name: " + user.last_name } maxlength="20" />
                     </Form.Field>
                     <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ "Email: " + user.email } type="text" />
+                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ "Email: " + user.email } type="text" maxlength="20" />
                     </Form.Field>
                     <Form.Field>
-                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } />
+                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } maxlength="20"  />
                     </Form.Field>
                     <Form.Field>
                         <input type="password" onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />
@@ -95,9 +97,11 @@ export default class Profile extends React.Component {
                     <Form.Field>
                         <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } placeholder='Repeat password' />
                     </Form.Field>
-                    <Button onClick={ this.handleSubmit } type='submit'>Submit</Button>
-                    <Button onClick={ this.props.logOut } color='red' basic floated='right'type='submit'>Log Out</Button>
+                    <Label color='red'>Current password required to perform changes.</Label>
+                    
                 </Form>
+                <Button onClick={ this.handleSubmit } type='submit'>Submit</Button>
+                <Button onClick={ this.props.logOut } color='red' basic floated='right' type='submit'>Log Out</Button>
                 { !this.props.user && <a href="/login">Already a member? Log in here!</a> }
             </div>
         )

@@ -54,7 +54,7 @@ export default class Wish extends React.Component {
         if(this.state.wish){return (<div>
             <br />
             <Card fluid>
-                <Image style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url :""} />
+                <img style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url : ""} />
                 <Card.Content>
                     <Card.Header><Icon name='star'/>{wish.name}</Card.Header>
                     
@@ -89,7 +89,10 @@ export default class Wish extends React.Component {
                 </Card.Content>
             </Card>
         </div>)
-        } else { return <div></div>}
+        } else { 
+            // do not remove
+            return <div></div>
+        }
         
     }
 }

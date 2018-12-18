@@ -13,12 +13,13 @@ export default class Wishlist extends React.Component {
             return (
                 <div style={ {
                     zIndex: 1,
-                    paddingTop: "3em"
+                    paddingTop: "3em",
+                    paddingBottom: "6em"
                 } }>
-                    { this.props.gifts
+                    { this.props.gifts.length>0 ? this.props.gifts
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
-                        .map(w => <Wish key={ w.id } wish={ w } user={ user } />) }
-                    <div> <br /><br /><br /><br /><br /><br />
+                        .map(w => <Wish key={ w.id } wish={ w } user={ user } />) : <div style={ { marginTop: '5em' } }><h4>No wishes were made yet</h4></div>}
+                    <div>
                         { this.props.search ?
                             <Button
                                 className="circular"
@@ -36,12 +37,13 @@ export default class Wishlist extends React.Component {
                             :
                             <Button
                                 className="circular"
-                                color="teal"
+                                color="red"
                                 onClick={ this.createWish }
                                 style={ {
+                                    marginLeft: 'calc(50% - 26px)',
                                     position: 'fixed',
-                                    right: '1em',
-                                    bottom: '1em',
+                                    
+                                    bottom: '0.5em',
                                     textAlign: 'center'
                                 } }
                             >

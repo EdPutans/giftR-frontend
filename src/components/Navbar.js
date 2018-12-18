@@ -7,7 +7,7 @@ import { Menu } from 'semantic-ui-react'
 
     render() {
         return (<div >
-            <Menu fluid style={ {position: 'fixed', zIndex: "100"} }>
+            <Menu inverted fluid style={ {position: 'fixed', zIndex: "100"} }>
                 <Menu.Item   
                     style={ {width:"12%"}}
                     icon="home"
