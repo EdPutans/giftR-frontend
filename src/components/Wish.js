@@ -4,6 +4,7 @@ import WishForm from './WishForm'
 
 export default class Wish extends React.Component {
 
+
     handleEdit =()=>{
         this.props.history.push({
             pathnme: '/edit_wish',
@@ -12,7 +13,17 @@ export default class Wish extends React.Component {
     }
 
     state={
-        editing: false
+        editing: false,
+        wish: null
+    }
+
+    componentDidMount=()=>{
+        console.log('props',this.props)
+        this.props.wish && this.setState({ wish: this.props.wish })
+    }
+
+    updateAfterEdit=(wish)=>{
+        this.setState({ wish })
     }
 
     renderStars = digit => {
@@ -38,22 +49,15 @@ export default class Wish extends React.Component {
 
 
     render() {
-        const {wish, user} = this.props
-        return (<div>
+        const {user} = this.props
+        const {wish} = this.state
+        if(this.state.wish){return (<div>
             <br />
             <Card fluid>
                 <Image style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url :""} />
                 <Card.Content>
                     <Card.Header><Icon name='star'/>{wish.name}</Card.Header>
-                    { user.id === wish.user_id && <Button 
-                        floated="right" 
-                        size="mini" 
-                        color="teal"
-                        onClick={this.toggleEdit}
-                    >
-                    {this.state.editing? "Cancel" : "Edit"}
-                    </Button> 
-                        }
+                    
                     <Card.Meta>
                         <span className='price'>£ { wish.price || "Price unspecified"} </span>
                     </Card.Meta>
@@ -65,10 +69,27 @@ export default class Wish extends React.Component {
                 </Card.Content>
                     
                 <Card.Content extra>
+                    
                     Rating: {this.renderStars(wish.rating)}
+                    { user.id === wish.user_id && <Button
+                        floated="right"
+                        size="mini"
+                        color="teal"
+                        onClick={ this.toggleEdit }
+                    >
+                        { this.state.editing ? "Cancel" : "Edit" }
+                    </Button>
+                    }
+                    { this.state.editing && <WishForm
+                        editing={ true }
+                        wish={wish}
+                        updateAfterEdit={this.updateAfterEdit}
+                        toggleEdit={this.toggleEdit}
+                    /> }
                 </Card.Content>
-                {this.state.editing && <WishForm />}
             </Card>
         </div>)
+        } else { return <div></div>}
+        
     }
 }

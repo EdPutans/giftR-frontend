@@ -1,4 +1,5 @@
 import React from 'react'
+import * as adapter from '../Adapter'
 import { Form, Button, Radio, Label } from 'semantic-ui-react'
 
 export default class WishForm extends React.Component {
@@ -20,6 +21,24 @@ export default class WishForm extends React.Component {
         { value: 5, label: "★★★★★" }
     ]
 
+    saveEdit=() => {
+        const updatedWish={...this.props.wish}
+        let {rating,name,description,url,img_url,price} = this.state
+        updatedWish.rating = !rating? updatedWish.rating : rating
+        updatedWish.price = !price ? updatedWish.price : price
+        updatedWish.description = !description ? updatedWish.description : description
+        updatedWish.url = !url ? updatedWish.url : url
+        updatedWish.img_url = !img_url ? updatedWish.img_url : img_url
+        updatedWish.name = !name ? updatedWish.name : name
+        adapter.patchGift(updatedWish)
+            .then(r=>{
+                this.props.toggleEdit()
+                this.props.updateAfterEdit(r)
+            })
+    }
+
+
+
     setStars = (num) => this.setState({ rating: parseInt(num) })
 
     handleSubmit = () => {
@@ -29,10 +48,6 @@ export default class WishForm extends React.Component {
             name, description, url, img_url, price, rating
         }
         this.props.handleSubmit(newWish)
-    }
-
-    componentDidMount(){
-        console.log(this.props)
     }
 
     render() {
@@ -99,7 +114,12 @@ export default class WishForm extends React.Component {
                 </Label>
 
             </Form><br />
-            <Button color="teal" onClick={this.handleSubmit}>Make a wish!</Button>
+            { this.props.editing? 
+                <Button color="teal" onClick={ this.saveEdit }>Save changes!</Button>
+            :
+                <Button color="teal" onClick={ this.handleSubmit }>Make a wish!</Button>
+            }
+            
         </div>)
     }
 }
