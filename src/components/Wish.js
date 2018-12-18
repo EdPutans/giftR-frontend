@@ -1,5 +1,6 @@
 import React from 'react'
 import { Card, Image, Icon, Button } from 'semantic-ui-react'
+import WishForm from './WishForm'
 
 export default class Wish extends React.Component {
 
@@ -10,7 +11,9 @@ export default class Wish extends React.Component {
         })
     }
 
-
+    state={
+        editing: false
+    }
 
     renderStars = digit => {
         switch(digit){
@@ -29,6 +32,10 @@ export default class Wish extends React.Component {
         }
     }
 
+    toggleEdit=()=>{
+        this.setState({ editing: !this.state.editing})
+    }
+
 
     render() {
         const {wish, user} = this.props
@@ -42,8 +49,10 @@ export default class Wish extends React.Component {
                         floated="right" 
                         size="mini" 
                         color="teal"
-                        onClick={this.handleEdit}
-                    >Edit</Button> 
+                        onClick={this.toggleEdit}
+                    >
+                    {this.state.editing? "Cancel" : "Edit"}
+                    </Button> 
                         }
                     <Card.Meta>
                         <span className='price'>£ { wish.price || "Price unspecified"} </span>
@@ -58,6 +67,7 @@ export default class Wish extends React.Component {
                 <Card.Content extra>
                     Rating: {this.renderStars(wish.rating)}
                 </Card.Content>
+                {this.state.editing && <WishForm />}
             </Card>
         </div>)
     }

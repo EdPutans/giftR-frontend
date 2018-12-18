@@ -31,6 +31,10 @@ export default class WishForm extends React.Component {
         this.props.handleSubmit(newWish)
     }
 
+    componentDidMount(){
+        console.log(this.props)
+    }
+
     render() {
         return (<div style={ {
             zIndex: 1,
