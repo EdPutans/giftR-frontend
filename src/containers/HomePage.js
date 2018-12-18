@@ -39,7 +39,7 @@ export default class HomePage extends React.Component {
                 } }>
                     <Input 
                         style={ { 
-                            marginTop: '10em',                        width: '70%',
+                            marginTop: '1em',                        width: '70%',
                             textAlign: 'center'
                         } } 
                         className='icon' 
@@ -51,10 +51,15 @@ export default class HomePage extends React.Component {
                         <Icon name="search" />Search
                     </Button>
             </div>
+                <div style={ {
+                    zIndex: 1,
+                    paddingTop: "1em"
+                } }>
                 <SearchArea 
                     users={this.state.users}
                     search={this.state.search} 
                 />
+                </div>
         </div>
         )
     }

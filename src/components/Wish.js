@@ -17,7 +17,7 @@ export default class Wish extends React.Component {
             <Card fluid>
                 <Image style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url :""} />
                 <Card.Content>
-                    <Card.Header><Icon name='star' />{wish.name}</Card.Header>
+                    <Card.Header><Icon name='star'/>{wish.name}</Card.Header>
                     { user.id === wish.user_id && <Button 
                         floated="right" 
                         size="mini" 

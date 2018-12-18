@@ -61,7 +61,7 @@ export const postUser = (userObject) => fetch(usersURL, {
 }).then(resp => resp.json())
 
 export const patchGift = (giftObject) => fetch(`${giftsURL}/${giftObject.id}`, {
-    method: 'PATCH',
+    method: 'PATCH', 
     headers: {
         "Content-Type": "application/json"
     },
