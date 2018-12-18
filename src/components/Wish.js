@@ -10,6 +10,26 @@ export default class Wish extends React.Component {
         })
     }
 
+
+
+    renderStars = digit => {
+        switch(digit){
+            case 5:
+                return "★★★★★"
+            case 4:
+                return "★★★★"
+            case 3:
+                return "★★★"
+            case 2:
+                return "★★"
+            case 1:
+                return "★"
+            default:
+                return "No rating specified."
+        }
+    }
+
+
     render() {
         const {wish, user} = this.props
         return (<div>
@@ -33,12 +53,10 @@ export default class Wish extends React.Component {
                     {wish.url? 
                         <Card.Description><a href={ wish.url }>Purchase here!</a></Card.Description> : <Card.Description>No purchase link provided</Card.Description>
                     }
-
-                
                 </Card.Content>
                     
                 <Card.Content extra>
-                    Rating: {wish.rating || "None"}
+                    Rating: {this.renderStars(wish.rating)}
                 </Card.Content>
             </Card>
         </div>)

@@ -77,16 +77,18 @@ export default class EditWish extends React.Component {
                     />
                 </Form.Field>
                 <Label > Priority: <div>
-                    <Form.Group inline>
+                    <Form.Group>
                         { this.selection.map(s =>
-                            <Form.Field
-                                key={ s.value }
-                                control={ Radio }
-                                label={ s.label }
-                                value={ s.value }
-                                checked={ this.state.rating === s.value }
-                                onChange={ () => this.setStars(s.value) }
-                            />
+                            <div>
+                                <Form.Field
+                                    key={ s.value }
+                                    control={ Radio }
+                                    label={ s.label }
+                                    value={ s.value }
+                                    checked={ this.state.rating === s.value }
+                                    onChange={ () => this.setStars(s.value) }
+                                />
+                            </div>
                         ) }
                     </Form.Group>
                 </div>

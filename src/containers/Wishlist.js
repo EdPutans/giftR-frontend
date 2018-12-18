@@ -6,9 +6,10 @@ export default class Wishlist extends React.Component {
 
 
     createWish = () => this.props.history.push('/new_wish')
+    
     render() {
-        let currentUser = this.props.currentUser
-        if (this.props.currentUser && this.props.gifts) {
+        let user = this.props.currentUser
+        if (user && this.props.gifts) {
             return (
                 <div style={ {
                     zIndex: 1,
@@ -16,7 +17,7 @@ export default class Wishlist extends React.Component {
                 } }>
                     { this.props.gifts
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
-                        .map(w => <Wish key={ w.id } wish={ w } user={ currentUser } />) }
+                        .map(w => <Wish key={ w.id } wish={ w } user={ user } />) }
                     <div> <br /><br /><br /><br /><br /><br />
                         { this.props.search ?
                             <Button
@@ -37,7 +38,6 @@ export default class Wishlist extends React.Component {
                                 className="circular"
                                 color="teal"
                                 onClick={ this.createWish }
-                                
                                 style={ {
                                     position: 'fixed',
                                     right: '1em',
