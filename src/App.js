@@ -41,7 +41,6 @@ class App extends Component {
           
       }
     })
-
   }
 
   backToWelcome = () => this.props.history.push('/')

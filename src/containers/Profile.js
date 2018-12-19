@@ -25,7 +25,7 @@ export default class Profile extends React.Component {
     render() {
         const {user} = this.props
         if(!this.state.editing){
-            return (
+            return (<div style={{marginTop:'8%'}}>
                 <Route path='/profile'
                     component={props => 
                     <ProfileShow
@@ -36,9 +36,10 @@ export default class Profile extends React.Component {
                     />
                 } 
                 />
-            )
+            </div> )
         }else{
-         return (
+            return (
+            <div>
              <Route path='/profile'
                  component={ props =>
                      <ProfileForm 
@@ -49,7 +50,7 @@ export default class Profile extends React.Component {
                      />
                  }
              />
-            
+            </div>
         )
     }}
 }

@@ -42,7 +42,7 @@ export default class HomePage extends React.Component {
             })
     }
 
-
+    backToWelcome=()=>this.props.history.push('')
 
     handleSubmit = () => {
         console.log('clicked')
