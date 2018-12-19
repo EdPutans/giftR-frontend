@@ -37,6 +37,7 @@ export default class Profile extends React.Component {
                  component={ props =>
                      <ProfileForm 
                          { ...props }
+                         updateUser={this.props.setUser}
                          toggleEdit={ this.toggleEdit }
                          user={ user }
                      />

@@ -25,7 +25,7 @@ class App extends Component {
     gifts: [],
    
   }
-
+  setUser=(user)=>this.setState({currentUser: user})
 
   componentDidMount() {
     const user = localStorage.getItem('currentUser')
@@ -97,6 +97,8 @@ class App extends Component {
     })
   }
 
+  
+
   handleLogout = () => {
     localStorage.removeItem('currentUser')
     localStorage.removeItem('token')
@@ -140,6 +142,7 @@ class App extends Component {
             } }><h1> Under construction - Secret santa </h1></div> } />
             <Route path='/profile' component={ props => <Profile { ...props }
               user={ currentUser }
+              setUser={this.setUser}
               gifts={ this.state.gifts }
               // currentUser={ currentUser }
               handleLogin={ this.handleLogin }

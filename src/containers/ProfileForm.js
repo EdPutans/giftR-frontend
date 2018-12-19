@@ -35,9 +35,12 @@ export default class ProfileForm extends React.Component {
             adapter.updateUserById(updatedUser)
                 .then(r => {
 
-                    r.error ? alert('Incorrect current password.')
-                        :
-                        this.props.history.push('/')
+                    if(r.error){alert('Incorrect current password.')}
+                    else{
+                        this.props.toggleEdit()
+                        this.props.updateUser(r)
+                    }
+                        
                 })
         } else {
             alert("Please check your password fields.")
