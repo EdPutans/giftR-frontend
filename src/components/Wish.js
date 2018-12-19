@@ -56,7 +56,7 @@ export default class Wish extends React.Component {
             <Card 
                 style={ {
                     // marginLeft: "calc(50% - 290px)"
-                    minHeight: '400px',
+                    minHeight: '433px',
                     maxHeight: '1050px',
                     width: '300px',
                    
@@ -66,7 +66,7 @@ export default class Wish extends React.Component {
 
                 }}>
                 <img 
-                    style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block' } } 
+                    style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } 
                     src={ 
                         wish.img_url ? wish.img_url 
                         :

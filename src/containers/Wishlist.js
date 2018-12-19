@@ -61,8 +61,8 @@ export default class Wishlist extends React.Component {
                             style={ {
                                 // marginLeft: 'calc(50% - 26px)',
                                 position: 'fixed',
-                                bottom: '0.5em',
-                                right: '0.5em',
+                                bottom: '1em',
+                                right: '1em',
                                 textAlign: 'center'
                             } }
                         >

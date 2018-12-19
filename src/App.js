@@ -113,7 +113,6 @@ class App extends Component {
     if (this.state.currentUser) {
       return (
         <div>
-          
           <Route 
             path='' 
             component={ props => <Navbar { ...props }
@@ -121,6 +120,15 @@ class App extends Component {
             activeItem={ navBarItem }
           /> } />
           <Switch>
+            <div
+              style={ {
+                maxWidth: '1000px',
+                margin: 'auto',
+                position: 'absolute',
+                left: '0px',
+                right: '0px',
+              } }>
+              
             {/* because user is signed out, we currently only work on these ;p */ }
             <Route path='/friends' component={ props => <div style={ {
               zIndex: 1,
@@ -152,7 +160,7 @@ class App extends Component {
             <Route exact path='/edit_wish' component={ props =>
               <EditWish { ...props } /> }
             />
-            
+            </div>
           </Switch>
         </div>
       )

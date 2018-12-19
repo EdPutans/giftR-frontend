@@ -10,17 +10,21 @@ export default class Welcome extends React.Component {
     render() {
         return (
             <div style={{
+                
                 backgroundColor: '#FFFFFF',
-                // paddingBottom: '1000%'
             }}
            
             >
                 <img 
-                    style={{
-                        zIndex: 1,
-                        width: '100%',
-                        height: 'auto'
-                        }}
+                    style={ {
+                        display: 'block',
+                        overflow: 'hidden',
+                        maxWidth: '400px',
+                        marginLeft: 'auto',
+                        marginRight: 'auto',
+                        height: 'auto',
+                    } }
+
                                 src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
                  />
                  <div>
