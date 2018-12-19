@@ -13,7 +13,9 @@ export default class Profile extends React.Component {
         return password === repeat_password ? true : false
     }
 
-
+    checkForPasswordPresense = () => {
+        return this.state.old_password? true : false
+    }
 
     handleSubmit = () => {
         if(this.checkPasswordFields()){
@@ -73,7 +75,7 @@ export default class Profile extends React.Component {
             } }>
                 <Form
                     style={ {
-                        marginTop: '20%',
+                        marginTop: '10%',
                         width: '80%',
                         marginLeft: '10%'
                     } }
@@ -95,6 +97,7 @@ export default class Profile extends React.Component {
                         <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } maxlength="20"  />
                     </Form.Field>
                     <Form.Field>
+                    {!this.checkForPasswordPresense() && <Label color='red'>Current password required to perform changes.</Label>}
                         <input type="password" onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />
                     </Form.Field>
                     <Form.Field>
@@ -103,11 +106,13 @@ export default class Profile extends React.Component {
                     <Form.Field>
                         <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } placeholder='Repeat password' />
                     </Form.Field>
-                    <Label color='red'>Current password required to perform changes.</Label>
+                   
                     
-                </Form>
+                
                 <Button onClick={ this.handleSubmit } type='submit'>Submit</Button>
                 <Button onClick={ this.props.logOut } color='red' basic floated='right' type='submit'>Log Out</Button>
+                
+                </Form>
                 { !this.props.user && <a href="/login">Already a member? Log in here!</a> }
             </div>
         )

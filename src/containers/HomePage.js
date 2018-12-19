@@ -67,7 +67,8 @@ export default class HomePage extends React.Component {
                     } }>
                         <Input 
                             style={ { 
-                                marginTop: '1em',                        width: '70%',
+                                marginTop: '1em',
+                                width: '70%',
                                 textAlign: 'center'
                             } } 
                             className='icon' 
