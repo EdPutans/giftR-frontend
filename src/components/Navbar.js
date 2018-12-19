@@ -15,7 +15,7 @@ import { Menu } from 'semantic-ui-react'
                     active={ this.props.activeItem === "" }
                     onClick={() => this.props.handleItemClick("") }
                 /> 
-                <Menu.Item style={ { width:"22%" } }
+                <Menu.Item style={ { width:"22%"} }
                     name='friends'
                     color='red'
                     active={ this.props.activeItem === 'friends' }

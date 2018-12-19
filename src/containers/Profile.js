@@ -14,6 +14,11 @@ export default class Profile extends React.Component {
 
     toggleEdit = () => this.setState({ editing: !this.state.editing }) 
     
+
+    logout=()=>{
+        this.props.logout()
+        this.props.history.push('')
+    }
     
     // pass different props to the function to sign up or to edit the user.
 
@@ -24,6 +29,7 @@ export default class Profile extends React.Component {
                 <Route path='/profile'
                     component={props => 
                     <ProfileShow
+                        logout={ this.logout }
                         {...props}
                         toggleEdit={this.toggleEdit}
                         user={user} 

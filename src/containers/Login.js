@@ -30,6 +30,7 @@ export default class Login extends React.Component {
         return (
             <div>
                 <img
+                    onClick={this.props.back}
                     style={ {
                         zIndex: 1,
                         width: '70%',

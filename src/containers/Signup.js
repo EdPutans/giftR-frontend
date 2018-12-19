@@ -56,6 +56,7 @@ handleChange = (value, type) => {
         return (
         <div>
                 <img
+                    onClick={ this.props.back }
                     style={ {
                         zIndex: 1,
                         width: '70%',

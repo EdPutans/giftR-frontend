@@ -44,7 +44,7 @@ class App extends Component {
 
   }
 
-
+  backToWelcome = () => this.props.history.push('/')
 
   setUserToLocalStorage = (user) => {
     localStorage.setItem('email', user.email)
@@ -103,7 +103,6 @@ class App extends Component {
     localStorage.removeItem('currentUser')
     localStorage.removeItem('token')
     this.setState({ currentUser: null })
-    this.props.history.push('')
   }
 
   // ---------- rendering ----------
@@ -148,7 +147,7 @@ class App extends Component {
               handleLogin={ this.handleLogin }
               handleSubmit={ this.handleEditProfile }
               authenticate={ this.authenticate }
-              logOut={ this.handleLogout }
+              logout={ this.handleLogout }
             /> } />
             <Route exact path='/wishlist' component={ props => <Wishlist
               { ...props }
@@ -171,8 +170,8 @@ class App extends Component {
       return (
         <Switch>
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
-          <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } /> } />
-          <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } /> } />
+          <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } back={this.backToWelcome}/> } />
+          <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } back={ this.backToWelcome } /> } />
         </Switch>
       )
     }

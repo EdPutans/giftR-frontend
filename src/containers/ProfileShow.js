@@ -24,7 +24,7 @@ export default class ProfileShow extends React.Component {
                         <Segment>  Email: { user.email } </Segment>
                         <Segment>  Age: { user.age } </Segment>
                     </Segment.Group>
-                    <Button onClick={ this.props.logOut } color='red' type='submit'>Log Out</Button>
+                    <Button onClick={ this.props.logout } color='red' type='submit'>Log Out</Button>
                     <Button floated='right' onClick={ this.props.toggleEdit }> edit </Button>
                 </div>
             </BodyBackgroundColor>
