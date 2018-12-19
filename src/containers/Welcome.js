@@ -21,8 +21,6 @@ export default class Welcome extends React.Component {
                             zIndex: 100,
                             marginTop: "45%",
                             marginLeft: 'calc(50% - 80px)',
-                            
-
                         }
                     }
                 >

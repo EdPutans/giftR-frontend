@@ -34,43 +34,43 @@ export default class Wishlist extends React.Component {
                             }>
                             <h4>No wishes were made yet</h4>
                         </div> }
-                    <div>
-                        { this.props.search ?
-                            <Button
-                                className="circular"
-                                color="teal"
-                                onClick={ this.props.resetUser }
-                                style={ {
-                                    position: 'fixed',
-                                    marginLeft: 'calc(50% - 98px)',
-                                    bottom: '1em',
-                                    textAlign: 'center'
-                                } }
-                            >
-                                <Icon name='angle left' />back to search resullts
-                            </Button>
-                            :
-                            <Button
-                                className="circular"
-                                circular
-                                // float="right"
-                                color="red"
-                                onClick={ this.createWish }
-                                style={ {
-                                    // marginLeft: 'calc(50% - 26px)',
-                                    position: 'fixed',
-                                    bottom: '0.5em',
-                                    right: '0.5em',
-                                    textAlign: 'center'
-                                } }
-                            >
-                                <h1>+</h1>
-                            </Button>
-
-                        }
-                    </div>
+                    
                 </Card.Group>
-             </div>)
+                    { this.props.search ?
+                        <Button
+                            className="circular"
+                            color="teal"
+                            onClick={ this.props.resetUser }
+                            style={ {
+                                position: 'fixed',
+                                marginLeft: 'calc(50% - 98px)',
+                                bottom: '1em',
+                                textAlign: 'center'
+                            } }
+                        >
+                            <Icon name='angle left' />back to search resullts
+                            </Button>
+                        :
+                        <Button
+                            className="circular"
+                            circular
+                            // float="right"
+                            color="red"
+                            onClick={ this.createWish }
+                            style={ {
+                                // marginLeft: 'calc(50% - 26px)',
+                                position: 'fixed',
+                                bottom: '0.5em',
+                                right: '0.5em',
+                                textAlign: 'center'
+                            } }
+                        >
+                            <h1>+</h1>
+                        </Button>
+
+                    }       
+             </div>
+             )
         }
     }
 }

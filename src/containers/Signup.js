@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from 'react-router-dom'
 import { Form, Button } from 'semantic-ui-react'
 
 import * as adapter from '../Adapter'
@@ -91,15 +92,15 @@ handleChange = (value, type) => {
                 Submit</Button>
             </Form>
                 { !this.props.user && 
-                <a
-                    href="/login"
+                <Link 
+                    to="/login"
                     style={{
                         marginLeft: 'calc(50% - 102.23px',
                         marginRight: '20%'
                     }}
                 >
                     Already a member? Log in here!
-                 </a>}
+                 </Link>}
         </div>
         )
     }

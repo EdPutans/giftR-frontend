@@ -34,12 +34,14 @@ export default class SearchArea extends React.Component {
         // }
         // if (!this.state.selectedUser){
             return (<div>
-                <Card.Group itemsPerRow={1} style={{
-                    // marginLeft: "calc(50% - 290px)"
-                    paddingLeft: '50%',
-                    marginLeft: '-145px'
-
-                }}>
+                <Card.Group 
+                //  style={{
+                //     // marginLeft: "calc(50% - 290px)"
+                //     paddingLeft: '50%',
+                //     marginLeft: '-145px'
+                className="ui center aligned grid"
+                // }}
+                >
                 { this.props.users && this.props.users.map(u =>
                     <div style={
                         {

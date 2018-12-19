@@ -58,6 +58,8 @@ export default class Wish extends React.Component {
                     // marginLeft: "calc(50% - 290px)"
                     minHeight: '400px',
                     maxHeight: '1050px',
+                    width: '300px',
+                   
                     // marginLeft: 'calc(50% - 145px)',
                     // marginLeft: '5%',
                     // marginRight: '10px'

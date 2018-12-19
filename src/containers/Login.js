@@ -1,5 +1,6 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
+import {Link} from 'react-router-dom'
 
 export default class Login extends React.Component {
 
@@ -48,15 +49,15 @@ export default class Login extends React.Component {
                     >
                         Submit
                     </Button><br></br>
-                    <a 
-                        href="/signup"
+                    <Link 
+                        to="/signup"
                         style={ {
                             marginLeft: 'calc(50% - 105.5px',
                             marginRight: '20%'
                         } }
                     >
                         Not a member yet? Sign up here!
-                    </a>
+                    </Link>
                 </Form>
                 
                 

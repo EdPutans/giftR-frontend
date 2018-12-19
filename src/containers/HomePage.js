@@ -68,8 +68,9 @@ export default class HomePage extends React.Component {
                         <Input 
                             style={ { 
                                 marginTop: '1em',
-                                width: '70%',
-                                textAlign: 'center'
+                                width: '60%',
+                                marginLeft: '10%',
+                                marginRight: '10%'
                             } } 
                             className='icon' 
                             placeholder='Search users' 
@@ -81,15 +82,16 @@ export default class HomePage extends React.Component {
                         </Button>
                 </div>
                     <div style={ {
+                        width:'20%',
                         zIndex: 1,
                         paddingTop: "1em"
                     } }>
+                </div>
                     <SearchArea 
                         selectUser={this.selectUser}
                         users={this.state.users}
                         search={this.state.search} 
-                    />
-                    </div>
+                    />   
             </div>
             )
         }
