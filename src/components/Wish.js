@@ -53,7 +53,13 @@ export default class Wish extends React.Component {
         const {wish} = this.state
         if(this.state.wish){return (<div>
             <br />
-            <Card fluid>
+            <Card 
+                itemsPerRow={ 1 } style={ {
+                    // marginLeft: "calc(50% - 290px)"
+                    marginLeft: 'calc(50% - 145px)',
+                    // marginLeft: '-145px'
+
+                }}>
                 <img style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url : ""} />
                 <Card.Content>
                     <Card.Header><Icon name='star'/>{wish.name}</Card.Header>

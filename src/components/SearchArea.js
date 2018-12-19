@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card } from 'semantic-ui-react'
+import { Card, Icon } from 'semantic-ui-react'
 import Wishlist from '../containers/Wishlist'
 
 export default class SearchArea extends React.Component {
@@ -34,6 +34,12 @@ export default class SearchArea extends React.Component {
         // }
         // if (!this.state.selectedUser){
             return (<div>
+                <Card.Group itemsPerRow={1} style={{
+                    // marginLeft: "calc(50% - 290px)"
+                    paddingLeft: '50%',
+                    marginLeft: '-145px'
+
+                }}>
                 { this.props.users && this.props.users.map(u =>
                     <div style={
                         {
@@ -41,14 +47,14 @@ export default class SearchArea extends React.Component {
                             paddingTop: "1em"
                         }
                     }>
-                        <Card 
+                        <Card
                             onClick={ () => this.props.selectUser(u) }
-                            fluid
-                            header={ (u.first_name ? u.first_name : "") + ' ' + (u.last_name ? u.last_name : "") }
+                            header={(u.first_name ? u.first_name : "") + ' ' + (u.last_name ? u.last_name : "") }
                             meta={ u.gifts.length + " wishes" }
                         />
                     </div>
                 ) }
+                </Card.Group>
             </div>)
         // }
     }

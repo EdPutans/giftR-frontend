@@ -28,7 +28,11 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
-                <Form>
+                <Form style={ {
+                    marginTop: '20%',
+                    width: '80%',
+                    marginLeft: '10%'
+                }}>
                     <Form.Field>
                         <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder='First Name' />
                     </Form.Field>
@@ -36,10 +40,26 @@ export default class Login extends React.Component {
                         <input onChange={ event => this.handleChange(event.target.value, "password") } placeholder='Password' type="password" />
                     </Form.Field>
 
-                    <Button onClick={ this.handleSubmit } type='submit'>Submit</Button>
+                    <Button 
+                        onClick={ this.handleSubmit } type='submit'
+                        style={ {
+                            marginLeft: 'calc(50% - 43px)'
+                        } }
+                    >
+                        Submit
+                    </Button><br></br>
+                    <a 
+                        href="/signup"
+                        style={ {
+                            marginLeft: 'calc(50% - 105.5px',
+                            marginRight: '20%'
+                        } }
+                    >
+                        Not a member yet? Sign up here!
+                    </a>
                 </Form>
                 
-                <a href="/signup">Not a member yet? Sign up here!</a>
+                
             </div>
             )
     }

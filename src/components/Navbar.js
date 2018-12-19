@@ -3,11 +3,11 @@ import { Menu } from 'semantic-ui-react'
  export default class Navbar extends React.Component {
 
 
-    
+     
 
     render() {
         return (<div >
-            <Menu inverted fluid style={ {position: 'fixed', zIndex: "100"} }>
+            <Menu fluid style={ {position: 'fixed', zIndex: "100"} }>
                 <Menu.Item   
                     style={ {width:"12%"}}
                     icon="home"

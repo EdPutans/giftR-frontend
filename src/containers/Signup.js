@@ -54,7 +54,12 @@ handleChange = (value, type) => {
         
         return (
         <div>
-            <Form>
+            <Form style={{
+                marginTop: '20%',
+                width: '80%',
+                marginLeft: '10%'
+            }
+            }>
                 <Form.Field>
                     <input onChange={event => this.handleChange(event.target.value, "first_name")} placeholder ='First Name'/>
                 </Form.Field>
@@ -75,9 +80,26 @@ handleChange = (value, type) => {
                 </Form.Field>
 
                 
-                <Button onClick={this.handleSignup}type='submit'>Submit</Button>
+                <Button 
+                    onClick={this.handleSignup}
+                    color="teal"
+                    type='submit'
+                    style={ { 
+                        marginLeft: 'calc(50% - 43px)'
+                    }}
+                >
+                Submit</Button>
             </Form>
-                { !this.props.user && <a href="/login">Already a member? Log in here!</a>}
+                { !this.props.user && 
+                <a
+                    href="/login"
+                    style={{
+                        marginLeft: 'calc(50% - 102.23px',
+                        marginRight: '20%'
+                    }}
+                >
+                    Already a member? Log in here!
+                 </a>}
         </div>
         )
     }

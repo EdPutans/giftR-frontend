@@ -71,7 +71,13 @@ export default class Profile extends React.Component {
                 zIndex: 1,
                 paddingTop: "4em"
             } }>
-                <Form><br/>
+                <Form
+                    style={ {
+                        marginTop: '20%',
+                        width: '80%',
+                        marginLeft: '10%'
+                    } }
+                ><br/>
                    
                     <Form.Field>
                         <input
