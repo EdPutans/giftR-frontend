@@ -3,6 +3,8 @@ import { Input, Button, Icon } from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
+import BodyBackgroundColor from 'react-body-backgroundcolor'
+
 // import Wish from '../components/Wish'
 
 export default class HomePage extends React.Component {
@@ -48,7 +50,7 @@ export default class HomePage extends React.Component {
 
     render() {
         if (this.state.selectedUser) {
-            return (
+            return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div>
                     <Wishlist
                         resetUser={ this.resetUser }
@@ -56,10 +58,10 @@ export default class HomePage extends React.Component {
                         search={ true }
                         gifts={ this.state.selectedUser.gifts }
                     />
-                </div>
+                </div></BodyBackgroundColor>
             )
         }else{
-            return (
+            return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div>
                     <div style={ {
                         zIndex: 1,
@@ -69,8 +71,7 @@ export default class HomePage extends React.Component {
                             style={ { 
                                 marginTop: '1em',
                                 width: '60%',
-                                marginLeft: '10%',
-                                marginRight: '10%'
+                                marginLeft: '10%'
                             } } 
                             className='icon' 
                             placeholder='Search users' 
@@ -92,7 +93,7 @@ export default class HomePage extends React.Component {
                         users={this.state.users}
                         search={this.state.search} 
                     />   
-            </div>
+                </div></BodyBackgroundColor>
             )
         }
     }

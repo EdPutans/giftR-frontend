@@ -1,6 +1,7 @@
 import React from 'react'
 import { Form, Button, Label } from 'semantic-ui-react'
 import * as adapter from '../Adapter'
+import BodyBackgroundColor from 'react-body-backgroundcolor'
 
 export default class Profile extends React.Component {
 
@@ -68,7 +69,7 @@ export default class Profile extends React.Component {
 
     render() {
         const {user} = this.props
-        return (
+        return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
             <div style={ {
                 zIndex: 1,
                 paddingTop: "4em"
@@ -108,13 +109,13 @@ export default class Profile extends React.Component {
                     </Form.Field>
                    
                     
-                
-                <Button onClick={ this.handleSubmit } type='submit'>Submit</Button>
-                <Button onClick={ this.props.logOut } color='red' basic floated='right' type='submit'>Log Out</Button>
+                    <Button onClick={ this.props.logOut } color='red' type='submit'>Log Out</Button>
+                    <Button onClick={ this.handleSubmit } color='teal' floated='right' type='submit'>Submit</Button>
+               
                 
                 </Form>
                 { !this.props.user && <a href="/login">Already a member? Log in here!</a> }
-            </div>
+            </div></BodyBackgroundColor>
         )
     }
 }

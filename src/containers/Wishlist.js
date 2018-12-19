@@ -1,6 +1,7 @@
 import React from 'react'
 import Wish from '../components/Wish'
 import { Button, Icon, Card } from 'semantic-ui-react'
+import BodyBackgroundColor from 'react-body-backgroundcolor'
 
 export default class Wishlist extends React.Component {
 
@@ -10,7 +11,7 @@ export default class Wishlist extends React.Component {
     render() {
         let user = this.props.currentUser
         if (user && this.props.gifts) {
-            return (
+            return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div style={ {
                     zIndex: 1,
                     paddingTop: "3em",
@@ -69,7 +70,7 @@ export default class Wishlist extends React.Component {
                         </Button>
 
                     }       
-             </div>
+                </div></BodyBackgroundColor>
              )
         }
     }

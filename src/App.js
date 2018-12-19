@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 // import { BrowserRouter, withRouter, Route, Switch, Redirect } from 'react-router-dom'
 import { Loader } from 'semantic-ui-react'
-
+import BodyBackgroundColor from 'react-body-backgroundcolor'
 import Login from './containers/Login'
 import WishForm from './components/WishForm'
 import Welcome from './containers/Welcome'
@@ -113,6 +113,7 @@ class App extends Component {
     if (this.state.currentUser) {
       return (
         <div>
+          
           <Route 
             path='' 
             component={ props => <Navbar { ...props }
@@ -151,6 +152,7 @@ class App extends Component {
             <Route exact path='/edit_wish' component={ props =>
               <EditWish { ...props } /> }
             />
+            
           </Switch>
         </div>
       )

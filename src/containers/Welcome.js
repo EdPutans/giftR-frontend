@@ -2,32 +2,46 @@ import React from 'react'
 import { Button } from 'semantic-ui-react'
 
 
+
 export default class Welcome extends React.Component {
 
 
 
     render() {
         return (
-            
-            <div 
-            // className="bg-img" 
+            <div style={{
+                backgroundColor: '#FFFFFF',
+                // paddingBottom: '1000%'
+            }}
+           
             >
-                <div>
+                <img 
+                    style={{
+                        zIndex: 1,
+                        width: '100%',
+                        height: 'auto'
+                        }}
+                                src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
+                 />
+                 <div>
                 <Button
+                    style={{
+                        marginLeft:'calc(50% - 80px)'
+                    }}
                     onClick={ () => this.props.history.push('/login') }
                     color='red'
-                    style={
-                        {
-                            zIndex: 100,
-                            marginTop: "45%",
-                            marginLeft: 'calc(50% - 80px)',
-                        }
-                    }
                 >
                     Log In
-                    </Button>
-                <Button onClick={ () => this.props.history.push('/signup') } basic color='teal'>Sign up</Button>
-            </div>
+                </Button >
+                <Button 
+                    onClick={ () => this.props.history.push('/signup') } 
+                    basic    
+                    color='teal'
+                >
+                    Sign up
+                </Button>
+                </div>
+            
             </div>
 
         )

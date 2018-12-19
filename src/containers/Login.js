@@ -29,8 +29,17 @@ export default class Login extends React.Component {
     render() {
         return (
             <div>
+                <img
+                    style={ {
+                        zIndex: 1,
+                        width: '70%',
+                        height: 'auto',
+                        paddingLeft: "30%"
+                    } }
+                    src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
+                />
                 <Form style={ {
-                    marginTop: '20%',
+                    // marginTop: '20%',
                     width: '80%',
                     marginLeft: '10%'
                 }}>

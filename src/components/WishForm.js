@@ -1,7 +1,7 @@
 import React from 'react'
 import * as adapter from '../Adapter'
 import { Form, Button, Radio, Label } from 'semantic-ui-react'
-
+import BodyBackgroundColor from 'react-body-backgroundcolor'
 export default class WishForm extends React.Component {
 
     state = {
@@ -51,7 +51,9 @@ export default class WishForm extends React.Component {
     }
 
     render() {
-        return (<div style={ !this.props.editing ?
+        return (
+            <BodyBackgroundColor backgroundColor='#F6CFCA'>
+        <div style={ !this.props.editing ?
             {
                 zIndex: 1,
                 paddingTop: "8em",
@@ -134,6 +136,6 @@ export default class WishForm extends React.Component {
                 <Button color="teal" onClick={ this.handleSubmit }>Make a wish!</Button>
             }
 
-        </div>)
+                </div></BodyBackgroundColor>)
     }
 }
