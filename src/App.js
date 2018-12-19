@@ -65,7 +65,7 @@ class App extends Component {
 
   handleNewWish = (wish) => {
     wish.user_id = this.state.currentUser.id
-    document.querySelector(".loader").remove()
+    
     return adapter.postGift(wish)
       .then(wish => {
         this.setState({ gifts: [...this.state.gifts, wish] })

@@ -10,8 +10,8 @@ export default class Profile extends React.Component {
     }
 
     checkPasswordFields = () => {
-        const { password, repeat_password } = this.state
-        return password === repeat_password ? true : false
+        const { new_password, repeat_password } = this.state
+        return new_password === repeat_password? true : false
     }
 
     checkForPasswordPresense = () => {
@@ -19,7 +19,7 @@ export default class Profile extends React.Component {
     }
 
     handleSubmit = () => {
-        if(this.checkPasswordFields()){
+        if(this.checkPasswordFields() && this.checkForPasswordPresense()){
             const { first_name, last_name, email, age, old_password, new_password, repeat_password } = this.state
             let user = this.props.user
             let updatedUser = {}
@@ -40,7 +40,7 @@ export default class Profile extends React.Component {
                         this.props.history.push('/')
                 })
         }else{
-            alert("Password fields don't match.")
+            alert("Please check your password fields.")
         }
      }
 

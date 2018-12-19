@@ -68,6 +68,7 @@ export default class WishForm extends React.Component {
             <Form>
                 <Form.Field>
                     <input
+                        value = {this.props.editing && this.props.wish.name? this.props.wish.name : ""}
                         type="text"
                         maxlength="20"
                         name="name"
@@ -77,6 +78,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <textarea
+                        value={ this.props.editing && this.props.wish.description ? this.props.wish.description : "" }
                         maxlength="500"
                         type="text"
                         name="description"
@@ -86,7 +88,8 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
-                        maxlength="0"
+                        value={ this.props.editing && this.props.wish.url ? this.props.wish.url : "" }
+                        maxlength="500"
                         type="text"
                         name="url"
                         placeholder="Link to purchase"
@@ -95,6 +98,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
+                        value={ this.props.editing && this.props.wish.img_url ? this.props.wish.img_url : "" }
                         maxlength="500"
                         type="text"
                         name="img_url"
@@ -104,6 +108,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
+                        value={ this.props.editing && this.props.wish.price ? this.props.wish.price : "" }
                         maxLength="2"
                         maxlength="20"
                         type="number"

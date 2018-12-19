@@ -81,7 +81,7 @@ export default class Wish extends React.Component {
                     </Card.Meta>
                     <Card.Description>{wish.description || "No description provided"} </Card.Description>
 
-                    {wish.url? 
+                    {wish.url && wish.url != "http://"? 
                         <Card.Description><a href={ wish.url }>Purchase here!</a></Card.Description> : <Card.Description>No purchase link provided</Card.Description>
                     }
                 </Card.Content>
