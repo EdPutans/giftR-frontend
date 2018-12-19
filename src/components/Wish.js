@@ -54,13 +54,23 @@ export default class Wish extends React.Component {
         if(this.state.wish){return (<div>
             <br />
             <Card 
-                itemsPerRow={ 1 } style={ {
+                style={ {
                     // marginLeft: "calc(50% - 290px)"
-                    marginLeft: 'calc(50% - 145px)',
-                    // marginLeft: '-145px'
+                    minHeight: '400px',
+                    maxHeight: '1050px',
+                    // marginLeft: 'calc(50% - 145px)',
+                    // marginLeft: '5%',
+                    // marginRight: '10px'
 
                 }}>
-                <img style={{maxHeight: '60%', maxWidth: '60%', margin:'0 auto', display: 'block'}} src={wish.img_url? wish.img_url : ""} />
+                <img 
+                    style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block' } } 
+                    src={ 
+                        wish.img_url ? wish.img_url 
+                        :
+                        'http://vyfhealth.com/wp-content/uploads/2015/10/yoga-placeholder1.jpg'
+                     } 
+                />
                 <Card.Content>
                     <Card.Header><Icon name='star'/>{wish.name}</Card.Header>
                     

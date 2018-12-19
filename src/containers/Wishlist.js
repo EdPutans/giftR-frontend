@@ -1,6 +1,6 @@
 import React from 'react'
 import Wish from '../components/Wish'
-import { Button, Icon } from 'semantic-ui-react'
+import { Button, Icon, Card } from 'semantic-ui-react'
 
 export default class Wishlist extends React.Component {
 
@@ -16,6 +16,7 @@ export default class Wishlist extends React.Component {
                     paddingTop: "3em",
                     paddingBottom: "6em"
                 } }>
+                    <Card.Group className="ui center aligned grid" itemsPerRow={2} >
                     { this.props.gifts.length > 0 ? this.props.gifts
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
                         .map(w =>
@@ -68,7 +69,8 @@ export default class Wishlist extends React.Component {
 
                         }
                     </div>
-                </div>)
+                </Card.Group>
+             </div>)
         }
     }
 }

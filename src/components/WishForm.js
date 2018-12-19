@@ -21,17 +21,17 @@ export default class WishForm extends React.Component {
         { value: 5, label: "★★★★★" }
     ]
 
-    saveEdit=() => {
-        const updatedWish={...this.props.wish}
-        let {rating,name,description,url,img_url,price} = this.state
-        updatedWish.rating = !rating? updatedWish.rating : rating
+    saveEdit = () => {
+        const updatedWish = { ...this.props.wish }
+        let { rating, name, description, url, img_url, price } = this.state
+        updatedWish.rating = !rating ? updatedWish.rating : rating
         updatedWish.price = !price ? updatedWish.price : price
         updatedWish.description = !description ? updatedWish.description : description
         updatedWish.url = !url ? updatedWish.url : url
         updatedWish.img_url = !img_url ? updatedWish.img_url : img_url
         updatedWish.name = !name ? updatedWish.name : name
         adapter.patchGift(updatedWish)
-            .then(r=>{
+            .then(r => {
                 this.props.toggleEdit()
                 this.props.updateAfterEdit(r)
             })
@@ -42,32 +42,40 @@ export default class WishForm extends React.Component {
     setStars = (num) => this.setState({ rating: parseInt(num) })
 
     handleSubmit = () => {
-        let {name, description, url, img_url, price, rating} = this.state
-        url = !url.includes("http://") || !url.includes("https://")? "http://"+url : url
-        const newWish ={
+        let { name, description, url, img_url, price, rating } = this.state
+        url = !url.includes("http://") || !url.includes("https://") ? "http://" + url : url
+        const newWish = {
             name, description, url, img_url, price, rating
         }
         this.props.handleSubmit(newWish)
     }
 
     render() {
-        return (<div style={ !this.props.editing? {
-            zIndex: 1,
-            paddingTop: "4em"
-        } : { paddingTop: "1em"}}>
+        return (<div style={ !this.props.editing ?
+            {
+                zIndex: 1,
+                paddingTop: "8em",
+                marginLeft: '10%',
+                marginRight: '10%'
+            }
+            :
+            {
+                paddingTop: "1em"
+            } }
+        >
             <Form>
                 <Form.Field>
-                    <input 
-                        type="text" 
-                        maxlength="20" 
-                        name="name" 
-                        placeholder="Title" 
-                        onChange={event=>this.setState({name: event.target.value})}
-                        />
+                    <input
+                        type="text"
+                        maxlength="20"
+                        name="name"
+                        placeholder="Title"
+                        onChange={ event => this.setState({ name: event.target.value }) }
+                    />
                 </Form.Field>
                 <Form.Field>
                     <textarea
-                        maxlength="500" 
+                        maxlength="500"
                         type="text"
                         name="description"
                         placeholder="Description (up to 500 characters)"
@@ -76,16 +84,16 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
-                        maxlength="20" 
+                        maxlength="0"
                         type="text"
                         name="url"
                         placeholder="Link to purchase"
                         onChange={ event => this.setState({ url: event.target.value }) }
-                    />                
+                    />
                 </Form.Field>
                 <Form.Field>
                     <input
-                        maxlength="20" 
+                        maxlength="500"
                         type="text"
                         name="img_url"
                         placeholder="Image link"
@@ -95,7 +103,7 @@ export default class WishForm extends React.Component {
                 <Form.Field>
                     <input
                         maxLength="2"
-                        maxlength="20" 
+                        maxlength="20"
                         type="number"
                         name="price"
                         placeholder="Price"
@@ -103,28 +111,29 @@ export default class WishForm extends React.Component {
                     />
                 </Form.Field>
                 <Label > Priority: <div>
-                    <Form.Group inline>
-                        { this.selection.map(s =>
-                            <Form.Field
-                                key={ s.value }
-                                control={ Radio }
-                                label={ s.label }
-                                value={ s.value }
-                                checked={ this.state.rating === s.value }
-                                onChange={ () => this.setStars(s.value) }
-                            />
-                        ) }
-                    </Form.Group>
+                    {/* <Form.Group> */ }
+                    { this.selection.map(s =>
+                        <Form.Field
+                            key={ s.value }
+                            control={ Radio }
+                            label={ s.label }
+                            value={ s.value }
+                            checked={ this.state.rating === s.value }
+                            onChange={ () => this.setStars(s.value) }
+
+                        />
+                    ) }
+                    {/* </Form.Group> */ }
                 </div>
                 </Label>
 
             </Form><br />
-            { this.props.editing? 
+            { this.props.editing ?
                 <Button color="teal" onClick={ this.saveEdit }>Save changes!</Button>
-            :
+                :
                 <Button color="teal" onClick={ this.handleSubmit }>Make a wish!</Button>
             }
-            
+
         </div>)
     }
 }
