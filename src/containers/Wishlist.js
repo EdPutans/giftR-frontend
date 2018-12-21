@@ -13,6 +13,7 @@ export default class Wishlist extends React.Component {
         if (user && this.props.gifts) {
             return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div style={ {
+                    
                     zIndex: 1,
                     paddingTop: "3em",
                     paddingBottom: "6em"
@@ -22,6 +23,8 @@ export default class Wishlist extends React.Component {
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
                         .map(w =>
                             <Wish
+                                deleteWishFromDB={ this.props.deleteWishFromDB }
+                                deleteWish={ this.props.deleteWish }
                                 key={ w.id }
                                 wish={ w }
                                 user={ user }
@@ -55,15 +58,15 @@ export default class Wishlist extends React.Component {
                         <Button
                             className="circular"
                             circular
-                            // float="right"
+                            // floated="right"
                             color="red"
                             onClick={ this.createWish }
                             style={ {
-                                // marginLeft: 'calc(50% - 26px)',
+                                left: 'calc(50% - 26px)',
                                 position: 'fixed',
-                                bottom: '1em',
-                                right: '1em',
-                                textAlign: 'center'
+                                top: '90%',
+                                // right: '1em',
+                                // textAlign: 'center'
                             } }
                         >
                             <h1>+</h1>

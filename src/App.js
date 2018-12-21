@@ -61,6 +61,15 @@ class App extends Component {
 
   // --------- prop functions ----------//
 
+  deleteWish = ( id ) => {
+    let gifts = [...this.state.gifts]
+    gifts = gifts.filter(w=> w.id !== id)
+    return this.setState({gifts})
+  }
+
+  deleteWishFromDB=(id)=>{
+    return adapter.deleteGift(id)
+  }
 
   handleNewWish = (wish) => {
     wish.user_id = this.state.currentUser.id
@@ -113,21 +122,22 @@ class App extends Component {
     if (this.state.currentUser) {
       return (
         <div>
-          <Route 
-            path='' 
-            component={ props => <Navbar { ...props }
-            handleItemClick={ this.handleNavBarChange }
-            activeItem={ navBarItem }
-          /> } />
           <Switch>
             <div
               style={ {
                 maxWidth: '1000px',
-                margin: 'auto',
+                width: '100%',
                 position: 'absolute',
-                left: '0px',
-                right: '0px',
+                left: 0,
+                right: 0,
               } }>
+          <Route 
+            // path='' 
+            component={ props => <Navbar { ...props }
+            handleItemClick={ this.handleNavBarChange }
+            activeItem={ navBarItem }
+          /> } />
+          
               
             {/* because user is signed out, we currently only work on these ;p */ }
             <Route path='/friends' component={ props => <div style={ {
@@ -150,6 +160,8 @@ class App extends Component {
             /> } />
             <Route exact path='/wishlist' component={ props => <Wishlist
               { ...props }
+              deleteWishFromDB={this.deleteWishFromDB}
+              deleteWish={this.deleteWish}
               currentUser={ currentUser }
               gifts={ this.state.gifts }
             /> }

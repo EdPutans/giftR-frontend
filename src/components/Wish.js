@@ -55,18 +55,21 @@ export default class Wish extends React.Component {
             <br />
             <Card 
                 style={ {
-                    // marginLeft: "calc(50% - 290px)"
+                    marginLeft: "calc(50% - 290px)",
                     minHeight: '433px',
                     maxHeight: '1050px',
                     width: '300px',
                    
-                    // marginLeft: 'calc(50% - 145px)',
-                    // marginLeft: '5%',
-                    // marginRight: '10px'
+                    marginLeft: 'calc(50% - 145px)',
+                    marginLeft: '5%',
+                    marginRight: '10px'
 
                 }}>
                 <img 
-                    style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } 
+                    style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block', 
+                    padding: '5% 0 5% 0 '
+                } 
+                } 
                     src={ 
                         wish.img_url ? wish.img_url 
                         :
@@ -99,6 +102,8 @@ export default class Wish extends React.Component {
                     </Button>
                     }
                     { this.state.editing && <WishForm
+                        deleteWishFromDB={ this.props.deleteWishFromDB }
+                        deleteWish={ this.props.deleteWish }
                         editing={ true }
                         wish={wish}
                         updateAfterEdit={this.updateAfterEdit}

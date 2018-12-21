@@ -6,11 +6,11 @@ export default class WishForm extends React.Component {
 
     state = {
         rating: 0,
-        name: '',
-        description: '',
-        url: '',
-        img_url: '',
-        price: 0
+        name: this.props.editing && this.props.wish.name ? this.props.wish.name : "" ,
+        description: this.props.editing && this.props.wish.description ? this.props.wish.description : "",
+        url: this.props.editing && this.props.wish.url ? this.props.wish.url : "",
+        img_url: this.props.editing && this.props.wish.img_url ? this.props.wish.img_url : "",
+        price: this.props.editing && this.props.wish.price ? this.props.wish.price : ""
     }
 
     selection = [
@@ -20,6 +20,11 @@ export default class WishForm extends React.Component {
         { value: 4, label: "★★★★" },
         { value: 5, label: "★★★★★" }
     ]
+
+    deleteWish=()=>{
+        this.props.deleteWishFromDB(this.props.wish.id).then( () =>
+        this.props.deleteWish(this.props.wish.id) )
+    }
 
     saveEdit = () => {
         const updatedWish = { ...this.props.wish }
@@ -68,7 +73,7 @@ export default class WishForm extends React.Component {
             <Form>
                 <Form.Field>
                     <input
-                        // value = {this.props.editing && this.props.wish.name? this.props.wish.name : ""}
+                        defaultValue = {this.state.name}
                         type="text"
                         maxLength="20"
                         name="name"
@@ -78,7 +83,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <textarea
-                        // value={ this.props.editing && this.props.wish.description ? this.props.wish.description : "" }
+                        defaultValue={ this.state.description }
                         maxLength="500"
                         type="text"
                         name="description"
@@ -88,7 +93,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
-                        // value={ this.props.editing && this.props.wish.url ? this.props.wish.url : "" }
+                        defaultValue={ this.state.url }
                         maxLength="500"
                         type="text"
                         name="url"
@@ -98,7 +103,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
-                        // value={ this.props.editing && this.props.wish.img_url ? this.props.wish.img_url : "" }
+                        defaultValue={ this.state.img_url }
                         maxLength="500"
                         type="text"
                         name="img_url"
@@ -108,7 +113,7 @@ export default class WishForm extends React.Component {
                 </Form.Field>
                 <Form.Field>
                     <input
-                        // value={ this.props.editing && this.props.wish.price ? this.props.wish.price : "" }
+                        defaultValue={ this.state.price }
                         
                         maxLength="20"
                         type="number"
@@ -124,7 +129,7 @@ export default class WishForm extends React.Component {
                             key={ s.value }
                             control={ Radio }
                             label={ s.label }
-                            value={ s.value }
+                            defaultValue={ s.value }
                             checked={ this.state.rating === s.value }
                             onChange={ () => this.setStars(s.value) }
 
@@ -135,8 +140,10 @@ export default class WishForm extends React.Component {
                 </Label>
 
             </Form><br />
-            { this.props.editing ?
+            { this.props.editing ? <div>
                 <Button color="teal" onClick={ this.saveEdit }>Save changes!</Button>
+                <Button color="red" floated='right' onClick={ this.deleteWish }>Delete</Button>
+                </div>
                 :
                 <Button color="teal" onClick={ this.handleSubmit }>Make a wish!</Button>
             }
