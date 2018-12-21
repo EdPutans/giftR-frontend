@@ -8,7 +8,7 @@ import { Menu } from 'semantic-ui-react'
     render() {
         return (<div >
             <Menu fluid 
-                style={ {position: 'fixed', zIndex: "100", marginBottom: '5%'} }>
+                style={ {position: 'fixed', zIndex: "100", overflow: 'hidden'} }>
                 <Menu.Item   
                     style={ {width:"12%"}}
                     icon="home"
@@ -28,6 +28,7 @@ import { Menu } from 'semantic-ui-react'
                     style={ { width:"22%" } }
                     icon="gift"
                     name='Secret Santa' 
+                    size='tiny'
                     color='red'
                     active={ this.props.activeItem === 'santa' } 
                     onClick={ () => this.props.handleItemClick("santa") } 
