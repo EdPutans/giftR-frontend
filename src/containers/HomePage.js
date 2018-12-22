@@ -16,14 +16,14 @@ export default class HomePage extends React.Component {
     }
 
     selectUser = (user) => {
-        console.log(user)
+        
         this.setState({ selectedUser: user })
 
     }
 
     resetUser = () => {
         this.setState({ selectedUser: null })
-        console.log('reset: ', this.state.selectUser)
+        
     }
 
 
@@ -35,7 +35,7 @@ export default class HomePage extends React.Component {
     
     
     findUsers = () =>{
-        console.log('searching')
+        
         return this.state.search && adapter.getUsersBySearchQuery(this.state.search)
             .then(users=>{
               return  !users.error && this.setState({users})
@@ -45,7 +45,6 @@ export default class HomePage extends React.Component {
     backToWelcome=()=>this.props.history.push('')
 
     handleSubmit = () => {
-        console.log('clicked')
         this.findUsers()
     }
 
@@ -65,7 +64,7 @@ export default class HomePage extends React.Component {
             return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div>
                     <div style={ {
-                        zIndex: 1,
+                        zIndex: '1',
                         paddingTop: "3em"
                     } }>
                         <Input 
@@ -85,7 +84,7 @@ export default class HomePage extends React.Component {
                 </div>
                     <div style={ {
                         width:'20%',
-                        zIndex: 1,
+                        zIndex: '1',
                         paddingTop: "1em"
                     } }>
                 </div>

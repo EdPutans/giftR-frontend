@@ -18,7 +18,6 @@ export default class Wish extends React.Component {
     }
 
     componentDidMount=()=>{
-        console.log('props',this.props)
         this.props.wish && this.setState({ wish: this.props.wish })
     }
 

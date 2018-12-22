@@ -5,7 +5,14 @@ import { Button } from 'semantic-ui-react'
 
 export default class Welcome extends React.Component {
 
-
+    // buttonStyle = {
+    //     zIndex: 100,
+    //     position: 'relative',
+    //     margin: '100px 100px',
+    //     paddingLeft: '24px ',
+    //     paddingRight: '24px',
+    //     // maxWidth: '1280px '
+    // }
 
     render() {
         return (
@@ -16,6 +23,18 @@ export default class Welcome extends React.Component {
            
             >
                 <img 
+
+                //     style={{
+
+                // height: 'auto',
+                // maxWidth: '400px',
+                // position: 'absolute',
+                // left: '50%',
+                // top: '10%',
+                // transform: 'translate(-50%, -50%)',
+             
+            
+                //                 }}
                     style={ {
                         display: 'block',
                         overflow: 'hidden',
@@ -29,6 +48,7 @@ export default class Welcome extends React.Component {
                  />
                  <div>
                 <Button
+                    // style={ this.buttonStyle}
                     style={{
                         marginLeft:'calc(50% - 80px)'
                     }}
@@ -40,6 +60,7 @@ export default class Welcome extends React.Component {
                 <Button 
                     onClick={ () => this.props.history.push('/signup') } 
                     basic    
+                    // style={this.buttonStyle}
                     color='teal'
                 >
                     Sign up

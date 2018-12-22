@@ -15,7 +15,7 @@ import EditWish from './components/EditWish'
 import Loading from './components/Loading'
 import './App.css';
 import * as adapter from './Adapter'
-
+import FriendList from './containers/FriendList'
 class App extends Component {
 
   // ----------- state and mounting ----------- //
@@ -143,7 +143,8 @@ class App extends Component {
             <Route path='/friends' component={ props => <div style={ {
               zIndex: 1,
               paddingTop: "6em"
-            } }><h1> Under construction - friends </h1></div> } />
+            } }><FriendList currentUser={this.state.currentUser} /></div> } />
+
             <Route path='/santa' component={ props => <div style={ {
               zIndex: 1,
               paddingTop: "6em"
@@ -166,6 +167,7 @@ class App extends Component {
               gifts={ this.state.gifts }
             /> }
             />
+       
             <Route exact path='/' component={ props => <HomePage { ...props } /> } />
             <Route exact path='/new_wish' component={ props =>
               <WishForm { ...props } handleSubmit={ this.handleNewWish } /> }

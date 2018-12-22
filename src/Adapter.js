@@ -3,6 +3,11 @@ const giftsURL = "http://localhost:3000/api/v1/gifts"
 
 export const test_const = 123
 
+export const getFriends = (id) => {
+    return fetch(`${usersURL}/${id}/friends`)
+        .then(r=>r.json())
+}
+
 
 export const signin= (email, password) => {
     return fetch('http://localhost:3000/api/v1/signin', {
