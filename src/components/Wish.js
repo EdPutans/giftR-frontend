@@ -1,5 +1,5 @@
 import React from 'react'
-import { Card, Image, Icon, Button } from 'semantic-ui-react'
+import { Card, Icon, Button } from 'semantic-ui-react'
 import WishForm from './WishForm'
 
 export default class Wish extends React.Component {

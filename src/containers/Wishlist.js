@@ -47,12 +47,12 @@ export default class Wishlist extends React.Component {
                             onClick={ this.props.resetUser }
                             style={ {
                                 position: 'fixed',
-                                marginLeft: 'calc(50% - 98px)',
+                                marginLeft: 'calc(50% - 56px)',
                                 bottom: '1em',
                                 textAlign: 'center'
                             } }
                         >
-                            <Icon name='angle left' />back to search resullts
+                            <Icon name='angle left' /> Go back
                             </Button>
                         :
                         <Button
