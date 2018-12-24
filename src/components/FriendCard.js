@@ -20,7 +20,7 @@ handleClick(friend){
 
 friendCard =(friend) => {
     return <Card
-        keu={friend.id}
+        key={friend.id}
         onClick={()=>this.handleClick(friend)}
             style={ {
                 // minHeight: '200px',
