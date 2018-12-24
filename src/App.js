@@ -23,24 +23,23 @@ class App extends Component {
     navBarItem: '',
     currentUser: null,
     gifts: [],
-   
+    friends: []
   }
+
   setUser=(user)=>this.setState({currentUser: user})
 
-  componentDidMount() {
-    const user = localStorage.getItem('currentUser')
-    const unUser = JSON.parse(user)
-    adapter.validate().then(data => {
-      if (data.error) {
-        this.handleLogout()
+  async componentDidMount() {
+    let data = await adapter.validate()
+    if (data.error) {
+      this.handleLogout()
+    }
+    else {
+      this.setState({ currentUser: data.user })
+      const gifts = await adapter.getWishes()
+      const friendsObject = await adapter.getFriends(data.user.id)
+      this.setState({ gifts })
+      this.setState({ friends: friendsObject.friends })
       }
-      else {
-        this.setState({ currentUser: data.user })
-        adapter.getWishes()
-          .then(r => this.setState({ gifts: r }))
-          
-      }
-    })
   }
 
   backToWelcome = () => this.props.history.push('/')
@@ -49,7 +48,6 @@ class App extends Component {
     localStorage.setItem('email', user.email)
     localStorage.setItem('currentUser', JSON.stringify(user))
   }
-
 
 
   // ----------- redirectors ----------- //
@@ -73,7 +71,6 @@ class App extends Component {
 
   handleNewWish = (wish) => {
     wish.user_id = this.state.currentUser.id
-    
     return adapter.postGift(wish)
       .then(wish => {
         this.setState({ gifts: [...this.state.gifts, wish] })
@@ -123,27 +120,32 @@ class App extends Component {
       return (
         <div>
           <Switch>
+            <Route
+              // path='' 
+              component={ props => <Navbar { ...props }
+                handleItemClick={ this.handleNavBarChange }
+                activeItem={ navBarItem }
+              /> } />
+          </Switch>
             <div
               style={ {
                 maxWidth: '1000px',
+                margin: 'auto',
                 width: '100%',
                 position: 'absolute',
                 left: 0,
                 right: 0,
-              } }>
-          <Route 
-            // path='' 
-            component={ props => <Navbar { ...props }
-            handleItemClick={ this.handleNavBarChange }
-            activeItem={ navBarItem }
-          /> } />
-          
-              
+              } }> 
+             
+            <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
             <Route path='/friends' component={ props => <div style={ {
               zIndex: 1,
               paddingTop: "6em"
-            } }><FriendList currentUser={this.state.currentUser} /></div> } />
+            } }><FriendList 
+                currentUser={this.state.currentUser} 
+                friends={this.state.friends}
+              /></div> } />
 
             <Route path='/santa' component={ props => <div style={ {
               zIndex: 1,
@@ -168,15 +170,16 @@ class App extends Component {
             /> }
             />
        
-            <Route exact path='/' component={ props => <HomePage { ...props } /> } />
+            <Route exact path='/' component={ props => <HomePage { ...props } friends={this.state.friends} /> } />
             <Route exact path='/new_wish' component={ props =>
               <WishForm { ...props } handleSubmit={ this.handleNewWish } /> }
             />
             <Route exact path='/edit_wish' component={ props =>
               <EditWish { ...props } /> }
             />
+            </Switch>
             </div>
-          </Switch>
+          
         </div>
       )
     } else {

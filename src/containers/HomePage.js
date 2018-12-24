@@ -15,17 +15,13 @@ export default class HomePage extends React.Component {
         selectedUser: null,
     }
 
-    selectUser = (user) => {
-        
+    selectUser = (user) => {  
         this.setState({ selectedUser: user })
-
     }
 
     resetUser = () => {
-        this.setState({ selectedUser: null })
-        
+        this.setState({ selectedUser: null })        
     }
-
 
 
 
@@ -34,8 +30,7 @@ export default class HomePage extends React.Component {
     }
     
     
-    findUsers = () =>{
-        
+    findUsers = () =>{ 
         return this.state.search && adapter.getUsersBySearchQuery(this.state.search)
             .then(users=>{
               return  !users.error && this.setState({users})
@@ -43,58 +38,72 @@ export default class HomePage extends React.Component {
     }
 
     backToWelcome=()=>this.props.history.push('')
-
+    
     handleSubmit = () => {
         this.findUsers()
     }
 
-    render() {
-        if (this.state.selectedUser) {
-            return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
-                <div>
-                    <Wishlist
-                        resetUser={ this.resetUser }
-                        currentUser={ this.state.selectedUser }
-                        search={ true }
-                        gifts={ this.state.selectedUser.gifts }
+
+
+    renderSelectedUser=()=>{
+        return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
+            <div>
+                <Wishlist
+                    resetUser={ this.resetUser }
+                    currentUser={ this.state.selectedUser }
+                    search={ true }
+                    gifts={ this.state.selectedUser.gifts }
+                />
+            </div></BodyBackgroundColor>
+        )
+    }
+
+
+    renderUserList=()=>{
+        return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
+            <div>
+                <div style={ {
+                    zIndex: '1',
+                    paddingTop: "3em"
+                } }>
+                    <Input
+                        style={ {
+                            marginTop: '1em',
+                            width: '60%',
+                            marginLeft: '10%'
+                        } }
+                        className='icon'
+                        placeholder='Search users'
+                        onChange={ event => this.handleChange(event) }
+                        onSubmit={ this.handleSubmit }
                     />
-                </div></BodyBackgroundColor>
-            )
-        }else{
-            return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
-                <div>
-                    <div style={ {
-                        zIndex: '1',
-                        paddingTop: "3em"
-                    } }>
-                        <Input 
-                            style={ { 
-                                marginTop: '1em',
-                                width: '60%',
-                                marginLeft: '10%'
-                            } } 
-                            className='icon' 
-                            placeholder='Search users' 
-                            onChange={event => this.handleChange(event) }
-                            onSubmit={this.handleSubmit}
-                        /> 
-                        <Button type="submit" float onClick={ this.handleSubmit }>
-                            <Icon name="search" />Search
+                    <Button type="submit" float onClick={ this.handleSubmit }>
+                        <Icon name="search" />Search
                         </Button>
                 </div>
-                    <div style={ {
-                        width:'20%',
-                        zIndex: '1',
-                        paddingTop: "1em"
-                    } }>
+                <div style={ {
+                    width: '20%',
+                    zIndex: '1',
+                    paddingTop: "1em"
+                } }>
                 </div>
-                    <SearchArea 
-                        selectUser={this.selectUser}
-                        users={this.state.users}
-                        search={this.state.search} 
-                    />   
-                </div></BodyBackgroundColor>
-            )
+                <SearchArea
+                    friends={ this.props.friends }
+                    selectUser={ this.selectUser }
+                    users={ this.state.users }
+                    search={ this.state.search }
+                />
+            </div></BodyBackgroundColor>
+        )
+    }
+
+
+
+    render() {
+        if (this.state.selectedUser) {
+            return this.renderSelectedUser()
+        }else{
+           return this.renderUserList()
         }
     }
 }

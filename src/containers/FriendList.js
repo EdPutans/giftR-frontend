@@ -9,7 +9,7 @@ import BodyBackgroundColor from 'react-body-backgroundcolor'
 export default class HomePage extends React.Component {
 
     state = {
-        friends: null,
+        // friends: null,
         selectedFriend: null
     }
 
@@ -24,9 +24,10 @@ export default class HomePage extends React.Component {
 
     componentDidMount() {
         console.log('setting state: ')
-        return adapter.getFriends(this.props.currentUser.id)
-            .then(resp => this.setState({ friends: (resp.friends) }))
-            .then(() => console.log('setting state: ', this.state.friends))
+        
+    //     return adapter.getFriends(this.props.currentUser.id)
+    //         .then(resp => this.setState({ friends: (resp.friends) }))
+    //         .then(() => console.log('setting state: ', this.props.friends))
     }
 
 
@@ -49,8 +50,8 @@ export default class HomePage extends React.Component {
     }
 
     friendsExist = () => {
-        if (this.state.friends) {
-            console.log(this.state.friends)
+        if (this.props.friends) {
+            console.log(this.props.friends)
             return <BodyBackgroundColor backgroundColor='#F6CFCA'><div>
                 <div style={ {
                     marginTop: '3em',
@@ -59,8 +60,7 @@ export default class HomePage extends React.Component {
                     paddingBottom: "6em"
                 } }>
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } >
-
-                        { this.state.friends.map(f =>
+                        { this.props.friends.map(f =>
                             <FriendCard
                                 friend={ f }
                                 toggleSelectFriend={ this.toggleSelectFriend }
@@ -75,14 +75,16 @@ export default class HomePage extends React.Component {
 
 
     render() {
-        if (this.state.friends && !this.state.selectedFriend) {
+        if (this.props.friends && !this.state.selectedFriend) {
             return this.friendsExist()
         }
-        if (!this.state.friends && !this.state.selectedFriend) {
+        if (!this.props.friends && !this.state.selectedFriend) {
             return this.noFriendsExist()
         }
-        if (this.state.selectedFriend) {
+        if (this.state.selectedFriend && this.props.friends) {
             return this.selectedFriend()
+        }else{
+            return <div>loading...</div>
         }
     }
 }

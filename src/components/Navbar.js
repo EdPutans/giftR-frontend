@@ -24,14 +24,14 @@ import { Menu } from 'semantic-ui-react'
                     active={ this.props.activeItem === 'friends' }
                     onClick={() => this.props.handleItemClick("friends") }
                 />
-                <Menu.Item 
+                {/* <Menu.Item 
                     style={ { width:"22%" } }
                     icon="gift"
                     // name='Secret Santa' 
                     color='red'
                     active={ this.props.activeItem === 'santa' } 
                     onClick={ () => this.props.handleItemClick("santa") } 
-                />
+                /> */}
                 <Menu.Item 
                     style={ { width:"22%" } }
                     icon='list'
