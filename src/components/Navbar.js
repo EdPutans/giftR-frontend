@@ -19,7 +19,7 @@ import { Menu } from 'semantic-ui-react'
                 <Menu.Item 
                     style={ { width:"22%"} }
                     icon='users'
-                    name='friends'
+                    // name='friends'
                     color='red'
                     active={ this.props.activeItem === 'friends' }
                     onClick={() => this.props.handleItemClick("friends") }
@@ -27,7 +27,7 @@ import { Menu } from 'semantic-ui-react'
                 <Menu.Item 
                     style={ { width:"22%" } }
                     icon="gift"
-                    name='Secret Santa' 
+                    // name='Secret Santa' 
                     color='red'
                     active={ this.props.activeItem === 'santa' } 
                     onClick={ () => this.props.handleItemClick("santa") } 
@@ -35,7 +35,7 @@ import { Menu } from 'semantic-ui-react'
                 <Menu.Item 
                     style={ { width:"22%" } }
                     icon='list'
-                    name='My wishlist'
+                    // name='My wishlist'
                     color='red'
                     active={ this.props.activeItem === 'wishlist' }
                     onClick={ () => this.props.handleItemClick("wishlist") }
@@ -43,7 +43,7 @@ import { Menu } from 'semantic-ui-react'
                 <Menu.Item 
                     style={ { width: "22%" } }
                     icon='user'
-                    name='profile'
+                    // name='profile'
                     color='red'
                     active={ this.props.activeItem === 'profile' }
                     onClick={ () => this.props.handleItemClick("profile") }
