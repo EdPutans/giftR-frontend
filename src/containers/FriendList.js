@@ -53,12 +53,7 @@ export default class HomePage extends React.Component {
         if (this.props.friends) {
             console.log(this.props.friends)
             return <BodyBackgroundColor backgroundColor='#F6CFCA'><div>
-                <div style={ {
-                    marginTop: '3em',
-                    zIndex: 1,
-                    paddingTop: "3em",
-                    paddingBottom: "6em"
-                } }>
+                <div style={ { marginTop: '10%' } }>
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } >
                         { this.props.friends.map(f =>
                             <FriendCard

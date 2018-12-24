@@ -22,17 +22,11 @@ friendCard =(friend) => {
     return <Card
         keu={friend.id}
         onClick={()=>this.handleClick(friend)}
-            // style={ {
-            //     marginLeft: "calc(50% - 290px)",
-            //     minHeight: '433px',
-            //     maxHeight: '1050px',
-            //     width: '300px',
-
-            //     marginLeft: 'calc(50% - 145px)',
-            //     marginLeft: '5%',
-            //     marginRight: '10px'
-
-            // } }
+            style={ {
+                minHeight: '200px',
+                width: '300px',
+                marginBottom: '3em',
+            } }
         >
        
         <Card.Content>

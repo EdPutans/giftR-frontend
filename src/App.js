@@ -139,28 +139,29 @@ class App extends Component {
              
             <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
-            <Route path='/friends' component={ props => <div style={ {
-              zIndex: 1,
-              paddingTop: "6em"
-            } }><FriendList 
+            <Route path='/friends' component={ props => <FriendList 
+                {...props}
                 currentUser={this.state.currentUser} 
                 friends={this.state.friends}
-              /></div> } />
+              /> } />
 
             <Route path='/santa' component={ props => <div style={ {
               zIndex: 1,
               paddingTop: "6em"
             } }><h1> Under construction - Secret santa </h1></div> } />
-            <Route path='/profile' component={ props => <Profile { ...props }
-              user={ currentUser }
-              setUser={this.setUser}
-              gifts={ this.state.gifts }
-              // currentUser={ currentUser }
-              handleLogin={ this.handleLogin }
-              handleSubmit={ this.handleEditProfile }
-              authenticate={ this.authenticate }
-              logout={ this.handleLogout }
-            /> } />
+            <Route path='/profile' component={ props => 
+              <Profile { ...props }
+                self={true}
+                user={ currentUser }
+                setUser={this.setUser}
+                gifts={ this.state.gifts }
+                // currentUser={ currentUser }
+                handleLogin={ this.handleLogin }
+                handleSubmit={ this.handleEditProfile }
+                authenticate={ this.authenticate }
+                logout={ this.handleLogout }
+              /> 
+              } />
             <Route exact path='/wishlist' component={ props => <Wishlist
               { ...props }
               deleteWishFromDB={this.deleteWishFromDB}
