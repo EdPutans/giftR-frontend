@@ -75,18 +75,18 @@ export default class ProfileForm extends React.Component {
             <BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div style={ {
                     zIndex: 1,
-                    paddingTop: "4em"
+                    // paddingTop: "4em"
                 } }>
                     <Form
                         style={ {
-                            marginTop: '10%',
+                            // marginTop: '10%',
                             width: '80%',
                             marginLeft: '10%'
                         } }
                     ><br />
 
                         <Form.Field>
-                            { !this.checkForPasswordPresense() && <Label>Note: current password required to perform changes.</Label> }
+                            { !this.checkForPasswordPresense() && <Label>Note: current password required to save changes.</Label> }
                             <input style={ { marginTop: '15px' } }
                                 onChange={ event => this.handleChange(event.target.value, "first_name") }
                                 placeholder={ 'First name: ' + user.first_name }

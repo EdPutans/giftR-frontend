@@ -15,32 +15,31 @@ import EditWish from './components/EditWish'
 import Loading from './components/Loading'
 import './App.css';
 import * as adapter from './Adapter'
-
+import FriendList from './containers/FriendList'
 class App extends Component {
 
   // ----------- state and mounting ----------- //
   state = {
-    navBarItem: '',
+    navBarItem: null,
     currentUser: null,
     gifts: [],
-   
+    friends: []
   }
+
   setUser=(user)=>this.setState({currentUser: user})
 
-  componentDidMount() {
-    const user = localStorage.getItem('currentUser')
-    const unUser = JSON.parse(user)
-    adapter.validate().then(data => {
-      if (data.error) {
-        this.handleLogout()
+  async componentDidMount() {
+    let data = await adapter.validate()
+    if (data.error) {
+      this.handleLogout()
+    }
+    else {
+      this.setState({ currentUser: data.user })
+      const gifts = await adapter.getWishes()
+      this.setState({ gifts })
+      const friendsResponse = await adapter.getFriends(data.user.id);
+      this.setState({ friends: friendsResponse.friends });
       }
-      else {
-        this.setState({ currentUser: data.user })
-        adapter.getWishes()
-          .then(r => this.setState({ gifts: r }))
-          
-      }
-    })
   }
 
   backToWelcome = () => this.props.history.push('/')
@@ -49,7 +48,6 @@ class App extends Component {
     localStorage.setItem('email', user.email)
     localStorage.setItem('currentUser', JSON.stringify(user))
   }
-
 
 
   // ----------- redirectors ----------- //
@@ -61,10 +59,18 @@ class App extends Component {
 
   // --------- prop functions ----------//
 
+  deleteWish = ( id ) => {
+    let gifts = [...this.state.gifts]
+    gifts = gifts.filter(w=> w.id !== id)
+    return this.setState({gifts})
+  }
+
+  deleteWishFromDB=(id)=>{
+    return adapter.deleteGift(id)
+  }
 
   handleNewWish = (wish) => {
     wish.user_id = this.state.currentUser.id
-    
     return adapter.postGift(wish)
       .then(wish => {
         this.setState({ gifts: [...this.state.gifts, wish] })
@@ -76,24 +82,23 @@ class App extends Component {
 
   // -------------- log in/out, sign up --------------
 
-  authenticate = (email, password) => {
-    return adapter.signin(email, password)
-  }
 
-
-  handleLogin = (object) => {
-    return adapter.signin(object.email, object.password).then(r => {
-      if (r.error) {
-        alert(r.error)
-      } else {
-        this.setState({ currentUser: r.user })
-        localStorage.removeItem('currentUser')
-        localStorage.setItem('currentUser', JSON.stringify(r.user))
-        localStorage.setItem('token', r.token)
-        this.props.history.push('/')
-        adapter.getWishes().then(r => this.setState({ gifts: r }))
-      }
-    })
+ handleLogin = async (object) => {
+    const r = await adapter.signin(object.email, object.password);
+   if (r.error) {
+     alert(r.error);
+   }
+   else {
+     this.setState({ currentUser: r.user });
+     localStorage.removeItem('currentUser');
+     localStorage.setItem('currentUser', JSON.stringify(r.user));
+     localStorage.setItem('token', r.token);
+     this.props.history.push('/');
+     const gifts = await adapter.getWishes()
+     this.setState({ gifts });
+     const friendsResponse = await adapter.getFriends(r.user.id);
+     this.setState({ friends: friendsResponse.friends });
+   }
   }
 
   
@@ -113,65 +118,99 @@ class App extends Component {
     if (this.state.currentUser) {
       return (
         <div>
-          <Route 
-            path='' 
-            component={ props => <Navbar { ...props }
-            handleItemClick={ this.handleNavBarChange }
-            activeItem={ navBarItem }
-          /> } />
           <Switch>
+            <Route
+              // path='' 
+              component={ props => <Navbar { ...props }
+                handleItemClick={ this.handleNavBarChange }
+                activeItem={ navBarItem }
+              /> } />
+          </Switch>
             <div
               style={ {
-                maxWidth: '1000px',
-                margin: 'auto',
+                // marginTop: '5%',
+                borderRadius: '5px',
+                backgroundColor: '#FFFFFF',
+                paddingBottom: '3%',
+                // maxWidth: '700px',
+                margin: '60px auto',
+                width: '80%',
                 position: 'absolute',
-                left: '0px',
-                right: '0px',
-              } }>
-              
+                left: 0,
+                right: 0,
+              } }> 
+             
+            <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
-            <Route path='/friends' component={ props => <div style={ {
-              zIndex: 1,
-              paddingTop: "6em"
-            } }><h1> Under construction - friends </h1></div> } />
+            <Route path='/friends' component={ props => <FriendList 
+                {...props}
+                currentUser={this.state.currentUser} 
+                friends={this.state.friends}
+              /> } />
+
             <Route path='/santa' component={ props => <div style={ {
               zIndex: 1,
               paddingTop: "6em"
             } }><h1> Under construction - Secret santa </h1></div> } />
-            <Route path='/profile' component={ props => <Profile { ...props }
-              user={ currentUser }
-              setUser={this.setUser}
-              gifts={ this.state.gifts }
-              // currentUser={ currentUser }
-              handleLogin={ this.handleLogin }
-              handleSubmit={ this.handleEditProfile }
-              authenticate={ this.authenticate }
-              logout={ this.handleLogout }
-            /> } />
+            <Route path='/profile' component={ props => 
+              <Profile { ...props }
+                self={true}
+                user={ currentUser }
+                setUser={this.setUser}
+                gifts={ this.state.gifts }
+                // currentUser={ currentUser }
+                handleLogin={ this.handleLogin }
+                handleSubmit={ this.handleEditProfile }
+                authenticate={ this.authenticate }
+                logout={ this.handleLogout }
+              /> 
+              } />
             <Route exact path='/wishlist' component={ props => <Wishlist
               { ...props }
+              deleteWishFromDB={this.deleteWishFromDB}
+              deleteWish={this.deleteWish}
               currentUser={ currentUser }
               gifts={ this.state.gifts }
             /> }
             />
-            <Route exact path='/' component={ props => <HomePage { ...props } /> } />
+       
+            <Route exact path='/' component={ props => <HomePage 
+              { ...props } 
+              friends={this.state.friends} 
+              /> }
+             />
             <Route exact path='/new_wish' component={ props =>
               <WishForm { ...props } handleSubmit={ this.handleNewWish } /> }
             />
             <Route exact path='/edit_wish' component={ props =>
               <EditWish { ...props } /> }
             />
+            </Switch>
             </div>
-          </Switch>
+          
         </div>
       )
     } else {
       return (
+        <div
+          style={ {
+            // marginTop: '5%',
+            borderRadius: '5px',
+            backgroundColor: '#FFFFFF',
+            paddingBottom: '5%',
+            // maxWidth: '700px',
+            margin: '60px auto',
+            width: '80%',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          } }> 
         <Switch>
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } back={this.backToWelcome}/> } />
           <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } back={ this.backToWelcome } /> } />
         </Switch>
+        </div>
       )
     }
   }

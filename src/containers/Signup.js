@@ -102,16 +102,18 @@ handleChange = (value, type) => {
                 >
                 Submit</Button>
             </Form>
+                <div style={ {
+                    textAlign: 'center'
+                } }>
+                
                 { !this.props.user && 
                 <Link 
                     to="/login"
-                    style={{
-                        marginLeft: 'calc(50% - 102.23px',
-                        marginRight: '20%'
-                    }}
+                    
                 >
                     Already a member? Log in here!
                  </Link>}
+                </div>
         </div>
         )
     }

@@ -5,7 +5,11 @@ import BodyBackgroundColor from 'react-body-backgroundcolor'
 import ProfileForm from './ProfileForm'
 import ProfileShow from './ProfileShow'
 import {Route} from 'react-router'
-export default class Profile extends React.Component {
+import Header from '../components/Header'
+
+
+export default class Profile extends 
+React.Component {
 
     state = {
         editing: false
@@ -25,7 +29,12 @@ export default class Profile extends React.Component {
     render() {
         const {user} = this.props
         if(!this.state.editing){
-            return (<div style={{marginTop:'8%'}}>
+            return (
+            
+            <div 
+            // style={{marginTop:'8%'}}
+            >
+                    <Header title={ "Profile" } />
                 <Route path='/profile'
                     component={props => 
                     <ProfileShow
@@ -40,6 +49,7 @@ export default class Profile extends React.Component {
         }else{
             return (
             <div>
+             <Header title={ "Profile" } />
              <Route path='/profile'
                  component={ props =>
                      <ProfileForm 
