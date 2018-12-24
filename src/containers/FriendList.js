@@ -4,7 +4,7 @@ import * as adapter from '../Adapter'
 import FriendCard from '../components/FriendCard'
 import Wishlist from './Wishlist'
 import BodyBackgroundColor from 'react-body-backgroundcolor'
-
+import Header from '../components/Header'
 
 export default class HomePage extends React.Component {
 
@@ -53,7 +53,12 @@ export default class HomePage extends React.Component {
         if (this.props.friends) {
             console.log(this.props.friends)
             return <BodyBackgroundColor backgroundColor='#F6CFCA'><div>
-                <div style={ { marginTop: '10%' } }>
+                <div style={ {
+                    zIndex: 1,
+                    paddingTop: "3em",
+                    paddingBottom: "6em"
+                } }>
+                    <Header title={'Friends'} />
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } >
                         { this.props.friends.map(f =>
                             <FriendCard

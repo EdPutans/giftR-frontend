@@ -4,6 +4,7 @@ import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
 import BodyBackgroundColor from 'react-body-backgroundcolor'
+import ProfileShow from './ProfileShow'
 
 // import Wish from '../components/Wish'
 
@@ -23,13 +24,18 @@ export default class HomePage extends React.Component {
         this.setState({ selectedUser: null })        
     }
 
-
+    userProfile = () => {
+        return (
+            <ProfileShow
+                user={ this.state.selectedUser }
+            />
+        )
+    }
 
     handleChange = (event) => {
         this.setState({ search: event.target.value })
     }
-    
-    
+        
     findUsers = () =>{ 
         return this.state.search && adapter.getUsersBySearchQuery(this.state.search)
             .then(users=>{
@@ -43,12 +49,11 @@ export default class HomePage extends React.Component {
         this.findUsers()
     }
 
-
-
     renderSelectedUser=()=>{
         return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
             <div>
                 <Wishlist
+                    friends={this.props.friends}
                     resetUser={ this.resetUser }
                     currentUser={ this.state.selectedUser }
                     search={ true }
@@ -58,17 +63,18 @@ export default class HomePage extends React.Component {
         )
     }
 
-
     renderUserList=()=>{
         return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
             <div>
                 <div style={ {
                     zIndex: '1',
-                    paddingTop: "3em"
+                    padding: "3em auto 3em auto "
                 } }>
+                <div 
+                    style={{display:'flex', marginTop: '1em', marginBottom: '1em'}}
+                >
                     <Input
                         style={ {
-                            marginTop: '1em',
                             width: '60%',
                             marginLeft: '10%'
                         } }
@@ -79,7 +85,8 @@ export default class HomePage extends React.Component {
                     />
                     <Button type="submit" float onClick={ this.handleSubmit }>
                         <Icon name="search" />Search
-                        </Button>
+                    </Button>
+                    </div>
                 </div>
                 <div style={ {
                     width: '20%',
@@ -96,8 +103,6 @@ export default class HomePage extends React.Component {
             </div></BodyBackgroundColor>
         )
     }
-
-
 
     render() {
         if (this.state.selectedUser) {

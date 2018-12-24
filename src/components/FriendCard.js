@@ -23,8 +23,8 @@ friendCard =(friend) => {
         keu={friend.id}
         onClick={()=>this.handleClick(friend)}
             style={ {
-                minHeight: '200px',
-                width: '300px',
+                // minHeight: '200px',
+                // width: '300px',
                 marginBottom: '3em',
             } }
         >
@@ -45,7 +45,7 @@ friendCard =(friend) => {
 
 
 render(){
-    const { friend } = this.props
+    const { friend } = this.props   
     return(
         <div>
            {this.friendCard(friend)}

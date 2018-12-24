@@ -59,15 +59,16 @@ export default class Login extends React.Component {
                     >
                         Submit
                     </Button><br></br>
+                    <div style={ {
+                        textAlign: 'center'
+                    } }>
                     <Link 
                         to="/signup"
-                        style={ {
-                            marginLeft: 'calc(50% - 105.5px)',
-                            marginRight: '20%'
-                        } }
+                        
                     >
                         Not a member yet? Sign up here!
                     </Link>
+                    </div>
                 </Form>
             </div>
             )

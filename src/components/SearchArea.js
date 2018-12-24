@@ -18,14 +18,16 @@ export default class SearchArea extends React.Component {
                     <div style={
                         {
                             zIndex: 1,
+                            width: '500px',
                             paddingTop: "1em"
                         }
                     }>
                         <Card
                             key={u.id}
+                            fluid
                             onClick={ () => this.props.selectUser(u) }
                             header={(u.first_name ? u.first_name : "") + ' ' + (u.last_name ? u.last_name : "") }
-                            meta={ u.gifts.length + " wishes" }
+                            meta={ u.gifts.length + " wish(es)" }
                             description={this.isFriend(u.id)}
                         />
                     </div>

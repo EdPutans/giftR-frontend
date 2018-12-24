@@ -20,7 +20,7 @@ class App extends Component {
 
   // ----------- state and mounting ----------- //
   state = {
-    navBarItem: '',
+    navBarItem: null,
     currentUser: null,
     gifts: [],
     friends: []
@@ -36,9 +36,9 @@ class App extends Component {
     else {
       this.setState({ currentUser: data.user })
       const gifts = await adapter.getWishes()
-      const friendsObject = await adapter.getFriends(data.user.id)
       this.setState({ gifts })
-      this.setState({ friends: friendsObject.friends })
+      const friendsResponse = await adapter.getFriends(data.user.id);
+      this.setState({ friends: friendsResponse.friends });
       }
   }
 
@@ -82,24 +82,23 @@ class App extends Component {
 
   // -------------- log in/out, sign up --------------
 
-  authenticate = (email, password) => {
-    return adapter.signin(email, password)
-  }
 
-
-  handleLogin = (object) => {
-    return adapter.signin(object.email, object.password).then(r => {
-      if (r.error) {
-        alert(r.error)
-      } else {
-        this.setState({ currentUser: r.user })
-        localStorage.removeItem('currentUser')
-        localStorage.setItem('currentUser', JSON.stringify(r.user))
-        localStorage.setItem('token', r.token)
-        this.props.history.push('/')
-        adapter.getWishes().then(r => this.setState({ gifts: r }))
-      }
-    })
+ handleLogin = async (object) => {
+    const r = await adapter.signin(object.email, object.password);
+   if (r.error) {
+     alert(r.error);
+   }
+   else {
+     this.setState({ currentUser: r.user });
+     localStorage.removeItem('currentUser');
+     localStorage.setItem('currentUser', JSON.stringify(r.user));
+     localStorage.setItem('token', r.token);
+     this.props.history.push('/');
+     const gifts = await adapter.getWishes()
+     this.setState({ gifts });
+     const friendsResponse = await adapter.getFriends(r.user.id);
+     this.setState({ friends: friendsResponse.friends });
+   }
   }
 
   
@@ -129,9 +128,13 @@ class App extends Component {
           </Switch>
             <div
               style={ {
-                maxWidth: '1000px',
-                margin: 'auto',
-                width: '100%',
+                // marginTop: '5%',
+                borderRadius: '5px',
+                backgroundColor: '#FFFFFF',
+                paddingBottom: '3%',
+                // maxWidth: '700px',
+                margin: '60px auto',
+                width: '80%',
                 position: 'absolute',
                 left: 0,
                 right: 0,
@@ -171,7 +174,11 @@ class App extends Component {
             /> }
             />
        
-            <Route exact path='/' component={ props => <HomePage { ...props } friends={this.state.friends} /> } />
+            <Route exact path='/' component={ props => <HomePage 
+              { ...props } 
+              friends={this.state.friends} 
+              /> }
+             />
             <Route exact path='/new_wish' component={ props =>
               <WishForm { ...props } handleSubmit={ this.handleNewWish } /> }
             />
@@ -185,11 +192,25 @@ class App extends Component {
       )
     } else {
       return (
+        <div
+          style={ {
+            // marginTop: '5%',
+            borderRadius: '5px',
+            backgroundColor: '#FFFFFF',
+            paddingBottom: '5%',
+            // maxWidth: '700px',
+            margin: '60px auto',
+            width: '80%',
+            position: 'absolute',
+            left: 0,
+            right: 0,
+          } }> 
         <Switch>
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } back={this.backToWelcome}/> } />
           <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } back={ this.backToWelcome } /> } />
         </Switch>
+        </div>
       )
     }
   }
