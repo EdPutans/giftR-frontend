@@ -12,13 +12,13 @@ export default class Wishlist extends React.Component {
     }
 
     userProfile=()=>{
-        let id = this.props.currentUser.id
+        let id = this.props.user.id
         return (
             <div>
                 <ProfileShow 
-                    user={this.props.currentUser}
+                    user={this.props.user}
                 />
-                { this.props.friends && !this.props.friends.find(u => u.id === id) ? <Button onClick={() => this.sendFriendRequest(this.props.user.id, this.props.currentUser.id)}>Add friend</Button> : 'Already a mate'  }
+                { this.props.friends && !this.props.friends.find(u => u.id === id) ? <Button onClick={() => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id)}>Add friend</Button> : 'Already a mate'  }
             </div>
         )
     }

@@ -106,7 +106,7 @@ class App extends Component {
      const gifts = await adapter.getWishes()
      this.setState({ gifts });
      const friendsResponse = await adapter.getFriends(r.user.id);
-     this.setState({ friends: friendsResponse.friends });
+     this.setState({ friends: friendsResponse });
    }
   }
 
