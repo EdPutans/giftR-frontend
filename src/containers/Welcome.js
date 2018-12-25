@@ -67,8 +67,8 @@ export default class Welcome extends React.Component {
                 </Button>
                 </div >
                 <div style={ { textAlign: 'center', margin: '10% 5% 0 5%' } }>
-                    <h4>When it comes to comming up with gift ideas, GiftR is your best option</h4>
-                    <h6>Find out what your friends/family/colleagues would like to get and make their life better, and your life easier!</h6>
+                    <h4>GiftR takes care of your holiday gifting headache</h4>
+                    <h6>Find out what other people would like to get as a gift!</h6>
                 </div>
             </div>
 

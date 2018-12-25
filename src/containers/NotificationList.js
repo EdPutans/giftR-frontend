@@ -69,7 +69,7 @@ export default class NotificationList extends React.Component{
                 }
             }
             >
-                {this.state.unaccepted.length===0? "loading..." : this.mapUnaccepted()}
+                {this.state.unaccepted.length===0? "There are no pending friend requests" : this.mapUnaccepted() }
 
             </div>
         )

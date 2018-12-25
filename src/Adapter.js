@@ -23,14 +23,15 @@ export const validate = () => {
 }
 // ------------- friend and related ----------- //
 
-export const friendRequest=(id, friend_id)=>{
-    return fetch(`${usersURL}/friend_request`,{
+export const friendRequest=(user_id, friend_id)=>{
+    console.log("ids:",user_id, friend_id )
+    return fetch(`${friendshipsURL}/`,{
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id, friend_id
+            user_id, friend_id
         })
     }).then(r=>r.json())
 }

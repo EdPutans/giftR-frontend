@@ -197,6 +197,7 @@ class App extends Component {
             <Route exact path='/' component={ props => <HomePage 
               { ...props } 
               friends={this.state.friends} 
+              currentUser={this.state.currentUser}
               /> }
              />
             <Route exact path='/new_wish' component={ props =>

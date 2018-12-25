@@ -5,9 +5,11 @@ import Wishlist from '../containers/Wishlist'
 export default class SearchArea extends React.Component {
 
     isFriend=(id)=>{
-        let friend = this.props.friends.find(friend => friend.id == id)
-        console.log('located, this guy is a friend:', friend)
-        return  friend  ? "In your friends list" : "not a friend yet"
+        if(this.props.friends){
+            let friend = this.props.friends.find(friend => friend.id == id)
+            console.log('located, this guy is a friend:', friend)
+            return  friend  ? "In your friends list" : "not a friend yet"
+        }
     }
 
     render() {

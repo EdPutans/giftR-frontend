@@ -54,7 +54,8 @@ export default class HomePage extends React.Component {
                 <Wishlist
                     friends={this.props.friends}
                     resetUser={ this.resetUser }
-                    currentUser={ this.state.selectedUser }
+                    currentUser={ this.props.currentUser }
+                    user={ this.state.selectedUser }
                     search={ true }
                     gifts={ this.state.selectedUser.gifts }
                 />

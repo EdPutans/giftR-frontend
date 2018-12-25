@@ -1,20 +1,15 @@
 import React from 'react'
 import Wish from '../components/Wish'
 import { Button, Icon, Card, Item } from 'semantic-ui-react'
-
+import * as Adapter from '../Adapter'
 import ProfileShow from './ProfileShow'
 import Header from '../components/Header'
 export default class Wishlist extends React.Component {
 
-
-
-    sendFriendRequest=()=>{
-        
+    sendFriendRequest= async (currentUser_id, newFriend_id)=>{
+        const newFriendship = Adapter.friendRequest(currentUser_id, newFriend_id)
+        return console.log('friendship created? => ', newFriendship)
     }
-
-
-
-
 
     userProfile=()=>{
         let id = this.props.currentUser.id
@@ -23,7 +18,7 @@ export default class Wishlist extends React.Component {
                 <ProfileShow 
                     user={this.props.currentUser}
                 />
-                { this.props.friends && !this.props.friends.find(u => u.id === id) ? <Button onClick={this.sendFriendRequest}>Add friend</Button> : 'Already a mate'  }
+                { this.props.friends && !this.props.friends.find(u => u.id === id) ? <Button onClick={() => this.sendFriendRequest(this.props.user.id, this.props.currentUser.id)}>Add friend</Button> : 'Already a mate'  }
             </div>
         )
     }
@@ -52,26 +47,23 @@ export default class Wishlist extends React.Component {
             color="red"
             onClick={ this.createWish }
             style={ {
-                // left: 'calc(50% - 26px)',
-                right: '1 0px',
+                
+                right: '10px',
                 position: 'fixed',
                 top: '90%',
-                // right: '1em',
-                // textAlign: 'center'
+            
             } }
         >
             <h1>+</h1>
         </Button>
 
     }       
-
-
+    
 
     createWish = () => this.props.history.push('/new_wish')
 
     render() {
-        
-        let user = this.props.currentUser
+        let user = this.props.user ? this.props.user : this.props.currentUser
         if (user && this.props.gifts) {
             return (
                 

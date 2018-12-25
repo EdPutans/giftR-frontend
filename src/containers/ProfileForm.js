@@ -20,7 +20,10 @@ export default class ProfileForm extends React.Component {
     }
 
     handleSubmit = () => {
-        if (this.checkPasswordFields() && this.checkForPasswordPresense()) {
+        if (
+            this.checkPasswordFields() 
+            && 
+            this.checkForPasswordPresense()) {
             const { first_name, last_name, email, age, old_password, new_password, repeat_password, img_url } = this.state
             let user = this.props.user
             let updatedUser = {}
@@ -36,7 +39,7 @@ export default class ProfileForm extends React.Component {
 
             adapter.updateUserById(updatedUser)
                 .then(r => {
-
+                    // console.log(r)
                     if(r.error){alert('Incorrect current password.')}
                     else{
                         this.props.toggleEdit()
