@@ -1,5 +1,5 @@
 import React from 'react'
-import { Input, Button, Icon } from 'semantic-ui-react'
+import { Input, Button, Icon, Form } from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
@@ -72,14 +72,15 @@ export default class HomePage extends React.Component {
                     padding: "3em auto 3em auto "
                 } }>
                 <div 
-                    style={{display:'flex', marginTop: '1em', marginBottom: '1em'}}
+                    style={{ marginTop: '1em', marginBottom: '1em'}}
                 >
-                    
+                <Form>
                     <Input
-                        style={ {
-                            width: '60%',
-                            marginLeft: '10%'
-                        } }
+                        // style={ {
+                        //     width: '60%',
+                        //     marginLeft: '10%'
+                        // } }
+                        
                         className='icon'
                         placeholder='Search users'
                         onChange={ event => this.handleChange(event) }
@@ -88,13 +89,16 @@ export default class HomePage extends React.Component {
                     <Button type="submit" float onClick={ this.handleSubmit }>
                         <Icon name="search" />Search
                     </Button>
+                        </Form>
                     </div>
                 </div>
-                <div style={ {
+                <div
+                 style={ {
                     width: '20%',
                     zIndex: '1',
                     paddingTop: "1em"
-                } }>
+                } }
+                >
                 </div>
                 <SearchArea
                     friends={ this.props.friends }
