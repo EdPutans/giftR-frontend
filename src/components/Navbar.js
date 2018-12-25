@@ -34,20 +34,24 @@ color='teal'
                     onClick={ () => this.props.handleItemClick("santa") } 
                 /> */}
                 <Menu.Item 
-                    // style={ { width:"22%" } }
                     color='teal'
-                    position='right'
                     icon='list'
                     name='My wishlist'
                     active={ this.props.activeItem === 'wishlist' }
                     onClick={ () => this.props.handleItemClick("wishlist") }
                 />    
+                <Menu.Item
+                    position='right'
+                    color='teal'
+                    icon='bell'
+                    active={ this.props.notificationsClicked === true }
+                    onClick={ () => this.props.toggleNotificationsClicked() }
+                />
                 <Menu.Item 
                     // style={ { width: "22%" } }
                     color='teal'
                     icon='user'
                     floated='right'
-                    name='profile'
                     active={ this.props.activeItem === 'profile' }
                     onClick={ () => this.props.handleItemClick("profile") }
                 />

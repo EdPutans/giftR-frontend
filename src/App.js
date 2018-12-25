@@ -20,6 +20,7 @@ class App extends Component {
 
   // ----------- state and mounting ----------- //
   state = {
+    notificationsClicked: false,
     navBarItem: null,
     currentUser: null,
     gifts: [],
@@ -50,14 +51,17 @@ class App extends Component {
   }
 
 
-  // ----------- redirectors ----------- //
+  // --------- prop functions ----------//
+
+  toggleNotificationsClicked=()=>
+    this.setState({notificationsClicked: !this.state.notificationsClicked})
+  
 
   handleNavBarChange = (item) => {
     this.setState({ navBarItem: item })
     this.props.history.push(`/${item}`)
   }
 
-  // --------- prop functions ----------//
 
   deleteWish = ( id ) => {
     let gifts = [...this.state.gifts]
@@ -78,6 +82,10 @@ class App extends Component {
       .then(this.props.history.push('/wishlist'))
 
   }
+
+
+
+
 
 
   // -------------- log in/out, sign up --------------
@@ -118,13 +126,35 @@ class App extends Component {
     if (this.state.currentUser) {
       return (
         <div>
+          {
+            this.state.notificationsClicked &&
+            <div style={
+              {
+                zIndex: 120,
+                border: '1px solid grey',
+                borderRadius: '5px',
+                backgroundColor: '#FFFFFF',
+                height: '300px',
+                width: '200px',
+                right: '15px',
+                top: '50px',
+                position: 'fixed'
+              }
+            }
+            >
+              this is where notifications go
+              </div>
+          }
           <Switch>
             <Route
               // path='' 
-              component={ props => <Navbar { ...props }
+                component={ props => <Navbar { ...props }
                 handleItemClick={ this.handleNavBarChange }
                 activeItem={ navBarItem }
+                toggleNotificationsClicked={this.toggleNotificationsClicked}
+                notificationsClicked={this.state.notificationsClicked}
               /> } />
+              
           </Switch>
             <div
               style={ {

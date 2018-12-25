@@ -2,7 +2,10 @@ import React from 'react'
 import * as adapter from '../Adapter'
 import { Form, Button, Radio, Label } from 'semantic-ui-react'
 import BodyBackgroundColor from 'react-body-backgroundcolor'
+import Header from './Header'
+
 export default class WishForm extends React.Component {
+
 
     state = {
         rating: 0,
@@ -57,11 +60,11 @@ export default class WishForm extends React.Component {
 
     render() {
         return (
-            <BodyBackgroundColor backgroundColor='#F6CFCA'>
+           
         <div style={ !this.props.editing ?
             {
                 zIndex: 1,
-                paddingTop: "8em",
+                paddingTop: "3em",
                 marginLeft: '10%',
                 marginRight: '10%'
             }
@@ -70,6 +73,7 @@ export default class WishForm extends React.Component {
                 paddingTop: "1em"
             } }
         >
+                { !this.props.editing && <Header title={ 'Make a wish!' } />}
             <Form>
                 <Form.Field>
                     <input
@@ -148,6 +152,7 @@ export default class WishForm extends React.Component {
                 <Button color="teal" onClick={ this.handleSubmit }>Make a wish!</Button>
             }
 
-                </div></BodyBackgroundColor>)
+                </div>
+                )
     }
 }
