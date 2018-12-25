@@ -21,7 +21,7 @@ export default class ProfileForm extends React.Component {
 
     handleSubmit = () => {
         if (this.checkPasswordFields() && this.checkForPasswordPresense()) {
-            const { first_name, last_name, email, age, old_password, new_password, repeat_password } = this.state
+            const { first_name, last_name, email, age, old_password, new_password, repeat_password, img_url } = this.state
             let user = this.props.user
             let updatedUser = {}
 
@@ -30,6 +30,7 @@ export default class ProfileForm extends React.Component {
             updatedUser.first_name = first_name ? first_name : user.first_name
             updatedUser.last_name = last_name ? last_name : user.last_name
             updatedUser.email = email ? email : user.email
+            updatedUser.img_url = img_url ? img_url : user.img_url
             updatedUser.old_password = old_password
             updatedUser.password = new_password
 
@@ -47,6 +48,9 @@ export default class ProfileForm extends React.Component {
             alert("Please check your password fields.")
         }
     }
+
+
+
 
     handleChange = (value, type) => {
         switch (type) {
@@ -71,13 +75,21 @@ export default class ProfileForm extends React.Component {
     }
 
 
+    setImage=(img_url)=>
+        this.setState({img_url})
+    
+
+
     render() {
         const { user } = this.props
         return (
                 <div style={ {
                     zIndex: 1,
-                    // paddingTop: "4em"
+                    
                 } }>
+                    <Uploader 
+                        propFunction={this.setImage}
+                    />
                     <Form
                         style={ {
                             // marginTop: '10%',

@@ -1,7 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 
-
 export default class FriendCard extends React.Component{
 
 mapWishCount=(friend)=>{
@@ -29,7 +28,7 @@ friendCard =(friend) => {
           
             } }
         >
-       
+        <img src={ friend.img_url } />
         <Card.Content>
            
             <Card.Header>{ (friend.first_name ? friend.first_name : "") + ' ' + (friend.last_name ? friend.last_name : "") }</Card.Header>

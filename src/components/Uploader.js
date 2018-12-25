@@ -3,16 +3,19 @@ import request from 'superagent'
 import React from 'react'
 // const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dotvnvsga/upload'
 // const CLOUDINARY_UPLOAD_PRESET   =  'eeeeee'
+const loadingGif = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
 
-export default class Uploader extends React.Component{
+export default class Uploader extends React.Component {
 
 
-    state={
+    state = {
+        uploading: false,
         uploadedImageURL: ''
     }
 
 
     handleImageUpload(file) {
+        this.setState({uploading:true})
         let upload = request.post('https://api.cloudinary.com/v1_1/dotvnvsga/image/upload')
             .field('upload_preset', 'eeeeee')
             .field('file', file)
@@ -24,13 +27,15 @@ export default class Uploader extends React.Component{
 
             if (response.body.secure_url !== '') {
                 this.setState({
-                    uploadedImageURL: response.body.secure_url
+                    uploadedImageURL: response.body.secure_url,
+                    uploading: false
                 })
+                this.props.propFunction && this.props.propFunction(this.state.uploadedImageURL)
             }
         })
     }
 
-    onImageDrop= (files)=> {
+    onImageDrop = (files) => {
         this.setState({
             uploadedFile: files[0]
         })
@@ -40,31 +45,36 @@ export default class Uploader extends React.Component{
 
 
     render() {
-       return <div>
-               <Dropzone onDrop={ this.onImageDrop }>
-                   { ({ getRootProps, getInputProps, isDragActive }) => {
-                       return (
-                           <div
-                               { ...getRootProps() }
-                           >
-                               <input { ...getInputProps() } />
-                               {
-                                   isDragActive ?
-                                       <p>Drop files here...</p> :
-                                       <p>Try dropping some files here, or click to select files to upload.</p>
-                               }
-                           </div>
-                       )
-                   } }
-               </Dropzone>
-          
-           
-            <div>
-                { this.state.uploadedImageURL === '' ? null :
-                    <div>
-                        <img src={ this.state.uploadedImageURL } style={{maxWidth: '300px', height: 'auto'}}/>
-                    </div> }
+        return <div>
+            <div style={ { height: '100px', width: '300px', margin: 'auto', display: 'block', border: '1px dotted black', borderRadius:'3px', textAlign: 'center' } }>
+                <Dropzone multiple={false} onDrop={ this.onImageDrop }>
+                    { ({ getRootProps, getInputProps, isDragActive }) => {
+                        return (
+                            <div
+                                { ...getRootProps() }
+                            >
+                                <input { ...getInputProps() } />
+                                {
+                                    isDragActive ?
+                                        <p>Drop the bad boy here</p> :
+                                        <div>
+                                            <p>Drop profile pic here or click to select one.</p>
+                                            <h1>+</h1>
+                                        </div>
+                                }
+                            </div>
+                        )
+                    } }
+                </Dropzone>
             </div>
+
+                <div>
+                    { this.state.uploadedImageURL === '' ? null :
+                        <div>
+                        <img style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.state.uploading? loadingGif : this.state.uploadedImageURL } />
+                        </div> }
+                </div>
+            
         </div>
     }
 

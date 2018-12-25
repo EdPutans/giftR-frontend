@@ -32,9 +32,9 @@ React.Component {
             return (
             
             <div 
-            style={{marginTop:'3em'}}
+                style={{marginTop:'3em'}}
             >
-                    <Header title={ "Profile" } />
+                <Header title={ "Profile" } />
                 <Route path='/profile'
                     component={props => 
                     <ProfileShow
@@ -48,7 +48,7 @@ React.Component {
             </div> )
         }else{
             return (
-            <div>
+        <div style={ { marginTop: '3em' } }>
              <Header title={ "Profile" } />
              <Route path='/profile'
                  component={ props =>

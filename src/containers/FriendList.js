@@ -34,25 +34,24 @@ export default class HomePage extends React.Component {
 
     selectedFriend = () => {
         console.log('eeee', this.state.selectedFriend)
-        return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
-            <Wishlist
+        return  <Wishlist
                 resetUser={ this.toggleSelectFriend }
                 currentUser={ this.state.selectedFriend }
                 gifts={ this.state.selectedFriend.wishes }
                 search={ true }
-            /></BodyBackgroundColor>
-        )
+            />
+        
     }
 
 
     noFriendsExist = () => {
-        return <BodyBackgroundColor backgroundColor='#F6CFCA'><div> No friends added yet</div></BodyBackgroundColor>
+        return <div> No friends added yet</div>
     }
 
     friendsExist = () => {
         if (this.props.friends) {
             console.log(this.props.friends)
-            return <BodyBackgroundColor backgroundColor='#F6CFCA'><div>
+            return <div>
                 <div style={ {
                     zIndex: 1,
                     paddingTop: "3em",
@@ -69,7 +68,6 @@ export default class HomePage extends React.Component {
                     </Card.Group>
                 </div>
             </div>
-            </BodyBackgroundColor>
         }
     }
 

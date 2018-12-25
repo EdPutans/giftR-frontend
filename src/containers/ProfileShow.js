@@ -8,7 +8,6 @@ export default class ProfileShow extends React.Component {
     render(){
         const {user} = this.props
         return(
-            <BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div 
                     style={
                         {
@@ -23,14 +22,15 @@ export default class ProfileShow extends React.Component {
                 >
 
                     <Card fluid>
-                        {/* <Image src='/images/avatar/large/matthew.png' /> */}
+                        <img style={ {
+                            width: '200px', height: 'auto', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } src={user.img_url? user.img_url : null} />
                         <Card.Content>
-                            <Image ></Image>
+                            
                             <Card.Header>{`${user.first_name} ${user.last_name}`}</Card.Header>
                             <Card.Meta>
                                {user.email}
                             </Card.Meta>
-                            <Card.Description>{user.age}</Card.Description>
+                            <Card.Description>{user.age} y.o. </Card.Description>
                         </Card.Content>
                         
                     </Card>
@@ -43,8 +43,6 @@ export default class ProfileShow extends React.Component {
                     {this.props.logout && <Button onClick={ this.props.logout } color='red' type='submit'>Log Out</Button>}
                     {this.props.toggleEdit && <Button floated='right' onClick={ this.props.toggleEdit }> edit </Button>}
                 </div>
-            </BodyBackgroundColor>
-
     )
 }
 }

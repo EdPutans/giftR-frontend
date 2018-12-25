@@ -1,7 +1,7 @@
 import React from 'react'
 import Wish from '../components/Wish'
 import { Button, Icon, Card, Item } from 'semantic-ui-react'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
+
 import ProfileShow from './ProfileShow'
 import Header from '../components/Header'
 export default class Wishlist extends React.Component {
