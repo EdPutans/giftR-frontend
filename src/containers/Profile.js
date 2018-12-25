@@ -32,7 +32,7 @@ React.Component {
             return (
             
             <div 
-            // style={{marginTop:'8%'}}
+            style={{marginTop:'3em'}}
             >
                     <Header title={ "Profile" } />
                 <Route path='/profile'

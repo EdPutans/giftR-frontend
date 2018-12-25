@@ -3,9 +3,8 @@ import { Input, Button, Icon } from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
 import ProfileShow from './ProfileShow'
-
+import Uploader from '../components/Uploader'
 // import Wish from '../components/Wish'
 
 export default class HomePage extends React.Component {
@@ -50,7 +49,7 @@ export default class HomePage extends React.Component {
     }
 
     renderSelectedUser=()=>{
-        return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
+        return (
             <div>
                 <Wishlist
                     friends={this.props.friends}
@@ -59,13 +58,15 @@ export default class HomePage extends React.Component {
                     search={ true }
                     gifts={ this.state.selectedUser.gifts }
                 />
-            </div></BodyBackgroundColor>
+            </div>
         )
     }
 
     renderUserList=()=>{
-        return (<BodyBackgroundColor backgroundColor='#F6CFCA'>
-            <div>
+        return (
+            <div style={{textAlign:'center', paddingTop: '3em', paddingBottom: '2 em'}}>
+                <h2>Welcome to GiftR!</h2><br/>
+                <h5>We suggest you start by looking up a person or creating your very own wishlist!</h5>
                 <div style={ {
                     zIndex: '1',
                     padding: "3em auto 3em auto "
@@ -73,6 +74,7 @@ export default class HomePage extends React.Component {
                 <div 
                     style={{display:'flex', marginTop: '1em', marginBottom: '1em'}}
                 >
+                    <Uploader />
                     <Input
                         style={ {
                             width: '60%',
@@ -100,7 +102,8 @@ export default class HomePage extends React.Component {
                     users={ this.state.users }
                     search={ this.state.search }
                 />
-            </div></BodyBackgroundColor>
+                
+            </div>
         )
     }
 

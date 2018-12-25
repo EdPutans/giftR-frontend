@@ -1,7 +1,8 @@
 import React from 'react'
 import { Form, Button, Label, Segment } from 'semantic-ui-react'
 import * as adapter from '../Adapter'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
+import Uploader from '../components/Uploader'
+
 
 export default class ProfileForm extends React.Component {
 
@@ -49,6 +50,7 @@ export default class ProfileForm extends React.Component {
 
     handleChange = (value, type) => {
         switch (type) {
+
             case "first_name":
                 return this.setState({ first_name: value })
             case "last_name":
@@ -72,7 +74,6 @@ export default class ProfileForm extends React.Component {
     render() {
         const { user } = this.props
         return (
-            <BodyBackgroundColor backgroundColor='#F6CFCA'>
                 <div style={ {
                     zIndex: 1,
                     // paddingTop: "4em"
@@ -111,16 +112,11 @@ export default class ProfileForm extends React.Component {
                         <Form.Field>
                             <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } placeholder='Repeat password' />
                         </Form.Field>
-
-
-
                         <Button onClick={ this.handleSubmit } color='teal' floated='right' type='submit'>Save</Button>
                         <Button onClick={ this.props.toggleEdit } color='red' basic type='submit'>Cancel</Button>
-
-
                     </Form>
                     { !this.props.user && <a href="/login">Already a member? Log in here!</a> }
-                </div></BodyBackgroundColor>
+                </div>
 
         )
     }

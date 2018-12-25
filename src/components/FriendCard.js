@@ -25,7 +25,8 @@ friendCard =(friend) => {
             style={ {
                 // minHeight: '200px',
                 // width: '300px',
-                marginBottom: '3em',
+                marginTop: '3em',
+          
             } }
         >
        

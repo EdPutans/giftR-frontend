@@ -37,7 +37,6 @@ export const friendRequest=(id, friend_id)=>{
 
 export const acceptOrRejectFriendRequest = (currentUser_id, friend_id, string)=>{
     let updateStatus = {}
-
     if(string==='confirmed'){
         updateStatus = { confirmed: true } 
     }else if(string==='rejected'){
@@ -45,12 +44,12 @@ export const acceptOrRejectFriendRequest = (currentUser_id, friend_id, string)=>
     }
 // this function reverses the friend id and current user id, since the user is a friend who replies to the request, so currentuser = friend.
     return fetch(`${usersURL}/confirm_or_reject`, {
-        method: 'POST',
+        method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-            id: friend_id,
+            user_id: friend_id,
             ...updateStatus,
             friend_id: currentUser_id
         }
@@ -106,8 +105,6 @@ export const deleteGift = (id) => fetch(`${giftsURL}/${id}`, {
 
 
 // ------------------ user stuff -------------//
-
-
 
 export const updateUserById = (userObject) => fetch(`http://localhost:3000/api/v1/users/${userObject.id}`, {
     method: 'PATCH',

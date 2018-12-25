@@ -52,7 +52,8 @@ export default class Wishlist extends React.Component {
             color="red"
             onClick={ this.createWish }
             style={ {
-                left: 'calc(50% - 26px)',
+                // left: 'calc(50% - 26px)',
+                right: '10px',
                 position: 'fixed',
                 top: '90%',
                 // right: '1em',
