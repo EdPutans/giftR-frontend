@@ -12,13 +12,35 @@ export default class NotificationList extends React.Component{
         return this.setState({unaccepted})
     }
 
+    handleAccept= async (friendship_id)=>{
+        const resp = await Adapter.acceptOrRejectFriendRequest  (friendship_id, 'confirmed')
+        return console.log(resp)
+    }
+
+    handleReject= async (friendship_id)=>{
+        const resp = await Adapter.acceptOrRejectFriendRequest(friendship_id, 'rejected')
+        return console.log(resp)
+    }
 
     mapUnaccepted = ()=>{
         return( 
         <div>
-            {this.state.unaccepted.map(u=>{ return (
-                <div>{u.first_name} {u.last_name} invited you to become friends 
-                    <Button size='tiny' color='teal'>Accept</Button><Button size='tiny' color='red'>Reject</Button>
+            {this.state.unaccepted.map(f=>{ return (
+                <div key={f.user.id}>{f.user.first_name} {f.user.last_name} invited you to become friends 
+                    <Button
+                        size='tiny'
+                        color='teal'
+                        onClick={()=>this.handleAccept(f.friendship_id)}
+                    >
+                    Accept
+                    </Button>
+                    <Button 
+                        size='tiny' 
+                        color='red'
+                        onClick={ () => this.handleReject(f.friendship_id)}
+                    >
+                    Reject
+                    </Button>
                 </div>
                 )
             })}
@@ -39,7 +61,8 @@ export default class NotificationList extends React.Component{
                     borderRadius: '5px',
                     backgroundColor: '#FFFFFF',
                     height: '300px',
-                    width: '400px',
+                    minWidth: '200px',
+                    maxWidth: '70%',
                     right: '15px',
                     top: '50px',
                     position: 'fixed'

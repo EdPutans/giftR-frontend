@@ -25,9 +25,11 @@ export default class HomePage extends React.Component {
     componentDidMount() {
         console.log('setting state: ')
         
-    //     return adapter.getFriends(this.props.currentUser.id)
-    //         .then(resp => this.setState({ friends: (resp.friends) }))
-    //         .then(() => console.log('setting state: ', this.props.friends))
+// FRIENDS ARE BEING RENDERED  ON MAIN PAGE ATM
+ 
+        // return adapter.getFriends(this.props.currentUser.id)
+        //     .then(friends => this.setState({ friends }))
+        //     .then(() => console.log('set state: ',  this.props.friends))
     }
 
 

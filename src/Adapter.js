@@ -1,6 +1,6 @@
 const usersURL = "http://localhost:3000/api/v1/users"
 const giftsURL = "http://localhost:3000/api/v1/gifts"
-
+const friendshipsURL = "http://localhost:3000/api/v1/friendships"
 export const test_const = 123
 
 export const signin= (email, password) => {
@@ -35,35 +35,52 @@ export const friendRequest=(id, friend_id)=>{
     }).then(r=>r.json())
 }
 
-export const acceptOrRejectFriendRequest = (currentUser_id, friend_id, string)=>{
+export const acceptOrRejectFriendRequest = (friendship_id, string) => {
     let updateStatus = {}
-    if(string==='confirmed'){
-        updateStatus = { confirmed: true } 
-    }else if(string==='rejected'){
+    if (string === 'confirmed') {
+        updateStatus = { confirmed: true }
+    } else if (string === 'rejected') {
         updateStatus = { rejected: true }
     }
-// this function reverses the friend id and current user id, since the user is a friend who replies to the request, so currentuser = friend.
-    return fetch(`${usersURL}/confirm_or_reject`, {
+    return fetch(`${friendshipsURL}/${friendship_id}`,{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({
-            user_id: friend_id,
-            ...updateStatus,
-            friend_id: currentUser_id
-        }
-        )
-    }).then(r => r.json())
+        body:JSON.stringify({
+            ...updateStatus
+        })
+}).then(r => r.json())
 }
+
+
+// export const acceptOrRejectFriendRequest = (currentUser_id, friend_id, string)=>{
+//     let updateStatus = {}
+//     if(string==='confirmed'){
+//         updateStatus = { confirmed: true } 
+//     }else if(string==='rejected'){
+//         updateStatus = { rejected: true }
+//     }
+// // this function reverses the friend id and current user id, since the user is a friend who replies to the request, so currentuser = friend.
+//     return fetch(`${friendshipsURL}/confirm_or_reject`, {
+//         method: 'PATCH',
+//         headers: {
+//             'Content-Type': 'application/json'
+//         },
+//         body: JSON.stringify({
+            
+//         }
+//         )
+//     }).then(r => r.json())
+// }
 
 export const getFriends = (id) => {
     return fetch(`${usersURL}/${id}/friends`)
         .then(r => r.json())
 }
 
-export const getUnaccepted = (id) => {
-    return fetch(`${usersURL}/${id}/unaccepted`)
+export const getUnaccepted = (currentUserId) => {
+    return fetch(`${friendshipsURL}/${currentUserId}/unaccepted`)
         .then(r => r.json())
 }
 

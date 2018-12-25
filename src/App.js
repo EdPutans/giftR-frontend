@@ -39,8 +39,8 @@ class App extends Component {
       this.setState({ currentUser: data.user })
       const gifts = await adapter.getWishes()
       this.setState({ gifts })
-      const friendsResponse = await adapter.getFriends(data.user.id);
-      this.setState({ friends: friendsResponse.friends });
+      const friends= await adapter.getFriends(data.user.id);
+      this.setState({ friends });
       }
   }
 
@@ -150,9 +150,10 @@ class App extends Component {
                 // marginTop: '5%',
                 borderRadius: '5px',
                 backgroundColor: '#FFFFFF',
-                paddingBottom: '3%',
+                paddingBottom: '6%',
                 // maxWidth: '700px',
-                margin: '60px auto',
+                margin: '60px auto ',
+                minWidth: '420px',
                 width: '80%',
                 position: 'absolute',
                 left: 0,

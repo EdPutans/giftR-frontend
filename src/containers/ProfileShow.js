@@ -23,7 +23,7 @@ export default class ProfileShow extends React.Component {
 
                     <Card fluid>
                         <img style={ {
-                            width: '200px', height: 'auto', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } src={user.img_url? user.img_url : null} />
+                            width: '80%', height: 'auto', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } src={user.img_url? user.img_url : null} />
                         <Card.Content>
                             
                             <Card.Header>{`${user.first_name} ${user.last_name}`}</Card.Header>
