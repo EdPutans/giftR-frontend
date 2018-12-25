@@ -1,10 +1,15 @@
-const usersURL = "http://localhost:3000/api/v1/users"
-const giftsURL = "http://localhost:3000/api/v1/gifts"
-const friendshipsURL = "http://localhost:3000/api/v1/friendships"
+const localhost = "http://192.168.1.31:3000"
+
+const API_v1 = `${localhost}/api/v1`
+const signinURL = `${localhost}/api/v1/signin`
+const validateURL = `${localhost}/api/v1/validate`
+const usersURL = `${localhost}/api/v1/users`
+const giftsURL = `${localhost}/api/v1/gifts`
+const friendshipsURL = `${localhost}/api/v1/friendships`
 export const test_const = 123
 
 export const signin= (email, password) => {
-    return fetch('http://localhost:3000/api/v1/signin', {
+    return fetch(signinURL, {
         method: "POST",
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ email, password })
@@ -13,7 +18,7 @@ export const signin= (email, password) => {
 
 
 export const validate = () => {
-    return fetch('http://localhost:3000/api/v1/validate', {
+    return fetch(validateURL, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
@@ -91,7 +96,7 @@ export const getUnaccepted = (currentUserId) => {
 
 
 export const getWishes = () => {
-    return fetch('http://localhost:3000/api/v1/get_items', {
+    return fetch(`${API_v1}/get_items`, {
         headers: {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
@@ -123,7 +128,7 @@ export const deleteGift = (id) => fetch(`${giftsURL}/${id}`, {
 
 // ------------------ user stuff -------------//
 
-export const updateUserById = (userObject) => fetch(`http://localhost:3000/api/v1/users/${userObject.id}`, {
+export const updateUserById = (userObject) => fetch(`${usersURL}/${userObject.id}`, {
     method: 'PATCH',
     headers: {
         "Content-Type": "application/json"
