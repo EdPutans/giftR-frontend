@@ -57,13 +57,12 @@ export const acceptOrRejectFriendRequest = (currentUser_id, friend_id, string)=>
     }).then(r => r.json())
 }
 
-
 export const getFriends = (id) => {
     return fetch(`${usersURL}/${id}/friends`)
         .then(r => r.json())
 }
 
-export const unaccepted = (id) => {
+export const getUnaccepted = (id) => {
     return fetch(`${usersURL}/${id}/unaccepted`)
         .then(r => r.json())
 }

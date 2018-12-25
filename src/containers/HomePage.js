@@ -75,12 +75,7 @@ export default class HomePage extends React.Component {
                     style={{ marginTop: '1em', marginBottom: '1em'}}
                 >
                 <Form>
-                    <Input
-                        // style={ {
-                        //     width: '60%',
-                        //     marginLeft: '10%'
-                        // } }
-                        
+                    <Input  
                         className='icon'
                         placeholder='Search users'
                         onChange={ event => this.handleChange(event) }

@@ -13,6 +13,7 @@ import Navbar from './components/Navbar'
 import Wishlist from './containers/Wishlist'
 import EditWish from './components/EditWish'
 import Loading from './components/Loading'
+import NotificationList from './containers/NotificationList'
 import './App.css';
 import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
@@ -128,22 +129,10 @@ class App extends Component {
         <div>
           {
             this.state.notificationsClicked &&
-            <div style={
-              {
-                zIndex: 120,
-                border: '1px solid grey',
-                borderRadius: '5px',
-                backgroundColor: '#FFFFFF',
-                height: '300px',
-                width: '200px',
-                right: '15px',
-                top: '50px',
-                position: 'fixed'
-              }
-            }
-            >
-              this is where notifications go
-              </div>
+           <NotificationList 
+              currentUser={this.state.currentUser}
+           
+           />
           }
           <Switch>
             <Route
