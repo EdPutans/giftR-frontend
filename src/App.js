@@ -19,6 +19,7 @@ import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
 class App extends Component {
 
+  // the actual working one... use this if screwed up again. milestone -  correct notifications when creating friend requests
   // ----------- state and mounting ----------- //
   state = {
     notificationsClicked: false,

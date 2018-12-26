@@ -36,6 +36,7 @@ export default class NotificationList extends React.Component{
       </div>
       )
     }
+
     
     
 
