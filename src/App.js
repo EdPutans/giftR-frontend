@@ -105,8 +105,8 @@ class App extends Component {
      this.props.history.push('/');
      const gifts = await adapter.getWishes()
      this.setState({ gifts });
-     const friendsResponse = await adapter.getFriends(r.user.id);
-     this.setState({ friends: friendsResponse });
+     const friends = await adapter.getFriends(r.user.id);
+     this.setState({ friends });
    }
   }
 
