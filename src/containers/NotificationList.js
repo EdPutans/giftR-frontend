@@ -1,6 +1,9 @@
 import React from 'react'
 import * as Adapter from '../Adapter'
 import {Button} from 'semantic-ui-react'
+import FriendNotification from '../components/FriendNotification'
+
+
 export default class NotificationList extends React.Component{
 
     state={
@@ -25,25 +28,11 @@ export default class NotificationList extends React.Component{
     mapUnaccepted = ()=>{
         return( 
         <div>
-            {this.state.unaccepted.map(f=>{ return (
-                <div key={f.user.id}>{f.user.first_name} {f.user.last_name} invited you to become friends 
-                    <Button
-                        size='tiny'
-                        color='teal'
-                        onClick={()=>this.handleAccept(f.friendship_id)}
-                    >
-                    Accept
-                    </Button>
-                    <Button 
-                        size='tiny' 
-                        color='red'
-                        onClick={ () => this.handleReject(f.friendship_id)}
-                    >
-                    Reject
-                    </Button>
-                </div>
-                )
-            })}
+            {this.state.unaccepted.map(f=><FriendNotification 
+                friend={f}
+                handleAccept={this.handleAccept}
+                handleReject={this.handleReject}
+            />) }
       </div>
       )
     }
@@ -56,13 +45,14 @@ export default class NotificationList extends React.Component{
         return(
             <div style={
                 {
+                    overflowY: 'scroll',
                     zIndex: 120,
                     border: '1px solid grey',
                     borderRadius: '5px',
                     backgroundColor: '#FFFFFF',
                     height: '300px',
                     minWidth: '200px',
-                    maxWidth: '70%',
+                    width: '50%',
                     right: '15px',
                     top: '50px',
                     position: 'fixed'
