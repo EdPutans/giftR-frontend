@@ -71,7 +71,7 @@ export default class Uploader extends React.Component {
                 <div>
                     { this.state.uploadedImageURL === '' ? null :
                         <div>
-                        <img style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.state.uploading? loadingGif : this.state.uploadedImageURL } />
+                        <img alt='uploaded file' style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.state.uploading? loadingGif : this.state.uploadedImageURL } />
                         </div> }
                 </div>
             

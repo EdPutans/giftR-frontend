@@ -82,7 +82,10 @@ export default class HomePage extends React.Component {
                         onChange={ event => this.handleChange(event) }
                         onSubmit={ this.handleSubmit }
                     />
-                    <Button type="submit" float onClick={ this.handleSubmit }>
+                    <Button
+                        type="submit"
+                        onClick={ this.handleSubmit }
+                    >
                         <Icon name="search" />Search
                     </Button>
                         </Form>

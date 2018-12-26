@@ -28,7 +28,9 @@ friendCard =(friend) => {
           
             } }
         >
-        <img src={ friend.img_url } />
+        <img alt='user profile pic' style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block', 
+                    padding: '5% 0 5% 0 '
+                } } src={ friend.img_url || "http://chittagongit.com//images/default-profile-icon/default-profile-icon-1.jpg" } />
         <Card.Content>
            
             <Card.Header>{ (friend.first_name ? friend.first_name : "") + ' ' + (friend.last_name? friend.last_name : "") }</Card.Header>

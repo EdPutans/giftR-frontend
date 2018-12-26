@@ -1,7 +1,6 @@
 import React from 'react'
 import * as adapter from '../Adapter'
 import { Form, Button, Radio, Label } from 'semantic-ui-react'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
 import Header from './Header'
 
 export default class WishForm extends React.Component {

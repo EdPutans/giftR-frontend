@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
-// import { BrowserRouter, withRouter, Route, Switch, Redirect } from 'react-router-dom'
-import { Loader } from 'semantic-ui-react'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
 import Login from './containers/Login'
 import WishForm from './components/WishForm'
 import Welcome from './containers/Welcome'
@@ -12,7 +9,6 @@ import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import Wishlist from './containers/Wishlist'
 import EditWish from './components/EditWish'
-import Loading from './components/Loading'
 import NotificationList from './containers/NotificationList'
 import './App.css';
 import * as adapter from './Adapter'
@@ -115,6 +111,9 @@ class App extends Component {
     else {
       this.setUserData(r)
       }
+      // document.querySelectorAll('img').forEach(function(img){
+      //   return img.onError && function(){this.style.display='none';}
+      //  })
   }
   
 
@@ -126,9 +125,15 @@ class App extends Component {
 
   // ---------- rendering ----------
 
+
+     
+    
+
+
+
   render() {
 
-    const { currentUser, navBarItem, loading } = this.state
+    const { currentUser, navBarItem } = this.state
 
     if (this.state.currentUser) {
       return (
@@ -142,7 +147,6 @@ class App extends Component {
           }
           <Switch>
             <Route
-              // path='' 
                 component={ props => <Navbar { ...props }
                 handleItemClick={ this.handleNavBarChange }
                 activeItem={ navBarItem }

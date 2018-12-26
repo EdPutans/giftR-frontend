@@ -1,7 +1,4 @@
 import React from 'react'
-import { Form, Button, Label, Segment } from 'semantic-ui-react'
-import * as adapter from '../Adapter'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
 import ProfileForm from './ProfileForm'
 import ProfileShow from './ProfileShow'
 import {Route} from 'react-router'

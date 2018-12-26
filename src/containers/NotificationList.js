@@ -1,6 +1,5 @@
 import React from 'react'
 import * as Adapter from '../Adapter'
-import {Button} from 'semantic-ui-react'
 import FriendNotification from '../components/FriendNotification'
 
 
@@ -26,13 +25,16 @@ export default class NotificationList extends React.Component{
     mapUnaccepted = ()=>{
         return( 
         <div>
-            {this.state.unaccepted.map(f=><FriendNotification 
-                refreshFriends ={ this.props.refreshFriends}
-                currentUser={this.props.currentUser}
-                friend={f}
-                handleAccept={this.handleAccept}
-                handleReject={this.handleReject}
-            />) }
+            {this.state.unaccepted.map(f=>
+            <div key={f.id}>
+                <FriendNotification
+                    refreshFriends ={ this.props.refreshFriends}
+                    currentUser={this.props.currentUser}
+                    friend={f}
+                    handleAccept={this.handleAccept}
+                    handleReject={this.handleReject}
+                />
+            </div>) }
       </div>
       )
     }
@@ -53,14 +55,14 @@ export default class NotificationList extends React.Component{
                     backgroundColor: '#FFFFFF',
                     height: '300px',
                     minWidth: '200px',
-                    width: '50%',
+                    width: '20%',
                     right: '15px',
                     top: '50px',
                     position: 'fixed'
                 }
             }
             >
-                {this.state.unaccepted.length===0? "There are no pending friend requests" : this.mapUnaccepted() }
+                {this.state.unaccepted.length===0? <h4>There are no pending friend requests</h4> : this.mapUnaccepted() }
 
             </div>
         )

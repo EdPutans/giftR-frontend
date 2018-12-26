@@ -22,7 +22,7 @@ export default class Welcome extends React.Component {
             }}
            
             >
-                <img 
+                <img alt='giftR logo'
 
                 //     style={{
 

@@ -56,6 +56,7 @@ handleChange = (value, type) => {
         return (
         <div>
                 <img
+                    alt='giftR logo'
                     onClick={ this.props.back }
                     style={ {
                         zIndex: 1,

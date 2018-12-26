@@ -1,6 +1,5 @@
 import React from 'react'
-import * as Adapter from '../Adapter'
-import { Button, Card, Feed} from 'semantic-ui-react'
+import { Button, Card} from 'semantic-ui-react'
 
 
 
@@ -22,56 +21,37 @@ export default class FriendNotification extends React.Component {
     }
 
 
-    feed = () =>{
+    feedCard = () =>{
         const { friend } = this.props
         return(  
-           <Feed>
-               <Feed.Event>
-                   <Feed.Label>
-                       {/* <img src={friend.img_url || null} /> */}
-                   </Feed.Label>
-                   {friend.user.first_name} {friend.user.last_name} invited you to become friends
-             </Feed.Event>
-             <Button
-                        size='tiny'
-                        color='teal'
-                        onClick={ () => this.handleAccept(friend.friendship_id) }
-                    >
-                        Accept
-                    </Button>
-                    <Button
-                        size='tiny'
-                        color='red'
-                        onClick={ () => this.handleReject(friend.friendship_id) }
-                    >
-                        Reject
-                    </Button>
-           </Feed>
+            <Card fluid>
+                <Card.Content>
+                <Card.Header>{friend.user.first_name} {friend.user.last_name}</Card.Header>
+                <Card.Meta>wants you to be their friend</Card.Meta>
+                <Button
+                    size='tiny'
+                    color='teal'
+                    onClick={ () => this.handleAccept(friend.friendship_id) }
+                >
+                Accept
+                </Button>
+                <Button
+                    size='tiny'
+                    color='red'
+                    onClick={ () => this.handleReject(friend.friendship_id) }
+                >
+                  Reject
+            </Button>
+                </Card.Content>
+        </Card>
        )
     }
 
 
 
     render(){
-        const { friend } = this.props
         if(!this.state.addressed){
-            return( this.feed()
-                // <div key={ friend.user.id }>{ friend.user.first_name } { friend.user.last_name } invited you to become friends
-                //     <Button
-                //         size='tiny'
-                //         color='teal'
-                //         onClick={ () => this.handleAccept(friend.friendship_id) }
-                //     >
-                //         Accept
-                //     </Button>
-                //     <Button
-                //         size='tiny'
-                //         color='red'
-                //         onClick={ () => this.handleReject(friend.friendship_id) }
-                //     >
-                //         Reject
-                //     </Button>
-                // </div>
+                return( this.feedCard()
             )
         }else{
             return <div>{this.state.addressed}</div>

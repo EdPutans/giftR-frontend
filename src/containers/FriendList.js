@@ -1,9 +1,7 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import * as adapter from '../Adapter'
 import FriendCard from '../components/FriendCard'
 import Wishlist from './Wishlist'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
 import Header from '../components/Header'
 
 export default class HomePage extends React.Component {
@@ -61,6 +59,7 @@ export default class HomePage extends React.Component {
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } >
                         { this.state.friends.map(f =>
                             <FriendCard
+                                key={f.id}
                                 friend={ f }
                                 toggleSelectFriend={ this.toggleSelectFriend }
                             />

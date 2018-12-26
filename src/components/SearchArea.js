@@ -1,12 +1,11 @@
 import React from 'react'
-import { Card, Icon } from 'semantic-ui-react'
-import Wishlist from '../containers/Wishlist'
+import { Card } from 'semantic-ui-react'
 
 export default class SearchArea extends React.Component {
 
     isFriend=(id)=>{
         if(this.props.friends){
-            let friend = this.props.friends.find(friend => friend.id == id)
+            let friend = this.props.friends.find(friend => friend.id === id)
             return  friend  ? "In your friends list" : "not a friend yet"
         }
     }
@@ -15,7 +14,9 @@ export default class SearchArea extends React.Component {
             return (<div>
                 <Card.Group className="ui center aligned grid">
                 { this.props.users && this.props.users.map(u =>
-                    <div style={
+                    <div 
+                        key={u.id}
+                        style={
                         {
                             zIndex: 1,
                             width: '500px',

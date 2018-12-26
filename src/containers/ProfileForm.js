@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Label, Segment } from 'semantic-ui-react'
+import { Form, Button, Label} from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import Uploader from '../components/Uploader'
 
@@ -24,7 +24,7 @@ export default class ProfileForm extends React.Component {
             this.checkPasswordFields() 
             && 
             this.checkForPasswordPresense()) {
-            const { first_name, last_name, email, age, old_password, new_password, repeat_password, img_url } = this.state
+            const { first_name, last_name, email, age, old_password, new_password, img_url } = this.state
             let user = this.props.user
             let updatedUser = {}
 

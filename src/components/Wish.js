@@ -54,25 +54,20 @@ export default class Wish extends React.Component {
             <br />
             <Card 
                 style={ {
-                    // marginLeft: "calc(50% - 290px)",
                     minHeight: '433px',
                     maxHeight: '1050px',
                     width: '300px',
-                   
-                    // marginLeft: 'calc(50% - 145px)',
-                    // marginLeft: '5%',
-                    // marginRight: '10px'
-
                 }}>
                 <img 
+                    alt='wish'
                     style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block', 
                     padding: '5% 0 5% 0 '
                 } 
                 } 
+               
                     src={ 
-                        wish.img_url ? wish.img_url 
-                        :
-                        'http://vyfhealth.com/wp-content/uploads/2015/10/yoga-placeholder1.jpg'
+                        wish.img_url ||
+                        'https://images.immediate.co.uk/volatile/sites/3/2017/11/imagenotavailable1-39de324.png'
                      } 
                 />
                 <Card.Content>

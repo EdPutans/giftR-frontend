@@ -1,7 +1,6 @@
 import React from 'react'
-import { Form, Button, Label, Segment, Card, Image, Icon } from 'semantic-ui-react'
-import * as adapter from '../Adapter'
-import BodyBackgroundColor from 'react-body-backgroundcolor'
+import { Button, Card } from 'semantic-ui-react'
+
 
 export default class ProfileShow extends React.Component {
 
@@ -22,7 +21,7 @@ export default class ProfileShow extends React.Component {
                 >
 
                     <Card fluid>
-                        <img style={ {
+                        <img alt='user profile pic' style={ {
                             width: '80%', height: 'auto', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } src={user.img_url? user.img_url : null} />
                         <Card.Content>
                             

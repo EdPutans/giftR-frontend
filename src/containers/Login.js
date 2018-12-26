@@ -31,6 +31,7 @@ export default class Login extends React.Component {
             <div>
                 <img
                     onClick={this.props.back}
+                    alt = 'giftR logo'
                     style={ {
                         zIndex: 1,
                         width: '70%',
