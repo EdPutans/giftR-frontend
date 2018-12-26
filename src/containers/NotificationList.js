@@ -16,13 +16,11 @@ export default class NotificationList extends React.Component{
     }
 
     handleAccept= async (friendship_id)=>{
-        const resp = await Adapter.acceptOrRejectFriendRequest  (friendship_id, 'confirmed')
-        return console.log(resp)
+        return await Adapter.acceptOrRejectFriendRequest(friendship_id, 'confirmed')
     }
 
     handleReject= async (friendship_id)=>{
-        const resp = await Adapter.acceptOrRejectFriendRequest(friendship_id, 'rejected')
-        return console.log(resp)
+        return await Adapter.acceptOrRejectFriendRequest(friendship_id, 'rejected')
     }
 
     mapUnaccepted = ()=>{

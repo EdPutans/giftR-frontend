@@ -7,13 +7,11 @@ export default class SearchArea extends React.Component {
     isFriend=(id)=>{
         if(this.props.friends){
             let friend = this.props.friends.find(friend => friend.id == id)
-            console.log('located, this guy is a friend:', friend)
             return  friend  ? "In your friends list" : "not a friend yet"
         }
     }
 
     render() {
-     console.log('search area friends:', this.props.friends)
             return (<div>
                 <Card.Group className="ui center aligned grid">
                 { this.props.users && this.props.users.map(u =>

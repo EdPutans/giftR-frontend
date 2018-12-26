@@ -87,8 +87,7 @@ class App extends Component {
   setUserData = async (response) =>{
     await this.setState({ currentUser: response.user });
     await this.getWishes()
-    await this.getFriends(response.user)
-    return console.log('set User details')
+    return await this.getFriends(response.user)
   }
 
   // -------------- log in/out, sign up --------------

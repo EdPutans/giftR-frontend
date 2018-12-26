@@ -1,14 +1,56 @@
 import React from 'react'
 import Wish from '../components/Wish'
-import { Button, Icon, Card, Item } from 'semantic-ui-react'
+import { Button, Icon, Card } from 'semantic-ui-react'
 import * as Adapter from '../Adapter'
 import ProfileShow from './ProfileShow'
 import Header from '../components/Header'
 export default class Wishlist extends React.Component {
 
     sendFriendRequest= async (currentUser_id, newFriend_id)=>{
-        const newFriendship = Adapter.friendRequest(currentUser_id, newFriend_id)
-        return console.log('friendship created? => ', newFriendship)
+        
+       await Adapter.friendRequest(currentUser_id, newFriend_id)
+       await this.getActiveRequestIds(currentUser_id)
+       await this.getUnacceptedIds(currentUser_id)
+       return console.log('done rendering')
+    }
+
+    state={
+        unaccepted_ids: null,
+        active_request_ids: null
+    }
+
+    getUnacceptedIds= async (id)=>{
+        const unaccepted_ids = await Adapter.getUnacceptedIds(id)
+        return this.setState({unaccepted_ids})
+    }
+
+    getActiveRequestIds= async (id)=>{
+        const active_request_ids = await Adapter.getActiveRequestIds(id)
+        return this.setState({active_request_ids})
+    }
+
+    componentDidMount = async() => {
+        this.getUnacceptedIds(this.props.currentUser.id)
+        this.getActiveRequestIds(this.props.currentUser.id)
+    }
+
+    renderCorrectButton = (id) =>{
+        if (this.state.unaccepted_ids && this.state.unaccepted_ids.find(digit => digit === id))
+        {
+            return "Accept request from notifications!"
+        }
+        if (this.state.active_request_ids && this.state.active_request_ids.find(digit => digit === id)){
+            return "Request already sent"
+        }
+
+        return this.props.friends && !this.props.friends.find(u => u.id === id) ?
+                <Button
+                    onClick={() => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id)}
+                 >
+                 Add friend
+                </Button>
+                : 
+                'Already a mate'
     }
 
     userProfile=()=>{
@@ -18,7 +60,7 @@ export default class Wishlist extends React.Component {
                 <ProfileShow 
                     user={this.props.user}
                 />
-                { this.props.friends && !this.props.friends.find(u => u.id === id) ? <Button onClick={() => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id)}>Add friend</Button> : 'Already a mate'  }
+                {this.renderCorrectButton(id)}
             </div>
         )
     }

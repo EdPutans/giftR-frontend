@@ -23,20 +23,17 @@ export default class HomePage extends React.Component {
 
 
     componentDidMount() {
-        console.log('setting state: ')
         this.setState({friends: this.props.friends})
-
+       
 // FRIENDS ARE BEING RENDERED  ON MAIN PAGE ATM
  
         // return adapter.getFriends(this.props.currentUser.id)
         //     .then(friends => this.setState({ friends }))
-        //     .then(() => console.log('set state: ',  this.state.friends))
     }
 
 
 
     selectedFriend = () => {
-        console.log('eeee', this.state.selectedFriend)
         return  <Wishlist
                 currentUser={this.props.currentUser}
                 resetUser={ this.toggleSelectFriend }
@@ -54,7 +51,6 @@ export default class HomePage extends React.Component {
 
     friendsExist = () => {
         if (this.state.friends) {
-            console.log(this.state.friends)
             return <div>
                 <div style={ {
                     zIndex: 1,

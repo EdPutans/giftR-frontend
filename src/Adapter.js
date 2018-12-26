@@ -29,7 +29,6 @@ export const validate = () => {
 // ------------- friend and related ----------- //
 
 export const friendRequest=(user_id, friend_id)=>{
-    console.log("ids:",user_id, friend_id )
     return fetch(`${friendshipsURL}/`,{
         method: 'POST',
         headers: {
@@ -89,6 +88,15 @@ export const getUnaccepted = (currentUserId) => {
     return fetch(`${friendshipsURL}/${currentUserId}/unaccepted`)
         .then(r => r.json())
 }
+export const getUnacceptedIds = (currentUserId) => {
+    return fetch(`${friendshipsURL}/${currentUserId}/unaccepted_ids`)
+        .then(r => r.json())
+}
+export const getActiveRequestIds = (currentUserId) => {
+    return fetch(`${friendshipsURL}/${currentUserId}/active_request_ids`)
+        .then(r => r.json())
+}
+
 
 
 //  ----------- gifts / wishes -------------- //
