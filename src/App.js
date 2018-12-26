@@ -31,19 +31,7 @@ class App extends Component {
 
   setUser=(user)=>this.setState({currentUser: user})
 
-  async componentDidMount() {
-    let data = await adapter.validate()
-    if (data.error) {
-      this.handleLogout()
-    }
-    else {
-      this.setState({ currentUser: data.user })
-      const gifts = await adapter.getWishes()
-      this.setState({ gifts })
-      const friends= await adapter.getFriends(data.user.id);
-      this.setState({ friends });
-      }
-  }
+
 
   backToWelcome = () => this.props.history.push('/')
 
@@ -86,9 +74,22 @@ class App extends Component {
   }
 
 
+  getWishes = async () => {
+    const gifts = await adapter.getWishes()
+    return this.setState({ gifts });
+  }
 
+  getFriends = async (user) => {
+    const friends = await adapter.getFriends(user.id);
+    return this.setState({ friends });
+  }
 
-
+  setUserData = async (response) =>{
+    await this.setState({ currentUser: response.user });
+    await this.getWishes()
+    await this.getFriends(response.user)
+    return console.log('set User details')
+  }
 
   // -------------- log in/out, sign up --------------
 
@@ -99,18 +100,23 @@ class App extends Component {
      alert(r.error);
    }
    else {
-     this.setState({ currentUser: r.user });
      localStorage.removeItem('currentUser');
      localStorage.setItem('currentUser', JSON.stringify(r.user));
      localStorage.setItem('token', r.token);
      this.props.history.push('/');
-     const gifts = await adapter.getWishes()
-     this.setState({ gifts });
-     const friends = await adapter.getFriends(r.user.id);
-     this.setState({ friends });
+     this.setUserData(r)
    }
   }
 
+  async componentDidMount() {
+    let r = await adapter.validate()
+    if (r.error) {
+      this.handleLogout()
+    }
+    else {
+      this.setUserData(r)
+      }
+  }
   
 
   handleLogout = () => {
@@ -131,8 +137,8 @@ class App extends Component {
           {
             this.state.notificationsClicked &&
            <NotificationList 
+              refreshFriends ={ this.getFriends}
               currentUser={this.state.currentUser}
-           
            />
           }
           <Switch>

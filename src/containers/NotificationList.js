@@ -29,6 +29,8 @@ export default class NotificationList extends React.Component{
         return( 
         <div>
             {this.state.unaccepted.map(f=><FriendNotification 
+                refreshFriends ={ this.props.refreshFriends}
+                currentUser={this.props.currentUser}
                 friend={f}
                 handleAccept={this.handleAccept}
                 handleReject={this.handleReject}

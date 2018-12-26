@@ -24,12 +24,13 @@ export default class HomePage extends React.Component {
 
     componentDidMount() {
         console.log('setting state: ')
-        
+        this.setState({friends: this.props.friends})
+
 // FRIENDS ARE BEING RENDERED  ON MAIN PAGE ATM
  
         // return adapter.getFriends(this.props.currentUser.id)
         //     .then(friends => this.setState({ friends }))
-        //     .then(() => console.log('set state: ',  this.props.friends))
+        //     .then(() => console.log('set state: ',  this.state.friends))
     }
 
 
@@ -52,8 +53,8 @@ export default class HomePage extends React.Component {
     }
 
     friendsExist = () => {
-        if (this.props.friends) {
-            console.log(this.props.friends)
+        if (this.state.friends) {
+            console.log(this.state.friends)
             return <div>
                 <div style={ {
                     zIndex: 1,
@@ -62,7 +63,7 @@ export default class HomePage extends React.Component {
                 } }>
                     <Header title={'Friends'} />
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } >
-                        { this.props.friends.map(f =>
+                        { this.state.friends.map(f =>
                             <FriendCard
                                 friend={ f }
                                 toggleSelectFriend={ this.toggleSelectFriend }
@@ -76,13 +77,13 @@ export default class HomePage extends React.Component {
 
 
     render() {
-        if (this.props.friends && !this.state.selectedFriend) {
+        if (this.state.friends && !this.state.selectedFriend) {
             return this.friendsExist()
         }
-        if (!this.props.friends && !this.state.selectedFriend) {
+        if (!this.state.friends && !this.state.selectedFriend) {
             return this.noFriendsExist()
         }
-        if (this.state.selectedFriend && this.props.friends) {
+        if (this.state.selectedFriend && this.state.friends) {
             return this.selectedFriend()
         }else{
             return <div>loading...</div>
