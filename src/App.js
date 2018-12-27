@@ -25,6 +25,8 @@ class App extends Component {
     friends: []
   }
 
+  // dasd
+
   setUser=(user)=>this.setState({currentUser: user})
 
 
@@ -111,6 +113,12 @@ class App extends Component {
     else {
       this.setUserData(r)
       }
+      // this.state.notificationsClicked && document.addEventListener('click', event => {
+      //   console.log('eeee')
+      //   if(event.target!==<NotificationList />){
+      //     this.setState({notificationsClicked:false})
+      //   }
+      // })
       // document.querySelectorAll('img').forEach(function(img){
       //   return img.onError && function(){this.style.display='none';}
       //  })
@@ -126,9 +134,7 @@ class App extends Component {
   // ---------- rendering ----------
 
 
-     
-    
-
+   
 
 
   render() {
@@ -139,11 +145,11 @@ class App extends Component {
       return (
         <div>
           {
-            this.state.notificationsClicked &&
+             <div style={!this.state.notificationsClicked? {display:'none'} : {display:'block'}}>
            <NotificationList 
               refreshFriends ={ this.getFriends}
               currentUser={this.state.currentUser}
-           />
+           /></div>
           }
           <Switch>
             <Route
