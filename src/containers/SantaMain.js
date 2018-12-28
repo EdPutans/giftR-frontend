@@ -13,6 +13,7 @@ export default class ProfileShow extends React.Component {
                 paddingBottom: "6em"
             } }>
              <Header title={'Secret Santa'} />
+             
              <div>under le constructionnn</div>
          </div>
         )

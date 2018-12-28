@@ -48,7 +48,7 @@ export default class Wish extends React.Component {
 
 
     render() {
-        const {user} = this.props
+        const {user, currentUser} = this.props
         const {wish} = this.state
         if(this.state.wish){return (<div>
             <br />
@@ -86,7 +86,7 @@ export default class Wish extends React.Component {
                 <Card.Content extra>
                     
                     Rating: {this.renderStars(wish.rating)}
-                    { user.id === wish.user_id && <Button
+                    { currentUser.id === wish.user_id && <Button
                         floated="right"
                         size="mini"
                         color="teal"

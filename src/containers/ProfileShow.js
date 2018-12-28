@@ -14,15 +14,15 @@ export default class ProfileShow extends React.Component {
                             width: '50%',
                             left: 0,
                             right: 0,
-                            // position: 'absolute',
-                            // marginLeft: '10%'
+                          
                         } 
                     }
                 >
 
                     <Card fluid>
                         <img alt='user profile pic' style={ {
-                            width: '80%', height: 'auto', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '} } src={user.img_url? user.img_url : null} />
+                        width: '80%', height: 'auto', margin: '0 auto', display: 'block', padding: '5% 0 5% 0 '
+                    } } src={ user.img_url ? user.img_url : 'https://pngimage.net/wp-content/uploads/2018/05/default-user-png-2.png'} />
                         <Card.Content>
                             
                             <Card.Header>{`${user.first_name} ${user.last_name}`}</Card.Header>

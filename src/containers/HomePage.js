@@ -67,7 +67,7 @@ export default class HomePage extends React.Component {
     renderUserList=()=>{
         return (
             <div style={{textAlign:'center', paddingTop: '3em', paddingBottom: '2 em'}}>
-                <h2>Welcome to GiftR!</h2><br/>
+                <h1>Welcome to GiftR!</h1><br/>
                 <h5>Start by looking up a person or creating your very own wishlist!</h5>
                 <div style={ {
                     zIndex: '1',

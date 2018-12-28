@@ -137,6 +137,7 @@ export default class Wishlist extends React.Component {
                                 deleteWish={ this.props.deleteWish }
                                 key={ w.id }
                                 wish={ w }
+                                currentUser={this.props.currentUser}
                                 user={ user }
                             />) 
                         :
