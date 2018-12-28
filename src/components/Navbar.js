@@ -25,14 +25,6 @@ import { Menu } from 'semantic-ui-react'
                     active={ this.props.activeItem === 'friends' }
                     onClick={() => this.props.handleItemClick("friends") }
                 />
-                {/* <Menu.Item 
-                    // style={ { width:"22%" } }
-                    icon="gift"
-color='teal'
-                    name='Secret Santa' 
-                    active={ this.props.activeItem === 'santa' } 
-                    onClick={ () => this.props.handleItemClick("santa") } 
-                /> */}
                 <Menu.Item 
                     color='teal'
                     icon='list'
@@ -40,6 +32,14 @@ color='teal'
                     active={ this.props.activeItem === 'wishlist' }
                     onClick={ () => this.props.handleItemClick("wishlist") }
                 />    
+                <Menu.Item
+                    // style={ { width:"22%" } }
+                    icon="gift"
+                    color='teal'
+                    name='Secret Santa'
+                    active={ this.props.activeItem === 'santa' }
+                    onClick={ () => this.props.handleItemClick("santa") }
+                />
                 <Menu.Item
                     position='right'
                     color='teal'

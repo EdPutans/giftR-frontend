@@ -46,7 +46,7 @@ export default class NotificationList extends React.Component{
     render(){
 
         return(
-            <div style={
+            <div style={ this.props.clicked?
                 {
                     overflowY: 'scroll',
                     zIndex: 120,
@@ -59,7 +59,7 @@ export default class NotificationList extends React.Component{
                     right: '15px',
                     top: '50px',
                     position: 'fixed'
-                }
+                } : {display: 'none'}
             }
             >
                 {this.state.unaccepted.length===0? <h4>There are no pending friend requests</h4> : this.mapUnaccepted() }

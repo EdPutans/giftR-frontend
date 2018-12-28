@@ -1,5 +1,6 @@
 import React from 'react'
 import { Input, Button, Icon, Form } from 'semantic-ui-react'
+import {Route, Redirect, Switch} from 'react-router-dom'
 import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
@@ -52,13 +53,13 @@ export default class HomePage extends React.Component {
         return (
             <div>
                 <Wishlist
-                    friends={this.props.friends}
-                    resetUser={ this.resetUser }
-                    currentUser={ this.props.currentUser }
-                    user={ this.state.selectedUser }
-                    search={ true }
-                    gifts={ this.state.selectedUser.gifts }
-                />
+                        friends={this.props.friends}
+                        resetUser={ this.resetUser }
+                        currentUser={ this.props.currentUser }
+                        user={ this.state.selectedUser }
+                        search={ true }
+                        gifts={ this.state.selectedUser.gifts }
+                    />
             </div>
         )
     }

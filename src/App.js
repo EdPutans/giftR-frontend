@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Login from './containers/Login'
 import WishForm from './components/WishForm'
@@ -9,11 +9,12 @@ import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import Wishlist from './containers/Wishlist'
 import EditWish from './components/EditWish'
+import SantaMain from './containers/SantaMain'
 import NotificationList from './containers/NotificationList'
 import './App.css';
 import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
-class App extends Component {
+class App extends PureComponent {
 
   // the actual working one... use this if screwed up again. milestone -  correct notifications when creating friend requests
   // ----------- state and mounting ----------- //
@@ -113,15 +114,7 @@ class App extends Component {
     else {
       this.setUserData(r)
       }
-      // this.state.notificationsClicked && document.addEventListener('click', event => {
-      //   console.log('eeee')
-      //   if(event.target!==<NotificationList />){
-      //     this.setState({notificationsClicked:false})
-      //   }
-      // })
-      // document.querySelectorAll('img').forEach(function(img){
-      //   return img.onError && function(){this.style.display='none';}
-      //  })
+
   }
   
 
@@ -134,7 +127,6 @@ class App extends Component {
   // ---------- rendering ----------
 
 
-   
 
 
   render() {
@@ -144,22 +136,23 @@ class App extends Component {
     if (this.state.currentUser) {
       return (
         <div>
-          {
-             <div style={!this.state.notificationsClicked? {display:'none'} : {display:'block'}}>
-           <NotificationList 
-              refreshFriends ={ this.getFriends}
-              currentUser={this.state.currentUser}
-           /></div>
-          }
+            <div>
+            <NotificationList 
+                clicked={this.state.notificationsClicked}
+                refreshFriends ={ this.getFriends}
+                currentUser={this.state.currentUser}
+            />
+           </div>
           <Switch>
             <Route
-                component={ props => <Navbar { ...props }
-                handleItemClick={ this.handleNavBarChange }
-                activeItem={ navBarItem }
-                toggleNotificationsClicked={this.toggleNotificationsClicked}
-                notificationsClicked={this.state.notificationsClicked}
-              /> } />
-              
+                component={ props => 
+                  <Navbar { ...props }
+                    handleItemClick={ this.handleNavBarChange }
+                    activeItem={ navBarItem }
+                    toggleNotificationsClicked={this.toggleNotificationsClicked}
+                    notificationsClicked={this.state.notificationsClicked}
+                /> } 
+              />
           </Switch>
             <div
               style={ {
@@ -184,10 +177,12 @@ class App extends Component {
                 friends={this.state.friends}
               /> } />
 
-            <Route path='/santa' component={ props => <div style={ {
-              zIndex: 1,
-              paddingTop: "6em"
-            } }><h1> Under construction - Secret santa </h1></div> } />
+            <Route path='/santa' component={ props => 
+            <div>
+              <SantaMain 
+                  // props here
+              />
+            </div> } />
             <Route path='/profile' component={ props => 
               <Profile { ...props }
                 self={true}

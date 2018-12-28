@@ -50,7 +50,12 @@ export default class Wishlist extends React.Component {
                  Add friend
                 </Button>
                 : 
-                'Already a mate'
+            <div style={{marginTop: '5px',textAlign:'center'}}>
+                <img 
+                    src='https://us.123rf.com/450wm/stas11/stas111706/stas11170600111/80189104-green-check-mark-icon-tick-symbol-in-green-color-vector-illustration.jpg?ver=6'
+                    style={{maxHeight:'20px', width:'auto'}}
+                />
+            Already a mate</div>
     }
 
     userProfile=()=>{
