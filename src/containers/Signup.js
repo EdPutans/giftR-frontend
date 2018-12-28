@@ -1,7 +1,7 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
 import { Form, Button } from 'semantic-ui-react'
-
+import Uploader from '../components/Uploader'
 import * as adapter from '../Adapter'
 
 export default class Signup extends React.Component {
@@ -12,7 +12,8 @@ state = {
     email: '',
     age: '',
     password: '',
-    repeat_password: ''
+    repeat_password: '',
+    img_url: ''
 }
 
 checkPasswords = () =>{
@@ -22,11 +23,11 @@ checkPasswords = () =>{
 
 handleSignup = () => {
     if(this.checkPasswords()){
-        const {first_name, last_name, email, age, password} = this.state
-        let user = { first_name, last_name, email, age, password }
+        const {first_name, last_name, email, age, password, img_url} = this.state
+        let user = { first_name, last_name, email, age, password, img_url }
         return adapter.postUser(user)
-            .then(user => this.props.handleLogin({email,password}))
-    }else{ alert('Passwords do not match, I believe')}
+            .then(() => this.props.handleLogin({email,password}))
+    }else{ alert('Passwords have to match.')}
 }
 
 
@@ -43,10 +44,16 @@ handleChange = (value, type) => {
     case "password":
         return this.setState({ password: value })
     case "repeat_password":
-        return this.setState({ repeat_password: value })        
+        return this.setState({ repeat_password: value })
+        case "img_url":
+            return this.setState({ img_url: value })               
     default:
         return null
     }
+}
+
+handleImageSet = (img_url) =>{
+    this.setState({img_url})
 }
 
 // pass different props to the function to sign up or to edit the user.
@@ -66,13 +73,13 @@ handleChange = (value, type) => {
                     } }
                     src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
                 />
+                <Uploader propFunction={ this.handleImageSet } />
             <Form style={{
                 // marginTop: '20%',
                 width: '80%',
                 marginLeft: '10%'
             }
             }>
-                    
                 <Form.Field>
                     <input onChange={event => this.handleChange(event.target.value, "first_name")} placeholder ='First Name'/>
                 </Form.Field>
