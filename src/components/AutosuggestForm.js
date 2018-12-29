@@ -1,25 +1,26 @@
 import Autosuggest from 'react-autosuggest'
 import React from 'react'
 import * as Adapter from '../Adapter'
-
+import {Button } from 'semantic-ui-react'
+ 
 export default class AutosuggestForm extends React.Component{
 
     
-   getSuggestionValue = suggestion => suggestion.first_name;
+   getSuggestionValue = suggestion => suggestion.first_name
 
 //    async componentDidMount(){
 //     const people = await Adapter.getUsersBySearchQuery('')
 //     return this.setState({people})
 //    }
 
-  getSuggestions = value => {
-    const inputValue = value.trim().toLowerCase();
-    const inputLength = inputValue.length;
+//   getSuggestions = value => {
+//     const inputValue = value.trim().toLowerCase()
+//     const inputLength = inputValue.length
   
-    return inputLength === 0 ? [] : this.state.people.filter(person =>
-      person.first_name.toLowerCase().slice(0, inputLength) === inputValue
-    );
-  };
+//     return inputLength === 0 ? [] : this.state.people.filter(person =>
+//       person.first_name.toLowerCase().slice(0, inputLength) === inputValue
+//     )
+//   }
 
     state={
         value: '',
@@ -27,14 +28,17 @@ export default class AutosuggestForm extends React.Component{
     }
 
 
-
-    // getting pepel from the db and storing in state when starting search
     getSuggestions = async inputValue =>{
        const searchValue = inputValue.toLowerCase().trim().split('').filter(e=> e !== ' ').join('')
-        return inputValue.length > 0 ? 
+        return searchValue.length > 0 ? 
             this.state.people.length > 0 && this.state.people.map(p => <div>{p.first_name} {p.last_name}</div>)
         :
             []
+     }
+
+     handleAdd=(event)=>{
+        event.preventDefault()
+         this.state.selectedId && this.props.addId(this.state.selectedId)
      }
 
      getSuggestionValue = suggestion => {
@@ -43,10 +47,12 @@ export default class AutosuggestForm extends React.Component{
      }
 
      renderSuggestion = suggestion => (
-        <div >
+        <div
+            className="ui fluid multiple search selection dropdown"
+        >
           {suggestion.first_name} {suggestion.last_name}
         </div>
-      );
+      )
       
 
       onChange = async (event, { newValue }) => {
@@ -54,23 +60,22 @@ export default class AutosuggestForm extends React.Component{
         this.setState({people})
         this.setState({
           value: newValue
-        });
-      };
+        })
+      }
 
       
       onSuggestionsFetchRequested = ({ value }) => {
         this.setState({
           people: this.getSuggestions(value)
-        });
-        console.log('eeeeee')
-      };
+        })
+      }
     
 
     onSuggestionsClearRequested = () => {
         this.setState({
           people: []
-        });
-      };
+        })
+      }
 
 
       render() {
@@ -85,6 +90,8 @@ export default class AutosuggestForm extends React.Component{
     
         // Finally, render it!
         return (
+            <form class="ui form">
+         
             <Autosuggest
               suggestions={people}
               onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
@@ -93,6 +100,11 @@ export default class AutosuggestForm extends React.Component{
               renderSuggestion={this.renderSuggestion}
               inputProps={inputProps}
             />
-          );
+            <Button
+                onClick={e=>this.handleAdd(e)}
+            >+</Button>
+           
+            </form>
+          )
         }
       }

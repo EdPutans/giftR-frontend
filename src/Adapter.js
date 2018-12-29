@@ -17,6 +17,8 @@ export const signin= (email, password) => {
     }).then(resp => resp.json())
 }
 
+export const getUser = id => 
+    fetch(`${usersURL}/${id}`).then(resp=>resp.json)
 
 export const validate = () => {
     return fetch(validateURL, {
