@@ -1,5 +1,5 @@
-// const localhost = "http://192.168.1.31:3000"
-const localhost = "http://localhost:3000"
+const localhost = "http://192.168.1.31:3000"
+// const localhost = "http://localhost:3000"
 
 const API_v1 = `${localhost}/api/v1`
 const signinURL = `${localhost}/api/v1/signin`
@@ -24,7 +24,7 @@ export const validate = () => {
             'Content-Type': 'application/json',
             'Authorization': localStorage.getItem('token')
         },
-    }).then(resp => resp.json())
+    }).then(resp => resp.json()).catch(e=>console.log(e))
 
 }
 // ------------- friend and related ----------- //
