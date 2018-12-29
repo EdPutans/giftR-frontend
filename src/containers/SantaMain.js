@@ -34,24 +34,18 @@ export default class SantaMain extends React.Component {
                     receiver:id, 
                     gifter: gifters[gifters.indexOf(id)] 
                 }))
-                return this.setState({randomized: result})
-            
-            
+                this.setState({randomized: result})
+                return result
             }
         }
-        // while (0 !== currentIndex) {
+        
+        randomizerMapper = () =>
+        {
 
-        //     randomIndex = Math.floor(Math.random() * currentIndex);
-        //     currentIndex -= 1;
 
-        //     temporaryValue = array[currentIndex];
-        //     array[currentIndex] = array[randomIndex];
-        //     array[randomIndex] = temporaryValue;
-        // }
-        // console.log(array)
-        // this.setState({ randomized: array })
-    
-    // add randomizer
+        }
+
+
 
     render() {
 
