@@ -8,19 +8,6 @@ export default class AutosuggestForm extends React.Component{
     
    getSuggestionValue = suggestion => suggestion.first_name
 
-//    async componentDidMount(){
-//     const people = await Adapter.getUsersBySearchQuery('')
-//     return this.setState({people})
-//    }
-
-//   getSuggestions = value => {
-//     const inputValue = value.trim().toLowerCase()
-//     const inputLength = inputValue.length
-  
-//     return inputLength === 0 ? [] : this.state.people.filter(person =>
-//       person.first_name.toLowerCase().slice(0, inputLength) === inputValue
-//     )
-//   }
 
     state={
         value: '',
@@ -48,7 +35,8 @@ export default class AutosuggestForm extends React.Component{
 
      renderSuggestion = suggestion => (
         <div
-            className="ui fluid multiple search selection dropdown"
+            className="ui multiple search selection dropdown"
+
         >
           {suggestion.first_name} {suggestion.last_name}
         </div>
@@ -90,19 +78,20 @@ export default class AutosuggestForm extends React.Component{
     
         // Finally, render it!
         return (
-            <form class="ui form">
-         
-            <Autosuggest
-              suggestions={people}
-              onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-              onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-              getSuggestionValue={this.getSuggestionValue}
-              renderSuggestion={this.renderSuggestion}
-              inputProps={inputProps}
-            />
-            <Button
-                onClick={e=>this.handleAdd(e)}
-            >+</Button>
+            <form className="ui form">
+                <Autosuggest
+                    suggestions={people}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    getSuggestionValue={this.getSuggestionValue}
+                    renderSuggestion={this.renderSuggestion}
+                    inputProps={inputProps}
+                />
+                <Button
+                    onClick={e=>this.handleAdd(e)}
+                >
+                +
+                </Button>
            
             </form>
           )
