@@ -81,22 +81,22 @@ handleImageSet = (img_url) =>{
             }
             }>
                 <Form.Field>
-                    <input onChange={event => this.handleChange(event.target.value, "first_name")} placeholder ='First Name'/>
+                    <input onChange={event => this.handleChange(event.target.value, "first_name")} placeholder ='First Name' maxLength='20'/>
                 </Form.Field>
                 <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={'Last Name' } />
+                        <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={'Last Name' }  maxLength='20'/>
                 </Form.Field>
                 <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={'Email' } type="email" />
+                        <input maxLength='40' onChange={ event => this.handleChange(event.target.value, "email") } placeholder={'Email' } type="email" />
                 </Form.Field>
                 <Form.Field>
-                        <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={"Age"} />
+                        <input maxLength='2' type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={"Age"} />
                 </Form.Field>
                  <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "password")} placeholder='Password' type="password" />
+                        <input maxLength='50' onChange={ event => this.handleChange(event.target.value, "password")} placeholder='Password' type="password" />
                 </Form.Field>
                 <Form.Field>
-                        <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password")} placeholder='Repeat password' />
+                        <input maxLength='50' type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password")} placeholder='Repeat password' />
                 </Form.Field>
 
                 
