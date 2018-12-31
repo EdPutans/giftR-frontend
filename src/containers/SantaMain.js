@@ -3,21 +3,27 @@ import Header from '../components/Header'
 import AutosuggestForm from '../components/AutosuggestForm'
 import SantaList from '../components/SantaList'
 import { Button, Grid } from 'semantic-ui-react'
+import Calendar from 'react-calendar'
+import * as Adapter from '../Adapter'
+
+
 export default class SantaMain extends React.Component {
 
     state = {
         randomized: [],
         ids: [],
-        users: []
+        budget: 0,
+        users: [],
+        date : new Date()
     }
 
+// --------------- Santa functionality -------------
 
     addUser = (value) => {
         !this.state.users.includes(value) && this.setState({ users: [...this.state.users, value] })
         !this.state.ids.includes(value.id) &&
             this.setState({ ids: [...this.state.ids, value.id] })
     }
-
 
     mapIdsForRandomizer = (objectArray) => {
         return objectArray.map(o => o.id)
@@ -55,6 +61,23 @@ export default class SantaMain extends React.Component {
         return mapper
     }
 
+// --------------- external functions -------------
+
+    onCalendarChange = date => this.setState({ date })
+
+    createSecretSanta = async () => {
+        let {date, randomized ,budget} = this.state
+        let deadline = [date.getYear()+1900, date.getMonth()+1, date.getDate()]
+        let body = {
+            list: randomized,
+                deadline,
+                budget
+            }
+        const resp = await Adapter.createSantaList(body)
+        return console.log(resp)
+        
+
+    }
 
     render() {
 
@@ -69,7 +92,12 @@ export default class SantaMain extends React.Component {
                 <Grid columns={2} >
                     <Grid.Row>
                         <Grid.Column>
-
+                            <div>
+                                <Calendar
+                                    onChange={this.onCalendarChange}
+                                    value = {this.state.date}
+                                />
+                            </div>
                             <div style={{ margin: '0 3em 0 3em' }}>
                             <div><input placeholder='budget' onChange={event => this.setState({budget: parseInt(event.target.value)})} /></div>
                                 Add people to the randomizer here:
@@ -92,7 +120,11 @@ export default class SantaMain extends React.Component {
                                     <div style={{ textAlign: 'center' }}>{u.gifter.first_name} {u.gifter.last_name} ---> {u.receiver.first_name} </div>
                                 )
                             }
-
+                            {this.state.randomized.length>1 && 
+                                <Button onClick={this.createSecretSanta}>
+                                    Complete secret santa
+                                </Button>
+                            }
                         </Grid.Column>
                     </Grid.Row>
                 </Grid>
