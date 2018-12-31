@@ -7,23 +7,29 @@ export default class SantaMain extends React.Component {
 
     state = {
         randomized: [],
-        ids: []
+        ids: [],
+        users:[]
     }
 
 
     addUser = (value) => {
-        !this.state.ids.includes(value) &&
-            this.setState({ ids: [...this.state.ids, {gifter:value}] })
+        !this.state.users.includes(value) && this.setState({users: [...this.state.users, value]})
+        !this.state.ids.includes(value.id) &&
+            this.setState({ ids: [...this.state.ids, value.id] })
+    }
+
+
+    mapIdsForRandomizer=(objectArray)=>{
+        return objectArray.map(o=>o.id)
     }
 
     randomizer = (passedArray) => {
         if(passedArray.length<2) {return;}
         let array = [...passedArray]
-        let gifters = []
+        let gifters = [...passedArray]
         
-        let currentIndex = array.length, temporaryValue, randomIndex;
-        array.forEach(object=> gifters.push(object.gifter) )
-        let receivers = array.sort(e=>0.5-Math.random()).map(e=>e.gifter)
+        
+        let receivers = array.sort(e=>0.5-Math.random())
         console.log({receivers, gifters})
         
         if(receivers.find(id => receivers.indexOf(id) === gifters.indexOf(id)))
@@ -31,20 +37,28 @@ export default class SantaMain extends React.Component {
             this.randomizer(passedArray)
         }else{
                 let result = receivers.map(id => ({ 
-                    receiver:id, 
-                    gifter: gifters[gifters.indexOf(id)] 
+                    receiver_id:id, 
+                    gifter_id: gifters[receivers.indexOf(id)] 
                 }))
                 this.setState({randomized: result})
+                console.log(result)
+                let mappedPeople = this.mapRandomizedToPeople(result)
+                this.setState({mappedPeople})
                 return result
             }
         }
-        
-        randomizerMapper = () =>
-        {
+    
 
-
+        mapRandomizedToPeople = (arg) =>{
+            let mapper = arg.map(obj => {
+                let receiver = this.state.users.find(u => u.id === obj.receiver_id)
+                let gifter = this.state.users.find(u => u.id === obj.gifter_id)
+                console.log('mapped:',{receiver, gifter})
+                return ({gifter, receiver})
+            })
+            console.log('mapped pepel: ', mapper)
+            return mapper
         }
-
 
 
     render() {
@@ -72,10 +86,18 @@ export default class SantaMain extends React.Component {
                             {this.state.ids.length > 0 && <div>
                                  <h4>Selected users:</h4>
                                 <div>
-                                    {this.state.ids.map(e => e.gifter).join(',')}
+                                    {this.state.users.map(e => e.id).join(',')}
                                     <br /> V <br />
-                                    {this.state.randomized.length > 0 && this.state.randomized.map(e=>e.receiver).join(',')}<br />
-                                    <Button onClick={e => this.randomizer(this.state.ids)}>Randomize</Button>
+                                    {this.state.randomized.length > 0 && this.state.randomized.map(e=>e.receiver_id).join(',')}<br />
+                                    {
+                                        this.state.mappedPeople && this.state.mappedPeople.map(u => 
+                                            <div>{u.gifter.first_name} to {u.receiver.first_name} </div>
+                                        )
+
+                                    }
+
+
+                                    <Button onClick={e => this.randomizer(this.mapIdsForRandomizer(this.state.users))}>Randomize</Button>
                                 </div>
                             </div>}
                         </Grid.Column>
