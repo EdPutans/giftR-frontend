@@ -7,6 +7,7 @@ const validateURL = `${localhost}/api/v1/validate`
 const usersURL = `${localhost}/api/v1/users`
 const giftsURL = `${localhost}/api/v1/gifts`
 const friendshipsURL = `${localhost}/api/v1/friendships`
+const santaURL = `${localhost}/api/v1/santas`
 export const test_const = 123
 
 export const signin= (email, password) => {
@@ -163,3 +164,15 @@ export const getUsersBySearchQuery = (string) => fetch(`${usersURL}/search_user`
     },
     body: JSON.stringify({ search: string })
 }).then(resp => resp.json())
+
+
+
+export const createSantaList = (arrayOfObjects) => {
+    return fetch (`${santaURL}/create_santa_list`,{
+        method: "POST",
+        headers:{
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify(arrayOfObjects)
+    }).then(r=> r.json())
+}

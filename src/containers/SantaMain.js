@@ -11,7 +11,7 @@ export default class SantaMain extends React.Component {
     }
 
 
-    addId = (value) => {
+    addUser = (value) => {
         !this.state.ids.includes(value) &&
             this.setState({ ids: [...this.state.ids, {gifter:value}] })
     }
@@ -64,7 +64,7 @@ export default class SantaMain extends React.Component {
                             <div style={{margin: '0 3em 0 3em'}}>
                             Add people to the randomizer here:
                                 <AutosuggestForm
-                                    addId={this.addId}
+                                    addUser={this.addUser}
                                 />
                             </div>
                         </Grid.Column>

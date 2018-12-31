@@ -25,12 +25,13 @@ export default class AutosuggestForm extends React.Component{
 
      handleAdd=(event)=>{
         event.preventDefault()
-         this.state.selectedId && this.props.addId(this.state.selectedId)
+        this.state.selected && this.props.addUser(this.state.selected) && this.setState({selected: null})
      }
 
      getSuggestionValue = suggestion => {
-        this.setState({selectedId: suggestion.id})
-        return `${suggestion.first_name} ${suggestion.last_name}`
+        const {id, first_name, last_name} = suggestion
+        this.setState({selected: {id, first_name, last_name }})
+        return `${first_name} ${last_name}`
      }
 
      renderSuggestion = suggestion => (
