@@ -15,7 +15,7 @@ export default class AutosuggestForm extends React.Component{
     }
 
 
-    getSuggestions = async inputValue =>{
+    getSuggestions = inputValue =>{
        const searchValue = inputValue.toLowerCase().trim().split('').filter(e=> e !== ' ').join('')
         return searchValue.length > 0 ? 
             this.state.people.length > 0 && this.state.people.map(p => <div>{p.first_name} {p.last_name}</div>)
@@ -45,18 +45,16 @@ export default class AutosuggestForm extends React.Component{
       
 
       onChange = async (event, { newValue }) => {
-        const people = await Adapter.getUsersBySearchQuery(newValue)
-        this.setState({people})
         this.setState({
           value: newValue
         })
       }
 
       
-      onSuggestionsFetchRequested = ({ value }) => {
-        this.setState({
-          people: this.getSuggestions(value)
-        })
+      onSuggestionsFetchRequested = async ({ value }) => {
+        const people = await Adapter.getUsersBySearchQuery(value)
+        this.setState({people})
+       
       }
     
 
@@ -79,6 +77,7 @@ export default class AutosuggestForm extends React.Component{
     
         // Finally, render it!
         return (
+          <div style={{margin:'3em 0 3em 0'}}>
             <form className="ui form">
                 <Autosuggest
                     suggestions={people}
@@ -91,10 +90,11 @@ export default class AutosuggestForm extends React.Component{
                 <Button
                     onClick={e=>this.handleAdd(e)}
                 >
-                +
+                Add
                 </Button>
            
             </form>
+            </div>
           )
         }
       }
