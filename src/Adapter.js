@@ -179,3 +179,15 @@ export const createSantaList = (arrayOfObjects) => {
 
 export const getUserSantas = (id) => 
     fetch(`${usersURL}/${id}/santas`).then(r=>r.json())
+
+export const makeSantaRead = (id) => {
+    return fetch(`${santaURL}/${id}/mark_read`,{
+        method: "PATCH",
+        headers:{
+            "Content-Type": 'application/json'
+        },
+        body: JSON.stringify({
+            read: true
+        })
+    }).then(r=> r.json())
+}

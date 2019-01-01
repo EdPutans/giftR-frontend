@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import AutosuggestForm from '../components/AutosuggestForm'
 import SantaList from '../components/SantaList'
-import { Button, Grid } from 'semantic-ui-react'
+import { Button, Grid, Card } from 'semantic-ui-react'
 import Calendar from 'react-calendar'
 import * as Adapter from '../Adapter'
 
@@ -40,8 +40,6 @@ export default class SantaMain extends React.Component {
         if (passedArray.length < 2) { return; }
         let array = [...passedArray]
         let gifters = [...passedArray]
-
-
         let receivers = array.sort(e => 0.5 - Math.random())
 
         if (receivers.find(id => receivers.indexOf(id) === gifters.indexOf(id))) {
@@ -84,21 +82,22 @@ export default class SantaMain extends React.Component {
             budget
         }
         const resp = await Adapter.createSantaList(body)
-        return console.log(resp)
-
-
+        console.log(resp)
+        return this.props.history.push('/santa')
     }
 
 
     budgetSet = (value) => {
         this.setState({ budget: parseInt(value) })
-        if (this.state.budget && this.state.budget > 0) {
+        if (this.state.budget && this.state.budget > 0){
             this.setState({ budgetSet: true })
+        }else{
+            this.setState({ budgetSet: false })
         }
     }
 
     render() {
-        
+
         const { budgetSet, peopleSet, randomizedSet, deadlineSet } = this.state
         return (
             <div style={{
@@ -108,69 +107,79 @@ export default class SantaMain extends React.Component {
                 textAlign: 'center'
             }}>
                 <Header title={'Secret Santa'} />
-                <SantaList 
-                    currentUser={this.props.currentUser}
-                />
-                <div style={{ margin: '0 3em 0 3em' }}>
-                    Add people to the randomizer here:
-                      <AutosuggestForm
-                        addUser={this.addUser}
-                    />
-                </div>
-                {
-                    this.state.ids.length > 0 && 
-                    <div>
-                        <h4>Selected users:</h4>
-                        {this.state.users.map(e =>
-                        <div key={e.id}>
-                            {e.first_name} {e.last_name}
-                            <br />
-                        </div>
-                        )}
-                    </div>
-                }   
-                <br />
-                <div>
-                    {
-                    peopleSet && 
-                    <input
-                        placeholder='budget'
-                        onChange={event => this.budgetSet(event.target.value)}
-                    />
-                    }
-                </div>
-                {
-                    (budgetSet && peopleSet) && 
-                    <div>
-                        <Calendar
-                            onChange={this.onCalendarChange}
-                            value={this.state.date}
+                <Grid columns={2} >
+                    <Grid.Row>
+                        <Grid.Column width={7}>
+                            <SantaList
+                                currentUser={this.props.currentUser}
+                            />
+                        </Grid.Column>
+                        <Grid.Column>
+                            <h3>Create new Secret Santa</h3>
+                            <div style={{ margin: '0 3em 0 3em' }}>
+                                Add people to the randomizer:
+                        <AutosuggestForm
+                            addUser={this.addUser}
                         />
-                    </div>
-                }
-                {
-                    (this.state.users.length < 2 || !peopleSet || !budgetSet || !deadlineSet) ?
-                     <Button disabled >Randomize</Button> 
-                    :
-                    <Button 
-                        onClick={() => this.randomizer(this.mapIdsForRandomizer(this.state.users))}
-                    >
-                    Randomize
+                            </div>
+                            {
+                                this.state.ids.length > 0 &&
+                                <div>
+                                    <h4>Selected users:</h4>
+                                    {this.state.users.map(e =>
+                                    <Card 
+                                        header={`${e.first_name} ${e.last_name}`}
+                                        key={e.id}
+                                    />
+                                    )
+                                    
+                                    }
+                                </div>
+                            }
+                            <br />
+                            <div>
+                                {
+                                    peopleSet &&
+                                    <input
+                                        placeholder='budget'
+                                        onChange={event => this.budgetSet(event.target.value)}
+                                    />
+                                }
+                            </div>
+                            {
+                                (budgetSet && peopleSet) &&
+                                <div>
+                                    <Calendar
+                                        onChange={this.onCalendarChange}
+                                        value={this.state.date}
+                                    />
+                                </div>
+                            }
+                            {
+                                (this.state.users.length < 2 || !peopleSet || !budgetSet || !deadlineSet) ?
+                                    <Button disabled >Randomize</Button>
+                                    :
+                                    <Button
+                                        onClick={() => this.randomizer(this.mapIdsForRandomizer(this.state.users))}
+                                    >
+                                        Randomize
                     </Button>
-                }
-                {
-                    this.state.mappedPeople && this.state.mappedPeople.map(u =>
-                        <div style={{ textAlign: 'center' }}>{u.gifter.first_name} {u.gifter.last_name} ---> {u.receiver.first_name} </div>
-                    )
-                }
-                {
-                    randomizedSet &&
-                    <Button 
-                    onClick={this.createSecretSanta}>
-                        Complete secret santa
+                            }
+                            {
+                                this.state.mappedPeople && this.state.mappedPeople.map(u =>
+                                    <div className='card' style={{ textAlign: 'center' }}>{u.gifter.first_name} {u.gifter.last_name} ---> {u.receiver.first_name} </div>
+                                )
+                            }
+                            {
+                                randomizedSet &&
+                                <Button
+                                    onClick={this.createSecretSanta}>
+                                    Complete secret santa
                     </Button>
-                }
-
+                            }
+                        </Grid.Column>
+                    </Grid.Row>
+                </Grid>
             </div>
         )
     }

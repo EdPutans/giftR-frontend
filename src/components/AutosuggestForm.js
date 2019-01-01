@@ -1,7 +1,7 @@
 import Autosuggest from 'react-autosuggest'
 import React from 'react'
 import * as Adapter from '../Adapter'
-import {Button } from 'semantic-ui-react'
+import {Button,Card} from 'semantic-ui-react'
  
 export default class AutosuggestForm extends React.Component{
 
@@ -18,7 +18,11 @@ export default class AutosuggestForm extends React.Component{
     getSuggestions = inputValue =>{
        const searchValue = inputValue.toLowerCase().trim().split('').filter(e=> e !== ' ').join('')
         return searchValue.length > 0 ? 
-            this.state.people.length > 0 && this.state.people.map(p => <div>{p.first_name} {p.last_name}</div>)
+            this.state.people.length > 0 && this.state.people.map(p => 
+            <div>
+              {p.first_name} {p.last_name}
+            </div>
+            )
         :
             []
      }
@@ -36,12 +40,11 @@ export default class AutosuggestForm extends React.Component{
      }
 
      renderSuggestion = suggestion => (
-        <div
-            className="ui multiple search selection dropdown"
-
-        >
-          {suggestion.first_name} {suggestion.last_name}
-        </div>
+      <div style={{marginLeft: '0px'}}>
+      <Card
+        description={`${suggestion.first_name} ${suggestion.last_name}`}
+      />
+      </div>
       )
       
 
@@ -83,7 +86,7 @@ export default class AutosuggestForm extends React.Component{
         // Finally, render it!
         return (
           <div 
-            style={{margin:'3em 0 3em 0'}}
+            
           >
             <form className="ui form">
                 <Autosuggest
@@ -93,13 +96,16 @@ export default class AutosuggestForm extends React.Component{
                     getSuggestionValue={this.getSuggestionValue}
                     renderSuggestion={this.renderSuggestion}
                     inputProps={inputProps}
-                />
+                /><br />
+                <div style={{margin:'3em 0 3em 0'}}>
                 <Button
-                    onClick={e=>this.handleAdd(e)}
+                  color='teal'
+                  basic
+                  onClick={e=>this.handleAdd(e)}
                 >
-                Add
+                  Add
                 </Button>
-           
+                </div>
             </form>
             </div>
           )

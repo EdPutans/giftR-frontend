@@ -181,6 +181,7 @@ class App extends PureComponent {
             <div>
               <SantaMain 
                 currentUser={this.state.currentUser}
+                {...props}
                   // props here
               />
             </div> } />
