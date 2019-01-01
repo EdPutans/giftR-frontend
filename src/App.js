@@ -180,6 +180,7 @@ class App extends PureComponent {
             <Route path='/santa' component={ props => 
             <div>
               <SantaMain 
+                currentUser={this.state.currentUser}
                   // props here
               />
             </div> } />

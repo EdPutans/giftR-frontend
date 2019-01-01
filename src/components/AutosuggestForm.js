@@ -26,6 +26,7 @@ export default class AutosuggestForm extends React.Component{
      handleAdd=(event)=>{
         event.preventDefault()
         this.state.selected && this.props.addUser(this.state.selected) && this.setState({selected: null})
+        this.setState({value: ''})
      }
 
      getSuggestionValue = suggestion => {
@@ -52,9 +53,13 @@ export default class AutosuggestForm extends React.Component{
 
       
       onSuggestionsFetchRequested = async ({ value }) => {
-        const people = await Adapter.getUsersBySearchQuery(value)
+        let people
+        try{
+          people = await Adapter.getUsersBySearchQuery(value)
+        }catch(e){
+          console.log('person not found')
+        }
         this.setState({people})
-       
       }
     
 
@@ -77,7 +82,9 @@ export default class AutosuggestForm extends React.Component{
     
         // Finally, render it!
         return (
-          <div style={{margin:'3em 0 3em 0'}}>
+          <div 
+            style={{margin:'3em 0 3em 0'}}
+          >
             <form className="ui form">
                 <Autosuggest
                     suggestions={people}

@@ -3,18 +3,28 @@ import * as Adapter from '../Adapter'
 
 export default class SantaList extends React.Component {
 
-    // mapPeople = async () =>
+    state={
+        users: null
+    }
 
-    //     })
 
-   
-
+    componentDidMount = async () => {
+        if(this.props.currentUser){
+            const santas = await Adapter.getUserSantas(this.props.currentUser.id)
+            console.log({santas})
+            if(!santas.error){
+                const users = santas.map(s => `${s.receiver.first_name} ${s.receiver.last_name}`)
+                this.setState({users})
+            }
+        }
+       
+    }
 
     render(){
-
+        const {users} = this.state
         return(
         <div>
-            {this.props.ids.length >0 && this.mapPeople()}
+          {users && users.map(e=> e)}
         </div>
         )
     }

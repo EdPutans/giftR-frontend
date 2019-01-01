@@ -98,6 +98,7 @@ export default class SantaMain extends React.Component {
     }
 
     render() {
+        
         const { budgetSet, peopleSet, randomizedSet, deadlineSet } = this.state
         return (
             <div style={{
@@ -106,7 +107,10 @@ export default class SantaMain extends React.Component {
                 paddingBottom: "6em",
                 textAlign: 'center'
             }}>
-                <Header title={'Secret dSanta'} />
+                <Header title={'Secret Santa'} />
+                <SantaList 
+                    currentUser={this.props.currentUser}
+                />
                 <div style={{ margin: '0 3em 0 3em' }}>
                     Add people to the randomizer here:
                       <AutosuggestForm
@@ -117,9 +121,12 @@ export default class SantaMain extends React.Component {
                     this.state.ids.length > 0 && 
                     <div>
                         <h4>Selected users:</h4>
-                        {
-                            this.state.users.map(e => <div>{e.first_name} {e.last_name}<br /></div>)
-                        }
+                        {this.state.users.map(e =>
+                        <div key={e.id}>
+                            {e.first_name} {e.last_name}
+                            <br />
+                        </div>
+                        )}
                     </div>
                 }   
                 <br />

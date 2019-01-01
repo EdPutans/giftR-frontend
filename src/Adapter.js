@@ -163,7 +163,7 @@ export const getUsersBySearchQuery = (string) => fetch(`${usersURL}/search_user`
         "Content-Type": "application/json"
     },
     body: JSON.stringify({ search: string })
-}).then(resp => resp.json())
+}).then(resp => resp.json()).catch(e => console.log(e))
 
 
 
@@ -176,3 +176,6 @@ export const createSantaList = (arrayOfObjects) => {
         body: JSON.stringify(arrayOfObjects)
     }).then(r=> r.json())
 }
+
+export const getUserSantas = (id) => 
+    fetch(`${usersURL}/${id}/santas`).then(r=>r.json())
