@@ -10,6 +10,12 @@ import * as Adapter from '../Adapter'
 export default class SantaMain extends React.Component {
 
     state = {
+        steps:{
+            deadline: false,
+            people: false,
+            randomized: false,
+            budget: false
+        },
         randomized: [],
         ids: [],
         budget: 0,
@@ -21,6 +27,7 @@ export default class SantaMain extends React.Component {
 
     addUser = (value) => {
         !this.state.users.includes(value) && this.setState({ users: [...this.state.users, value] })
+        this.state.users.length>1 && this.setState({steps : {...this.state.steps, people: true}})
         !this.state.ids.includes(value.id) &&
             this.setState({ ids: [...this.state.ids, value.id] })
     }
@@ -80,31 +87,43 @@ export default class SantaMain extends React.Component {
     }
 
     render() {
-
+        const {budget,people,randomized,deadline } = this.state.steps
         return (
             <div style={{
                 zIndex: 1,
                 paddingTop: "3em",
                 paddingBottom: "6em"
             }}>
-                <Header title={'Secret Santa'} />
+                <Header title={'Secret Srranta'} />
 
                 <Grid columns={2} >
                     <Grid.Row>
                         <Grid.Column>
-                            <div>
-                                <Calendar
-                                    onChange={this.onCalendarChange}
-                                    value = {this.state.date}
-                                />
-                            </div>
+                           
                             <div style={{ margin: '0 3em 0 3em' }}>
-                            <div><input placeholder='budget' onChange={event => this.setState({budget: parseInt(event.target.value)})} /></div>
-                                Add people to the randomizer here:
+                           
+                                    Add people to the randomizer here:
                                 <AutosuggestForm
                                     addUser={this.addUser}
                                 />
                             </div>
+                            {
+                                <div>
+                                    people && <input
+                                        placeholder='budget'
+                                        onChange={event => this.setState({ budget: parseInt(event.target.value) })}
+                                    />
+
+                                </div>
+                            }
+                            {
+                                budget && people && <div>
+                                    <Calendar
+                                        onChange={this.onCalendarChange}
+                                        value={this.state.date}
+                                    />
+                                </div>
+                            }
                             {this.state.ids.length > 0 && <div>
                                 <h4>Selected users:</h4>
                                 {this.state.users.map(e => <div>{e.first_name} {e.last_name}<br /></div>)}
