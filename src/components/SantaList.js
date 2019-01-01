@@ -36,7 +36,7 @@ export default class SantaList extends React.Component {
         <div style={{
             margin: 'auto auto auto 1em',
                        }}>
-            <h3>Active</h3>
+            <h3>Active Secret Santas:</h3>
             { users && users.map(e => 
             <Card 
             style={{
