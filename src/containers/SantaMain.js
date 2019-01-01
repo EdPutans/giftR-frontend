@@ -10,12 +10,12 @@ import * as Adapter from '../Adapter'
 export default class SantaMain extends React.Component {
 
     state = {
-        steps:{
-            deadline: false,
-            people: false,
-            randomized: false,
-            budget: false
-        },
+        // steps:
+        deadlineSet: false,
+        peopleSet: false,
+        randomizedSet: false,
+        budgetSet: false,
+        // actual state:
         randomized: [],
         ids: [],
         budget: 0,
@@ -27,7 +27,7 @@ export default class SantaMain extends React.Component {
 
     addUser = (value) => {
         !this.state.users.includes(value) && this.setState({ users: [...this.state.users, value] })
-        this.state.users.length>1 && this.setState({steps : {...this.state.steps, people: true}})
+        this.state.users.length>0 && this.setState({peopleSet: true})
         !this.state.ids.includes(value.id) &&
             this.setState({ ids: [...this.state.ids, value.id] })
     }
@@ -53,7 +53,7 @@ export default class SantaMain extends React.Component {
             }))
             this.setState({ randomized: result })
             let mappedPeople = this.mapRandomizedToPeople(result)
-            this.setState({ mappedPeople })
+            this.setState({ mappedPeople, randomizedSet: true })
             return result
         }
     }
@@ -70,7 +70,10 @@ export default class SantaMain extends React.Component {
 
 // --------------- external functions -------------
 
-    onCalendarChange = date => this.setState({ date })
+    onCalendarChange = date => {
+        this.setState({ date })
+        this.setState({deadlineSet: true})
+    }
 
     createSecretSanta = async () => {
         let {date, randomized ,budget} = this.state
@@ -86,15 +89,23 @@ export default class SantaMain extends React.Component {
 
     }
 
+
+    budgetSet=(value)=>{
+        this.setState({budget: parseInt(value)})
+        if(this.state.budget && this.state.budget>0){
+            this.setState({budgetSet: true})
+        }
+    }
+
     render() {
-        const {budget,people,randomized,deadline } = this.state.steps
+        const {budgetSet,peopleSet,randomizedSet,deadlineSet } = this.state
         return (
             <div style={{
                 zIndex: 1,
                 paddingTop: "3em",
                 paddingBottom: "6em"
             }}>
-                <Header title={'Secret Srranta'} />
+                <Header title={'Secret Santa'} />
 
                 <Grid columns={2} >
                     <Grid.Row>
@@ -107,17 +118,17 @@ export default class SantaMain extends React.Component {
                                     addUser={this.addUser}
                                 />
                             </div>
-                            {
+                            
                                 <div>
-                                    people && <input
+                                    {peopleSet && <input
                                         placeholder='budget'
-                                        onChange={event => this.setState({ budget: parseInt(event.target.value) })}
-                                    />
+                                        onChange={event => this.budgetSet(event.target.value) }
+                                    />}
 
                                 </div>
-                            }
+                            
                             {
-                                budget && people && <div>
+                                (budgetSet && peopleSet) && <div>
                                     <Calendar
                                         onChange={this.onCalendarChange}
                                         value={this.state.date}
@@ -132,14 +143,14 @@ export default class SantaMain extends React.Component {
                         </Grid.Column>
                         <Grid.Column>
                             
-                            {this.state.users.length < 2 ? "Please add at least 2 users!" : <Button onClick={e => this.randomizer(this.mapIdsForRandomizer(this.state.users))}>Randomize</Button> }
+                            {(this.state.users.length < 2 || !peopleSet || !budgetSet || !deadlineSet) ? "disabled button here" : <Button onClick={e => this.randomizer(this.mapIdsForRandomizer(this.state.users))}>Randomize</Button> }
 
                             {
                                 this.state.mappedPeople && this.state.mappedPeople.map(u =>
                                     <div style={{ textAlign: 'center' }}>{u.gifter.first_name} {u.gifter.last_name} ---> {u.receiver.first_name} </div>
                                 )
                             }
-                            {this.state.randomized.length>1 && 
+                            {randomizedSet &&
                                 <Button onClick={this.createSecretSanta}>
                                     Complete secret santa
                                 </Button>
