@@ -43,7 +43,6 @@ export default class SantaList extends React.Component {
     componentDidMount = async () => {
         if(this.props.currentUser){
             const santas = await Adapter.getUserSantas(this.props.currentUser.id)
-            console.log({santas})
             if(!santas.error){
                 const users = santas.map(s => { 
                     const {id, last_name, first_name, age, img_url} = s.receiver

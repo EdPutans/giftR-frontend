@@ -27,11 +27,13 @@ export default class SantaMain extends React.Component {
 
     // --------------- Santa functionality -------------
 
-    addUser = (value) => {
-        !this.state.users.includes(value) && this.setState({ users: [...this.state.users, value] })
-        // !this.state.ids.includes(value.id) && this.setState({ ids: [...this.state.ids, value.id] })
-        this.state.users.length> 0 && this.setState({ peopleSet: true })
-
+    addUser = (user) => {
+        if(!this.state.users.find(u=>u.id === user.id)){
+            this.setState({ users: [...this.state.users, user] })
+        }else{
+            alert('User already on the list')
+        }
+        this.state.users.length > 0 && this.setState({ peopleSet: true })
     }
 
     mapIdsForRandomizer = (objectArray) => {
@@ -104,6 +106,7 @@ export default class SantaMain extends React.Component {
                 >
                     Create New Santa
                   </Button>
+                  
             </div>
         )
     }
@@ -179,6 +182,9 @@ export default class SantaMain extends React.Component {
                             {
                                 (budgetSet && peopleSet && calendarActive)?
                                 <div>
+                                <div style={{
+                                    display: 'inline-block'   
+                                }}>
                                     {
                                         this.state.deadlineSet? 
                                         <h5>Change deadline:</h5>
@@ -190,18 +196,23 @@ export default class SantaMain extends React.Component {
                                         value={ this.state.date }
                                     />
                                 </div> 
+                                </div>
                                 :
                                 (
                                     
+                                <div>
+                                    <p>{ this.state.date && `Deadline: ${this.formatDate(this.state.date)}`}</p>
+                                    {!calendarActive && 
                                     <div>
-                                            <p>{ this.state.date && `Deadline: ${this.formatDate(this.state.date)}`}</p>
-                                        {!calendarActive && 
-                                        <Button 
-                                            onClick={this.toggleCalendar}
-                                        >
-                                            Change deadline
-                                        </Button>
-                                        }</div>
+                                    <Button 
+                                        onClick={this.toggleCalendar}
+                                    >
+                                        Change deadline
+                                    </Button>
+                                    <br />
+                                </div>
+                                }<br />
+                                </div>
                                 )
 
                             }
@@ -214,11 +225,21 @@ export default class SantaMain extends React.Component {
                                         onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
                                     >
                                         Randomize
-                    </Button>
+                                    </Button>
                             }
+                            <br />
                             {
                                 this.state.mappedPeople && this.state.mappedPeople.map(u =>
-                                    <div className='card' style={ { textAlign: 'center' } }>{ u.gifter.first_name } { u.gifter.last_name } ---> { u.receiver.first_name } </div>
+                                    <div style={ { margin: '2em auto 2em auto' } }>
+                                    <div 
+                                        style={ { textAlign: 'center', display:'inline-block' } }
+                                    >
+                                    <Card
+
+                                        description={`${ u.gifter.first_name } ${ u.gifter.last_name } ---> ${ u.receiver.first_name }`}
+                                    />
+                                    </div>
+                                    </div>
                                 )
                             }
                             {
@@ -227,7 +248,7 @@ export default class SantaMain extends React.Component {
                                     onClick={ this.createSecretSanta }>
                                     Complete secret santa
                     </Button>
-                            }
+                }<br />
                             <Button
                                 
                                 onClick={ this.toggleNewSanta }
@@ -235,7 +256,7 @@ export default class SantaMain extends React.Component {
                                 color='red'
                             >
                                 Cancel
-                            </Button>
+                            </Button><br />
                         
             </div>
         )

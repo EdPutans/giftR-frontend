@@ -89,7 +89,6 @@ export default class AutosuggestForm extends React.Component{
         // Finally, render it!
         return (
           <div 
-            
           >
             <form className="ui form">
                 <Autosuggest
@@ -100,7 +99,7 @@ export default class AutosuggestForm extends React.Component{
                     renderSuggestion={this.renderSuggestion}
                     inputProps={inputProps}
                 /><br />
-                <div style={{margin:'3em 0 3em 0'}}>
+                <div style={{margin:'0 0 3em 0'}}>
                 <Button
                   color='teal'
                   basic
