@@ -37,20 +37,29 @@ export default class Wishlist extends React.Component {
     renderCorrectButton = (id) =>{
         if (this.state.unaccepted_ids && this.state.unaccepted_ids.find(digit => digit === id))
         {
-            return "Accept request from notifications!"
+            return <div style={ { marginTop: '5px', textAlign: 'center' } }>
+                <h5>You were added as a friend. Accept request from notifications.</h5>
+                </div>
         }
+        if(this.props.currentUser.id === this.props.user.id){return;}
         if (this.state.active_request_ids && this.state.active_request_ids.find(digit => digit === id)){
-            return "Request already sent"
+            return <div style={ { marginTop: '5px', textAlign: 'center' } }>
+                   <h5>You have already sent a request.</h5>
+                </div>
         }
 
         return this.props.friends && !this.props.friends.find(u => u.id === id) ?
-            <Button
-                onClick={ () => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id) }
-            >
+            <div style={ { marginTop: '5px', textAlign: 'center' } }>
+                <Button
+                    basic
+                    color='teal'
+                    onClick={ () => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id) }
+                >
                 Add friend
                 </Button>
+            </div>
             :
-            <div>
+            !this.props.currentUser.id !== this.props.user.id && <div>
                 <div style={ { marginTop: '5px', textAlign: 'center' } }>
                     <img
                         src='https://us.123rf.com/450wm/stas11/stas111706/stas11170600111/80189104-green-check-mark-icon-tick-symbol-in-green-color-vector-illustration.jpg?ver=6'
@@ -95,7 +104,7 @@ export default class Wishlist extends React.Component {
             className="circular"
             circular
             // floated="right"
-            color="red"
+            color="teal"
             onClick={ this.createWish }
             style={ {
                 

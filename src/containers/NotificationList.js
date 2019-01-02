@@ -13,7 +13,7 @@ export default class NotificationList extends React.Component{
     componentDidMount= async () => {
         const unacceptedFriendRequests = await Adapter.getUnaccepted(this.props.currentUser.id)
         const resp = await Adapter.getUserSantas(this.props.currentUser.id)
-        const santas = resp.filter(s=>!s.read)
+        const santas = resp.length>0 ? resp.filter(s=>!s.read) : []
         return this.setState({unacceptedFriendRequests, santas})
 
     }
@@ -30,10 +30,10 @@ export default class NotificationList extends React.Component{
         
         return( 
         <div>
-            {this.state.santas.map(s =>
+            {this.state.santas && this.state.santas.map(s =>
                 <SantaNotification santa={s}
             />) }
-            {this.state.unacceptedFriendRequests.map(f=>
+                { this.state.unacceptedFriendRequests && this.state.unacceptedFriendRequests.map(f=>
             <div key={f.id}>
                 <FriendNotification
                     refreshFriends ={ this.props.refreshFriends}
@@ -71,7 +71,7 @@ export default class NotificationList extends React.Component{
                 } 
             }
             >
-                {unacceptedFriendRequests.length===0 && santas.length === 0? <h4>There are no notifications</h4> : this.mapUnaccepted() }
+                {unacceptedFriendRequests.length === 0 && santas.length === 0? <h4>There are no notifications</h4> : this.mapUnaccepted() }
 
             </div>
         )

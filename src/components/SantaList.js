@@ -7,7 +7,7 @@ import ProfileShow from '../containers/ProfileShow'
 export default class SantaList extends React.Component {
 
     state={
-        users: null,
+        users: [],
         selectedUser: null
     }
 
@@ -61,13 +61,14 @@ export default class SantaList extends React.Component {
 
     render(){
         const {users, selectedUser} = this.state
+        
         if (!selectedUser) {
             return(
                 <div style={ {
                     margin: 'auto auto auto 1em',
                 } }>
-                    <h3>Active Secret Santas:</h3>
-                    { users && users.map(e =>
+                    {users.length>0 && <h3>Active Secret Santas:</h3>}
+                    { users.length>0 && users.map(e =>
                         <Card
                             onClick={ () => this.selectUser(e) }
                             style={ {

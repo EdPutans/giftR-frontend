@@ -62,7 +62,7 @@ handleImageSet = (img_url) =>{
         
         return (
         <div>
-                <img
+               <img
                     alt='giftR logo'
                     onClick={ this.props.back }
                     style={ {
@@ -102,8 +102,17 @@ handleImageSet = (img_url) =>{
                 
                 <Button 
                     onClick={this.handleSignup}
-                    color="teal"
-                    type='submit'
+                    disabled={
+                        !this.state.first_name ||
+                        !this.state.last_name ||
+                        !this.state.email ||
+                        !this.state.age ||
+                        !this.state.password ||
+                        !this.state.repeat_password ||
+                        !this.state.img_url
+               }
+               color="teal"
+               type='submit'
                     style={ { 
                         marginLeft: 'calc(50% - 43px)'
                     }}

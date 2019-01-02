@@ -7,7 +7,7 @@ import Header from '../components/Header'
 export default class HomePage extends React.Component {
 
     state = {
-        // friends: null,
+        friends: [],
         selectedFriend: null
     }
 
@@ -21,7 +21,7 @@ export default class HomePage extends React.Component {
 
 
     componentDidMount() {
-        this.setState({friends: this.props.friends})
+        this.props.friends && this.props.friends.length > 0 ? this.setState({ friends: this.props.friends }) : this.setState({ friends: [] })
        
 // FRIENDS ARE BEING RENDERED  ON MAIN PAGE ATM
  
@@ -44,7 +44,14 @@ export default class HomePage extends React.Component {
 
 
     noFriendsExist = () => {
-        return <div> No friends added yet</div>
+        return <div style={ {
+            zIndex: 1,
+            paddingTop: "3em",
+            paddingBottom: "6em"
+        } }>
+            <Header title={ 'Friends' } />
+             <h5 style={{textAlign:'center'}}> No friends added yet</h5>
+        </div>
     }
 
     friendsExist = () => {
@@ -76,13 +83,13 @@ export default class HomePage extends React.Component {
 
 
     render() {
-        if (this.state.friends && !this.state.selectedFriend) {
+        if (this.state.friends.length > 0 && !this.state.selectedFriend) {
             return this.friendsExist()
         }
-        if (!this.state.friends && !this.state.selectedFriend) {
+        if (this.state.friends.length < 1 && !this.state.selectedFriend) {
             return this.noFriendsExist()
         }
-        if (this.state.selectedFriend && this.state.friends) {
+        if (this.state.friends.length > 0 && this.state.selectedFriend ) {
             return this.selectedFriend()
         }else{
             return <div>loading...</div>

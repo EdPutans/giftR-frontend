@@ -46,12 +46,13 @@ export default class Uploader extends React.Component {
 
     render() {
         return <div>
-            <div>
+            { this.state.uploadedImageURL && <div>
                 { this.state.uploadedImageURL === '' ? <img style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.props.profilePicURL } /> :
                     <div>
                         <img alt='uploaded file' style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.state.uploading ? loadingGif : this.state.uploadedImageURL } />
-                    </div> }
-            </div>
+                        </div>
+                    } 
+            </div>}
             <div style={ { height: '100px', width: '300px', margin: 'auto', display: 'block', border: '1px dotted black', borderRadius:'3px', textAlign: 'center' } }>
                 <Dropzone multiple={false} onDrop={ this.onImageDrop }>
                     { ({ getRootProps, getInputProps, isDragActive }) => {
