@@ -132,7 +132,7 @@ export default class SantaMain extends React.Component {
                         <Grid.Column>
                             <h3>Create new Secret Santa</h3>
                             <div style={ { margin: '0 3em 0 3em' } }>
-                                Add people to the randomizer:
+                                1. Add people to the randomizer:
                                 <br />
                             <AutosuggestForm
                                     addUser={ this.addUser }
@@ -160,8 +160,8 @@ export default class SantaMain extends React.Component {
                                 {
                                    ( peopleSet || this.state.users.length> 1 ) &&
                                    <div>
-                                    <h5>Set budget:</h5>
-                                        <div className='ui input'
+                                    <h5>2. Set budget:</h5>
+                                        £<div className='ui input'
                                         style={
                                             {
                                                 marginBottom: '3em'
@@ -180,7 +180,12 @@ export default class SantaMain extends React.Component {
                             {
                                 (budgetSet && peopleSet && calendarActive)?
                                 <div>
-                                    <h5>Set deadline:</h5>
+                                    {
+                                        this.state.deadlineSet? 
+                                        <h5>Change deadline:</h5>
+                                        : 
+                                        <h5>3. Set deadline</h5>
+                                    }
                                     <Calendar
                                         onChange={ this.onCalendarChange }
                                         value={ this.state.date }
@@ -190,12 +195,12 @@ export default class SantaMain extends React.Component {
                                 (
                                     
                                     <div>
-                                            <p>Deadline: {this.state.date && this.formatDate(this.state.date)}</p>
+                                            <p>{ this.state.date && `Deadline: ${this.formatDate(this.state.date)}`}</p>
                                         {!calendarActive && 
                                         <Button 
                                             onClick={this.toggleCalendar}
                                         >
-                                            Set deadline
+                                            Change deadline
                                         </Button>
                                         }</div>
                                 )
@@ -206,6 +211,7 @@ export default class SantaMain extends React.Component {
                                     <Button disabled >Randomize</Button>
                                     :
                                     <Button
+                                        color='teal'
                                         onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
                                     >
                                         Randomize
@@ -243,7 +249,7 @@ export default class SantaMain extends React.Component {
 
     budgetSet = (value) => {
         this.setState({ budget: parseInt(value) })
-        if (this.state.budget && this.state.budget > 0) {
+        if (value > 0) {
             this.setState({ budgetSet: true })
         } else {
             this.setState({ budgetSet: false })
