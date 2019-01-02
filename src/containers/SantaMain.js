@@ -122,142 +122,157 @@ export default class SantaMain extends React.Component {
         this.setState({calendarActive: !this.state.calendarActive})
     }
 
-    renderBoth = () => {
-        const { budgetSet, peopleSet, randomizedSet, deadlineSet, calendarActive } = this.state
-        return (
-            <div>
-               
-                            < SantaList
-                                currentUser={ this.props.currentUser }
-                                friends={ this.props.friends }
-                            />
-                        
-                            <h3>Create new Secret Santa</h3>
-                            <div style={ { margin: '0 3em 0 3em' } }>
-                                1. Add people to the randomizer:
-                                <br />
-                            <AutosuggestForm
-                                    addUser={ this.addUser }
+    renderSantaForm = () => {
+        const { budgetSet, peopleSet, randomizedSet, deadlineSet, calendarActive, users } = this.state
+        const { currentUser, friends } = this.props
+
+        return(<div>
+
+            <h3>Create new Secret Santa</h3>
+            <div style={ { margin: '0 3em 0 3em' } }>
+                <div style={ { margin: '1em 0 1em 0' } }>
+                1. Add people to the randomizer:
+                </div>
+                <AutosuggestForm
+                    addUser={ this.addUser }
+                />
+            </div>
+            {
+                users.length > 0 &&
+                <div>
+                    <h4>Selected users:</h4>
+                    { users.map(e =>
+                        <div key={e.id} style={ { margin: '1em auto 0 auto' } }>
+                            <div style={ { textAlign: 'center', display: 'inline-block' } } >
+                                <Card
+                                    description={ `${e.first_name} ${e.last_name}` }
+                                    key={ e.id }
                                 />
                             </div>
-                            {
-                                this.state.users.length > 0 &&
-                                <div>
-                                    <h4>Selected users:</h4>
-                                    { this.state.users.map(e => 
-                                    
-                                                <Card
-                                                    fluid
-                                                    header={ `${e.first_name} ${e.last_name}` }
-                                                    key={ e.id }
-                                                />
-                                        
-                                    )
+                        </div>
+                    )
 
-                                    }
-                                </div>
-                            }
-                            <br />
-                            <div>
+                    }
+                </div>
+            }
+            <br />
+            <div>
+                {
+                    (peopleSet || users.length > 1) &&
+                    <div>
+                        <h5>2. Set budget:</h5>
+                        £<div className='ui input'
+                            style={
                                 {
-                                   ( peopleSet || this.state.users.length> 1 ) &&
-                                   <div>
-                                    <h5>2. Set budget:</h5>
-                                        £<div className='ui input'
-                                        style={
-                                            {
-                                                marginBottom: '3em'
+                                    marginBottom: '3em'
 
-                                            }
-                                        }
-                                        >
-                                            <input
-                                                placeholder='budget'
-                                                onChange={ event => this.budgetSet(event.target.value) }
-                                            />
-                                        </div>
-                                    </div>
                                 }
-                            </div>
+                            }
+                        >
+                            <input
+                                placeholder='budget'
+                                onChange={ event => this.budgetSet(event.target.value) }
+                            />
+                        </div>
+                    </div>
+                }
+            </div>
+            {
+                (budgetSet && peopleSet && calendarActive) ?
+                    <div>
+                        <div style={ {
+                            display: 'inline-block',
+                            margin: 'auto auto 3em'
+                        } }>
                             {
-                                (budgetSet && peopleSet && calendarActive)?
+                                this.state.deadlineSet ?
+                                    <h5>Change deadline:</h5>
+                                    :
+                                    <h5>3. Set deadline</h5>
+                            }
+                            <Calendar
+                                onChange={ this.onCalendarChange }
+                                value={ this.state.date }
+                            />
+                        </div>
+                    </div>
+                    :
+                    (
+
+                        <div>
+                            <p>{ this.state.date && `Deadline: ${this.formatDate(this.state.date)}` }</p>
+                            { !calendarActive &&
                                 <div>
-                                <div style={{
-                                    display: 'inline-block'   
-                                }}>
-                                    {
-                                        this.state.deadlineSet? 
-                                        <h5>Change deadline:</h5>
-                                        : 
-                                        <h5>3. Set deadline</h5>
-                                    }
-                                    <Calendar
-                                        onChange={ this.onCalendarChange }
-                                        value={ this.state.date }
-                                    />
-                                </div> 
-                                </div>
-                                :
-                                (
-                                    
-                                <div>
-                                    <p>{ this.state.date && `Deadline: ${this.formatDate(this.state.date)}`}</p>
-                                    {!calendarActive && 
-                                    <div>
-                                    <Button 
-                                        onClick={this.toggleCalendar}
+                                    <Button
+                                        onClick={ this.toggleCalendar }
                                     >
                                         Change deadline
                                     </Button>
                                     <br />
                                 </div>
-                                }<br />
-                                </div>
-                                )
+                            }<br />
+                        </div>
+                    )
 
-                            }
-                            {
-                                (this.state.users.length < 2 || !peopleSet || !budgetSet || !deadlineSet) ?
-                                    <Button disabled >Randomize</Button>
-                                    :
-                                    <Button
-                                        color='teal'
-                                        onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
-                                    >
-                                        Randomize
+            }
+            {
+                (users.length < 2 || !peopleSet || !budgetSet || !deadlineSet) ?
+                    <Button disabled >Randomize</Button>
+                    :
+                    <Button
+                        color='teal'
+                        onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
+                    >
+                        Randomize
                                     </Button>
-                            }
-                            <br />
-                            {
-                                this.state.mappedPeople && this.state.mappedPeople.map(u =>
-                                    <div style={ { margin: '2em auto 2em auto' } }>
-                                    <div 
-                                        style={ { textAlign: 'center', display:'inline-block' } }
-                                    >
-                                    <Card
-
-                                        description={`${ u.gifter.first_name } ${ u.gifter.last_name } ---> ${ u.receiver.first_name }`}
-                                    />
-                                    </div>
-                                    </div>
-                                )
-                            }
-                            {
-                                randomizedSet &&
-                                <Button
-                                    onClick={ this.createSecretSanta }>
-                                    Complete secret santa
+            }
+            <br />
+            {
+                this.state.mappedPeople && this.state.mappedPeople.map(u =>
+                    <div key={u.id} style={ { margin: '2em auto 2em auto' } }>
+                        <div
+                            style={ { textAlign: 'center', display: 'inline-block' } }
+                        >
+                            <Card
+                                header={ `${u.gifter.first_name} ${u.gifter.last_name} → ${u.receiver.first_name} ${u.receiver.last_name} ` }
+                            />
+                        </div>
+                    </div>
+                )
+            }
+            {
+                randomizedSet &&
+                <Button
+                    onClick={ this.createSecretSanta }>
+                    Complete secret santa
                     </Button>
-                }<br />
-                            <Button
-                                
-                                onClick={ this.toggleNewSanta }
-                                basic
-                                color='red'
-                            >
-                                Cancel
+            }<br />
+            <Button
+
+                onClick={ this.toggleNewSanta }
+                basic
+                color='red'
+            >
+                Cancel
                             </Button><br />
-                        
+
+
+        </div>)
+
+    }
+
+
+    renderBoth = () => {
+        const { budgetSet, peopleSet, randomizedSet, deadlineSet, calendarActive, users } = this.state
+        const {currentUser, friends} = this.props
+        return (
+            <div>
+               
+                            < SantaList
+                                currentUser={ currentUser }
+                                friends={ friends }
+                            />
+                            {this.renderSantaForm()}
             </div>
         )
     }
