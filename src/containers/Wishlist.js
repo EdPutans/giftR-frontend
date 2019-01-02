@@ -44,18 +44,22 @@ export default class Wishlist extends React.Component {
         }
 
         return this.props.friends && !this.props.friends.find(u => u.id === id) ?
-                <Button
-                    onClick={() => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id)}
-                 >
-                 Add friend
+            <Button
+                onClick={ () => this.sendFriendRequest(this.props.currentUser.id, this.props.user.id) }
+            >
+                Add friend
                 </Button>
-                : 
-            <div style={{marginTop: '5px',textAlign:'center'}}>
-                <img 
-                    src='https://us.123rf.com/450wm/stas11/stas111706/stas11170600111/80189104-green-check-mark-icon-tick-symbol-in-green-color-vector-illustration.jpg?ver=6'
-                    style={{maxHeight:'20px', width:'auto'}}
-                />
-            Already a mate</div>
+            :
+            <div>
+                <div style={ { marginTop: '5px', textAlign: 'center' } }>
+                    <img
+                        src='https://us.123rf.com/450wm/stas11/stas111706/stas11170600111/80189104-green-check-mark-icon-tick-symbol-in-green-color-vector-illustration.jpg?ver=6'
+                        style={ { maxHeight: '20px', width: 'auto' } }
+                    />
+                    Already a mate
+                </div>
+                <hr></hr>
+            </div>
     }
 
     userProfile=()=>{

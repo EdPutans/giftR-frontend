@@ -89,9 +89,13 @@ export default class ProfileForm extends React.Component {
                     zIndex: 1,
                     
                 } }>
+                <div>
+                    
                     <Uploader 
+                        profilePicURL={user.img_url}
                         propFunction={this.setImage}
                     />
+                </div>
                     <Form
                         style={ {
                             // marginTop: '10%',
@@ -101,7 +105,7 @@ export default class ProfileForm extends React.Component {
                     ><br />
 
                         <Form.Field>
-                            { !this.checkForPasswordPresense() && <Label>Note: current password required to save changes.</Label> }
+                            { !this.checkForPasswordPresense() && <Label>Note: To save changes enter current password below.</Label> }
                             <input style={ { marginTop: '15px' } }
                                 onChange={ event => this.handleChange(event.target.value, "first_name") }
                                 placeholder={ 'First name: ' + user.first_name }
