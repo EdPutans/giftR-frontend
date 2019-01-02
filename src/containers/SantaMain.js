@@ -88,7 +88,13 @@ export default class SantaMain extends React.Component {
         }
         const resp = await Adapter.createSantaList(body)
         console.log(resp)
-        return this.props.history.push('/santa')
+        this.setState({ done: true })
+        this.redirectBack()
+        // return this.props.history.push('/santa')
+    }
+
+    redirectBack = () =>{
+        return setTimeout(() => this.props.history.push('/santa'), 4000)
     }
 
     renderSantaList = () => {
@@ -272,6 +278,7 @@ export default class SantaMain extends React.Component {
                      </div>
             }
             <br />
+            { this.state.done && <h4>Secret Santa created. Now hold on to your shoes...</h4>}
             {
                 randomizedSet &&
                 <div style={ { margin: '1em 0 1em 0' } }>
