@@ -10,12 +10,30 @@ export default class NotificationList extends React.Component{
         santas: []
     }
 
-    componentDidMount= async () => {
+
+    componentDidMount = async () => {
         const unacceptedFriendRequests = await Adapter.getUnaccepted(this.props.currentUser.id)
         const resp = await Adapter.getUserSantas(this.props.currentUser.id)
-        const santas = resp.length>0 ? resp.filter(s=>!s.read) : []
+        let santas = []
+        if (resp.length>0) 
+        {
+            santas = resp.filter(s=>!s.read)
+        }
         return this.setState({unacceptedFriendRequests, santas})
+    }
 
+
+
+    componentWillUnmount=async()=>{
+       
+            const unacceptedFriendRequests = await Adapter.getUnaccepted(this.props.currentUser.id)
+            const resp = await Adapter.getUserSantas(this.props.currentUser.id)
+            let santas = []
+            if (resp.length > 0) {
+                santas = resp.filter(s => !s.read)
+            }
+            return this.setState({ unacceptedFriendRequests, santas })
+        
     }
 
     handleAccept= async (friendship_id)=>{
@@ -31,7 +49,9 @@ export default class NotificationList extends React.Component{
         return( 
         <div>
             {this.state.santas && this.state.santas.map(s =>
-                <SantaNotification santa={s}
+                <SantaNotification
+                    santa={s}
+                    handleClick={this.pressedCool}
             />) }
                 { this.state.unacceptedFriendRequests && this.state.unacceptedFriendRequests.map(f=>
             <div key={f.id}>
@@ -47,7 +67,11 @@ export default class NotificationList extends React.Component{
       )
     }
 
-    
+    pressedCool = (id) =>{
+        let santas = [...this.state.santas]
+        santas = santas.filter(s => s.id !== id)
+        this.setState({santas})
+    }
     
 
 

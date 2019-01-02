@@ -108,9 +108,8 @@ handleImageSet = (img_url) =>{
                         !this.state.email ||
                         !this.state.age ||
                         !this.state.password ||
-                        !this.state.repeat_password ||
-                        !this.state.img_url
-               }
+                        !this.state.repeat_password
+                              }
                color="teal"
                type='submit'
                     style={ { 

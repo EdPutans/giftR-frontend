@@ -44,7 +44,7 @@ export default class Wishlist extends React.Component {
         if(this.props.currentUser.id === this.props.user.id){return;}
         if (this.state.active_request_ids && this.state.active_request_ids.find(digit => digit === id)){
             return <div style={ { marginTop: '5px', textAlign: 'center' } }>
-                   <h5>You have already sent a request.</h5>
+                   <h5>Friend request sent</h5>
                 </div>
         }
 

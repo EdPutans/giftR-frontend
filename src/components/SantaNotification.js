@@ -12,7 +12,9 @@ export default class SantaNotification extends React.Component {
     setRead = async () => {
         const resp = await Adapter.makeSantaRead(this.props.santa.id)
         if(!resp.error){
-           return this.setState({ read: true })
+           this.setState({ read: true })
+           this.props.handleClick()
+
         }else{
            return alert("The 'Cool' Button broke for some reason ")
         }

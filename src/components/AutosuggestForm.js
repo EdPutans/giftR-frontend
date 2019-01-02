@@ -45,7 +45,7 @@ export default class AutosuggestForm extends React.Component{
       <div style={{textAlign:'left'}}>
        
         <Card
-          description={`${suggestion.first_name} ${suggestion.last_name}`}
+           description={ `${suggestion.first_name} ${suggestion.last_name} ${this.props.users.find(u => u.id ===suggestion.id)? '(already on list)' : ""}`}
         />
       </div>
       )
@@ -62,6 +62,7 @@ export default class AutosuggestForm extends React.Component{
         let people
         try{
           people = await Adapter.getUsersBySearchQuery(value)
+          people = people.filter(user => user.id !== this.props.currentUser.id)
         }catch(e){
           console.log('person not found')
         }

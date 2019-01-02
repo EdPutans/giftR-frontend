@@ -118,17 +118,22 @@ export default class ProfileForm extends React.Component {
                             <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ "Email: " + user.email } type="text" maxLength="30" />
                         </Form.Field>
                         <Form.Field>
-                            <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } maxLength="3" />
+                            <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } maxLength="2" />
                         </Form.Field>
                         <Form.Field>
-
-                            <input type="password" onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />
+                            <input type="password" 
+                            maxLength='50'
+                            onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />
                         </Form.Field>
                         <Form.Field>
-                            <input onChange={ event => this.handleChange(event.target.value, "new_password") } placeholder='New password' type="password" />
+                            <input onChange={ event => this.handleChange(event.target.value, "new_password") } placeholder='New password'
+                            maxLength='50'
+                            type="password" />
                         </Form.Field>
                         <Form.Field>
-                            <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } placeholder='Repeat password' />
+                            <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } 
+                            maxLength='50'
+                            placeholder='Repeat password' />
                         </Form.Field>
                         <Button onClick={ this.handleSubmit } color='teal' floated='right' type='submit'>Save</Button>
                         <Button onClick={ this.props.toggleEdit } color='red' basic type='submit'>Cancel</Button>

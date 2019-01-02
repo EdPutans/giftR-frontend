@@ -2,7 +2,7 @@ import React from 'react'
 import Header from '../components/Header'
 import AutosuggestForm from '../components/AutosuggestForm'
 import SantaList from '../components/SantaList'
-import { Button, Grid, Card } from 'semantic-ui-react'
+import { Button, Grid, Card, Checkbox } from 'semantic-ui-react'
 import Calendar from 'react-calendar'
 import * as Adapter from '../Adapter'
 
@@ -10,9 +10,9 @@ import * as Adapter from '../Adapter'
 export default class SantaMain extends React.Component {
 
     state = {
+        self: false,
         // steps:
         deadlineSet: false,
-        peopleSet: false,
         randomizedSet: false,
         budgetSet: false,
         // actual state:
@@ -30,10 +30,8 @@ export default class SantaMain extends React.Component {
     addUser = (user) => {
         if(!this.state.users.find(u=>u.id === user.id)){
             this.setState({ users: [...this.state.users, user] })
-        }else{
-            alert('User already on the list')
         }
-        this.state.users.length > 0 && this.setState({ peopleSet: true })
+        return ;
     }
 
     mapIdsForRandomizer = (objectArray) => {
@@ -104,11 +102,29 @@ export default class SantaMain extends React.Component {
                     onClick={ this.toggleNewSanta }
                     color='teal'
                 >
-                    Create New Santa
+                    New Secret Santa
                   </Button>
                   
             </div>
         )
+    }
+
+    handleSelfTick=()=>{
+        // has to be opposute!!!
+        if(this.state.self){
+            let users = JSON.stringify(this.state.users)
+            users = JSON.parse(users)
+            users = users.filter(user=>user.id !== this.props.currentUser.id)
+            this.setState({users})
+        }else{
+            let users = JSON.stringify(this.state.users)
+            users = JSON.parse(users)
+            users.push(this.props.currentUser)
+            this.setState({ users })
+        }
+        this.setState({ self: !this.state.self })
+
+        
     }
 
     formatDate = (date) => {
@@ -123,8 +139,8 @@ export default class SantaMain extends React.Component {
     }
 
     renderSantaForm = () => {
-        const { budgetSet, peopleSet, randomizedSet, deadlineSet, calendarActive, users } = this.state
-        const { currentUser, friends } = this.props
+        const { budgetSet,  randomizedSet, deadlineSet, calendarActive, users } = this.state
+       
 
         return(<div>
 
@@ -134,8 +150,16 @@ export default class SantaMain extends React.Component {
                 1. Add people to the randomizer:
                 </div>
                 <AutosuggestForm
+                    currentUser={this.props.currentUser}
+                    users={this.state.users}
                     addUser={ this.addUser }
                 />
+                <Checkbox
+                    name='Include myself' 
+                    label='Include myself'
+                    checked={this.state.self===true}
+                    onChange={ () => this.handleSelfTick() }
+                ></Checkbox>
             </div>
             {
                 users.length > 0 &&
@@ -158,7 +182,7 @@ export default class SantaMain extends React.Component {
             <br />
             <div>
                 {
-                    (peopleSet || users.length > 1) &&
+                    (users.length > 1) &&
                     <div>
                         <h5>2. Set budget:</h5>
                         £<div className='ui input'
@@ -171,6 +195,8 @@ export default class SantaMain extends React.Component {
                         >
                             <input
                                 placeholder='budget'
+                                type='number'
+                                maxLength='4'
                                 onChange={ event => this.budgetSet(event.target.value) }
                             />
                         </div>
@@ -178,7 +204,7 @@ export default class SantaMain extends React.Component {
                 }
             </div>
             {
-                (budgetSet && peopleSet && calendarActive) ?
+                (budgetSet && calendarActive) ?
                     <div>
                         <div style={ {
                             display: 'inline-block',
@@ -215,18 +241,7 @@ export default class SantaMain extends React.Component {
                     )
 
             }
-            {
-                (users.length < 2 || !peopleSet || !budgetSet || !deadlineSet) ?
-                    <Button disabled >Randomize</Button>
-                    :
-                    <Button
-                        color='teal'
-                        onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
-                    >
-                        Randomize
-                                    </Button>
-            }
-            <br />
+           
             {
                 this.state.mappedPeople && this.state.mappedPeople.map(u =>
                     <div key={u.id} style={ { margin: '2em auto 2em auto' } }>
@@ -241,21 +256,42 @@ export default class SantaMain extends React.Component {
                 )
             }
             {
+                (users.length < 2 || !budgetSet || !deadlineSet) ?
+                    <div style={ { margin: '1em 0 1em 0' } }>
+                        <Button disabled >Randomize list</Button>
+                    </div>
+                    :
+                    <div style={ { margin: '1em 0 1em 0' } }>
+                        <Button
+                            color='teal'
+                            basic
+                            onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
+                        >
+                            {this.state.randomizedSet? 'Randomize again' : 'Randomize list' }
+                        </Button>
+                     </div>
+            }
+            <br />
+            {
                 randomizedSet &&
-                <Button
-                    onClick={ this.createSecretSanta }>
-                    Complete secret santa
+                <div style={ { margin: '1em 0 1em 0' } }>
+                    <Button
+                        onClick={ this.createSecretSanta }
+                        color='teal'
+                    >
+                        Complete secret santa
                     </Button>
+                </div>
             }<br />
-            <Button
-
+            <div style={ { margin: '1em 0 1em 0' } }>
+                <Button
                 onClick={ this.toggleNewSanta }
                 basic
                 color='red'
             >
                 Cancel
-                            </Button><br />
-
+            </Button>
+            </div>
 
         </div>)
 
@@ -263,16 +299,16 @@ export default class SantaMain extends React.Component {
 
 
     renderBoth = () => {
-        const { budgetSet, peopleSet, randomizedSet, deadlineSet, calendarActive, users } = this.state
+        
         const {currentUser, friends} = this.props
         return (
             <div>
                
-                            < SantaList
-                                currentUser={ currentUser }
-                                friends={ friends }
-                            />
-                            {this.renderSantaForm()}
+                < SantaList
+                    currentUser={ currentUser }
+                    friends={ friends }
+                />
+                {this.renderSantaForm()}
             </div>
         )
     }

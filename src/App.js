@@ -138,11 +138,13 @@ class App extends PureComponent {
       return (
         <div>
             <div>
+              {this.state.notificationsClicked &&
             <NotificationList 
                 clicked={this.state.notificationsClicked}
                 refreshFriends ={ this.getFriends}
                 currentUser={this.state.currentUser}
-            />
+              /> 
+              }
            </div>
           <Switch>
             <Route
