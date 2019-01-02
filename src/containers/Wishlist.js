@@ -128,7 +128,9 @@ export default class Wishlist extends React.Component {
 
 
                     { this.props.search && this.userProfile() }
-                    <Card.Group className="ui center aligned grid" itemsPerRow={2} >
+                    <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } style={ {
+                        marginRight: '0px'
+                    } } >
                     { this.props.gifts.length > 0 ? this.props.gifts
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
                         .map(w =>

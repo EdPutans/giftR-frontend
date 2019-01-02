@@ -2,13 +2,43 @@ import React from 'react'
 import * as Adapter from '../Adapter'
 import {Card} from 'semantic-ui-react'
 import Header from './Header'
-
+import Wishlist from '../containers/Wishlist'
+import ProfileShow from '../containers/ProfileShow'
 export default class SantaList extends React.Component {
 
     state={
-        users: null
+        users: null,
+        selectedUser: null
     }
 
+    selectUser = (userr) => {
+        Adapter.getUser(userr.id).then(user => {
+            this.setState({ selectedUser: user })
+        })
+        
+    }
+
+    resetUser = () => {
+        this.setState({ selectedUser: null })
+    }
+
+    userProfile = (id) => {
+        
+            return (
+                <div>
+                    <Wishlist
+                        friends={ this.props.friends }
+                        resetUser={ this.resetUser }
+                        currentUser={ this.props.currentUser }
+                        user={ this.state.selectedUser }
+                        search={ true }
+                        gifts={ this.state.selectedUser.gifts }
+                    />
+                </div>
+            )
+       
+        
+    }
 
     componentDidMount = async () => {
         if(this.props.currentUser){
@@ -31,26 +61,30 @@ export default class SantaList extends React.Component {
     }
 
     render(){
-        const {users} = this.state
-        return(
-        <div style={{
-            margin: 'auto auto auto 1em',
-                       }}>
-            <h3>Active Secret Santas:</h3>
-            { users && users.map(e => 
-            <Card 
-            style={{
-                textAlign:'center',
-                margin: '1em auto',
-            }}
-                header={`${e.first_name} ${e.last_name}`}
-                meta={`Deadline on ${this.formatDate(e.deadline)}`}
-                description={`Budget - £${e.budget}`}
-            />)
+        const {users, selectedUser} = this.state
+        if (!selectedUser) {
+            return(
+                <div style={ {
+                    margin: 'auto auto auto 1em',
+                } }>
+                    <h3>Active Secret Santas:</h3>
+                    { users && users.map(e =>
+                        <Card
+                            onClick={ () => this.selectUser(e) }
+                            style={ {
+                                textAlign: 'center',
+                                margin: '1em auto',
+                            } }
+                            header={ `${e.first_name} ${e.last_name}` }
+                            meta={ `Deadline on ${this.formatDate(e.deadline)}` }
+                            description={ `Budget - £${e.budget}` }
+                        />)
+                    }
+
+                </div>
+            )}else{
+                return this.userProfile(selectedUser.id)
             }
-          
-        </div>
-        )
     }
 
 }

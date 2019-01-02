@@ -1,10 +1,19 @@
 body {
 
    /* background-image: url('https://wallpapershome.com/images/wallpapers/christmas-3840x2160-new-year-gifts-4k-17132.jpg'); */
-   /* background-image: url('http://www.tokkoro.com/picsup/3079633-gift-wrap_gift-wrap-paper_gifts.jpg'); */
-   background-image: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+
+   /* background-image: url("https://images.pexels.com/photos/326311/pexels-photo-326311.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"); */
+
+     /* background-color: #000000; */
+    /* background-image: linear-gradient(#303F9F, #5666b7); */
+
+    /* background-color: #F6CFCA; */
+   background-image: url('https://hdqwalls.com/download/hex-abstract-material-design-ad-3840x2160.jpg');
+
   width: 100%;
-  background-color: #F6CFCA;
+
+   background-color: #303F9F;
+  
   margin: 0 0 0 0;
   padding: 0 0 0 0;
 
@@ -13,6 +22,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 ul{

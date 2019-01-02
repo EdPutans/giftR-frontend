@@ -47,7 +47,7 @@ class App extends PureComponent {
   
 
   handleNavBarChange = (item) => {
-    this.setState({ navBarItem: item })
+    this.setState({ navBarItem: item, notificationsClicked: false })
     this.props.history.push(`/${item}`)
   }
 
@@ -162,7 +162,7 @@ class App extends PureComponent {
                 paddingBottom: '6%',
                 // maxWidth: '700px',
                 margin: '60px auto ',
-                minWidth: '420px',
+                minWidth: '375px',
                 width: '80%',
                 position: 'absolute',
                 left: 0,
@@ -181,6 +181,7 @@ class App extends PureComponent {
             <div>
               <SantaMain 
                 currentUser={this.state.currentUser}
+                friends={this.state.friends}
                 {...props}
                   // props here
               />

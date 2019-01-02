@@ -27,6 +27,8 @@ export default class AutosuggestForm extends React.Component{
             []
      }
 
+  
+
      handleAdd=(event)=>{
         event.preventDefault()
         this.state.selected && this.props.addUser(this.state.selected) && this.setState({selected: null})
@@ -40,10 +42,11 @@ export default class AutosuggestForm extends React.Component{
      }
 
      renderSuggestion = suggestion => (
-      <div style={{marginLeft: '0px'}}>
-      <Card
-        description={`${suggestion.first_name} ${suggestion.last_name}`}
-      />
+      <div style={{textAlign:'left'}}>
+       
+        <Card
+          description={`${suggestion.first_name} ${suggestion.last_name}`}
+        />
       </div>
       )
       

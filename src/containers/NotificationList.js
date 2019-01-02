@@ -54,11 +54,12 @@ export default class NotificationList extends React.Component{
     render(){
         const {santas, unacceptedFriendRequests} = this.state
         return(
-            <div style={ this.props.clicked?
+            this.props.clicked && <div style={
                 {
                     overflowY: 'scroll',
                     zIndex: 120,
                     border: '1px solid grey',
+                    padding: '5px 5px 5px 5px',
                     borderRadius: '5px',
                     backgroundColor: '#FFFFFF',
                     height: '300px',
@@ -67,7 +68,7 @@ export default class NotificationList extends React.Component{
                     right: '15px',
                     top: '50px',
                     position: 'fixed'
-                } : {display: 'none'}
+                } 
             }
             >
                 {unacceptedFriendRequests.length===0 && santas.length === 0? <h4>There are no notifications</h4> : this.mapUnaccepted() }

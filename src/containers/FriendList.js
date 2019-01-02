@@ -56,7 +56,11 @@ export default class HomePage extends React.Component {
                     paddingBottom: "6em"
                 } }>
                     <Header title={'Friends'} />
-                    <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } >
+                    <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } 
+                    style={{
+                        marginRight: '0px'
+                    }}
+                    >
                         { this.state.friends.map(f =>
                             <FriendCard
                                 key={f.id}

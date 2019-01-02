@@ -95,6 +95,7 @@ export default class SantaMain extends React.Component {
         return (
             <div>
                 < SantaList
+                    friends={ this.props.friends }
                     currentUser={ this.props.currentUser }
                 />
                 <Button
@@ -122,14 +123,12 @@ export default class SantaMain extends React.Component {
         const { budgetSet, peopleSet, randomizedSet, deadlineSet, calendarActive } = this.state
         return (
             <div>
-                < Grid columns={ 2 } divided>
-                    <Grid.Row>
-                        <Grid.Column width={ 7 }>
+               
                             < SantaList
                                 currentUser={ this.props.currentUser }
+                                friends={ this.props.friends }
                             />
-                        </Grid.Column>
-                        <Grid.Column>
+                        
                             <h3>Create new Secret Santa</h3>
                             <div style={ { margin: '0 3em 0 3em' } }>
                                 1. Add people to the randomizer:
@@ -230,15 +229,14 @@ export default class SantaMain extends React.Component {
                     </Button>
                             }
                             <Button
+                                
                                 onClick={ this.toggleNewSanta }
                                 basic
                                 color='red'
                             >
                                 Cancel
                             </Button>
-                        </Grid.Column>
-                    </Grid.Row>
-                </Grid >
+                        
             </div>
         )
     }
