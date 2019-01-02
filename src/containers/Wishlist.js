@@ -103,8 +103,7 @@ export default class Wishlist extends React.Component {
         <Button
             className="circular"
             circular
-            // floated="right"
-            color="teal"
+            color="red"
             onClick={ this.createWish }
             style={ {
                 

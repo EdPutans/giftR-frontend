@@ -12,6 +12,7 @@ import EditWish from './components/EditWish'
 import SantaMain from './containers/SantaMain'
 import NotificationList from './containers/NotificationList'
 import './App.css';
+import Error404 from './components/Error404'
 import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
 class App extends PureComponent {
@@ -220,6 +221,7 @@ class App extends PureComponent {
             <Route exact path='/edit_wish' component={ props =>
               <EditWish { ...props } /> }
             />
+              <Route path='/:error' component={ props => <Error404 { ...props } /> } />
             </Switch>
             </div>
           
@@ -244,6 +246,7 @@ class App extends PureComponent {
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } back={this.backToWelcome}/> } />
           <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } back={ this.backToWelcome } /> } />
+          <Route path='/:error' component={props=> <Error404 {...props} />} />
         </Switch>
         </div>
       )

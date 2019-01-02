@@ -110,7 +110,7 @@ export default class WishForm extends React.Component {
                         maxLength="500"
                         type="text"
                         name="img_url"
-                        placeholder="Image link"
+                        placeholder="Image link (optional)"
                         onChange={ event => this.setState({ img_url: event.target.value }) }
                     />
                 </Form.Field>
@@ -125,7 +125,7 @@ export default class WishForm extends React.Component {
                         onChange={ event => this.setState({ price: parseInt(event.target.value) }) }
                     />
                 </Form.Field>
-                <Label > Priority: <div>
+                <Label > Priority (optional): <div>
                     {/* <Form.Group> */ }
                     { this.selection.map(s =>
                         <Form.Field
@@ -148,7 +148,17 @@ export default class WishForm extends React.Component {
                 <Button color="red" floated='right' onClick={ this.deleteWish }>Delete</Button>
                 </div>
                 :
-                <Button color="teal" onClick={ this.handleSubmit }>Make a wish!</Button>
+                <Button 
+                    color="teal" 
+                    onClick={ this.handleSubmit }
+                    disabled={
+                        !this.state.name ||
+                        !this.state.description ||
+                        !this.state.url ||
+                        !this.state.price 
+                    }
+                >
+                Make a wish!</Button>
             }
 
                 </div>
