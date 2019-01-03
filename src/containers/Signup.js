@@ -23,12 +23,22 @@ checkPasswords = () =>{
 
 handleSignup = () => {
     const { first_name, last_name, email, age, password, img_url } = this.state
-    if(email.includes('@') && age < 100){
-        if (this.checkPasswords()) {
+    if(email.includes('@') && age < 100)
+        {if (this.checkPasswords()) {
             let user = { first_name, last_name, email, age, password, img_url }
             return adapter.postUser(user)
-                .then(() => this.props.handleLogin({ email, password }))
-        } else { alert('Passwords have to match.') }
+                .then(resp => {
+                    
+                    if(!resp.error){
+                        return this.props.handleLogin({ email, password })
+                    }else{
+                        return alert(resp.error)
+                    }
+                    
+                })
+        } else { 
+            alert('Passwords have to match.') 
+        }
     }
     
 }
