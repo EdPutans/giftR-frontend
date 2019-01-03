@@ -32,6 +32,7 @@ import { Menu } from 'semantic-ui-react'
                 <Menu.Item
                     color='teal'
                     icon='list'
+                    position='right'
                     // name='My list'
                     active={ this.props.activeItem === 'wishlist' }
                     onClick={ () => this.props.handleItemClick("wishlist") }
@@ -45,7 +46,7 @@ import { Menu } from 'semantic-ui-react'
                     onClick={() => this.props.handleItemClick("friends") }
                 />
                 <Menu.Item
-                    position='right'
+                    
                     color='teal'
                     icon='bell'
                     active={ this.props.notificationsClicked === true }

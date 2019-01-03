@@ -27,7 +27,7 @@ class App extends PureComponent {
   state = {
     play: false,
     notificationsClicked: false,
-    navBarItem: null,
+    navBarItem: '',
     currentUser: null,
     gifts: [],
     friends: []

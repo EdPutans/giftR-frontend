@@ -25,11 +25,11 @@ export default class SantaNotification extends React.Component {
     render(){
         const {santa} = this.props
         return(
-        !this.state.read?
+        !this.state.read &&
         <Card fluid>
             <Card.Content>
             <Card.Header>{santa.receiver.first_name} {santa.receiver.last_name}</Card.Header>
-            <Card.Meta>This person is your target for a secret santa event. You can see more info <a href='/santa/'>here</a>.</Card.Meta>
+            <Card.Meta>You were added to a secret santa list. This person is your receiver. Find out more <a href='/santa/'>here</a>.</Card.Meta>
             <Button
                 size='tiny'
                 color='teal'
@@ -39,7 +39,5 @@ export default class SantaNotification extends React.Component {
             </Button>
             </Card.Content>
         </Card>
-        :
-        <div>Cool!</div>
     )}
 }

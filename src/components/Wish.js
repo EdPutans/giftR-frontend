@@ -90,6 +90,7 @@ export default class Wish extends React.Component {
                         floated="right"
                         size="mini"
                         color="teal"
+                        basic
                         onClick={ this.toggleEdit }
                     >
                         { this.state.editing ? "Cancel" : "Edit" }

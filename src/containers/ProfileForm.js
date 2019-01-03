@@ -2,6 +2,7 @@ import React from 'react'
 import { Form, Button, Label} from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import Uploader from '../components/Uploader'
+import { Animate } from 'react-simple-animate'
 
 
 export default class ProfileForm extends React.Component {
@@ -80,12 +81,25 @@ export default class ProfileForm extends React.Component {
     setImage=(img_url)=>
         this.setState({img_url})
     
+// animation
+    animateDown = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
+            endStyle={ { "transform": "translateY(0)", "opacity": 1 } }
+            durationSeconds="0.3"
+            delaySeconds='0'
+        >
+            { component }
+        </Animate>
+    }
+    
 
 
     render() {
         const { user } = this.props
         return (
-                <div style={ {
+        this.animateDown(<div style={ {
                     zIndex: 1,
                     
                 } }>
@@ -139,7 +153,7 @@ export default class ProfileForm extends React.Component {
                         <Button onClick={ this.props.toggleEdit } color='red' basic type='submit'>Cancel</Button>
                     </Form>
                     { !this.props.user && <a href="/login">Already a member? Log in here!</a> }
-                </div>
+                </div>)
 
         )
     }

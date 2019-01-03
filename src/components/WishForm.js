@@ -2,6 +2,7 @@ import React from 'react'
 import * as adapter from '../Adapter'
 import { Form, Button, Radio, Label } from 'semantic-ui-react'
 import Header from './Header'
+import { Animate } from 'react-simple-animate'
 
 export default class WishForm extends React.Component {
 
@@ -57,6 +58,21 @@ export default class WishForm extends React.Component {
         this.props.handleSubmit(newWish)
     }
 
+
+
+    animateDown = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
+            endStyle={ { "transform": "translateY(0)", "opacity": 1 } }
+            durationSeconds="0.3"
+            delaySeconds='0'
+        >
+            { component }
+        </Animate>
+    }
+
+
     render() {
         return (
            
@@ -73,7 +89,7 @@ export default class WishForm extends React.Component {
             } }
         >
                 { !this.props.editing && <Header title={ 'Make a wish!' } />}
-            <Form>
+            {this.animateDown(<Form>
                 <Form.Field>
                     <input
                         defaultValue = {this.state.name}
@@ -142,7 +158,8 @@ export default class WishForm extends React.Component {
                 </div>
                 </Label>
 
-            </Form><br />
+            </Form>)}
+            <br />
             { this.props.editing ? <div>
                 <Button color="teal" onClick={ this.saveEdit }>Save changes!</Button>
                 <Button color="red" floated='right' onClick={ this.deleteWish }>Delete</Button>

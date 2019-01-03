@@ -1,5 +1,5 @@
-const localhost = "http://192.168.1.31:3000"
-// const localhost = "http://localhost:3000"
+// const localhost = "http://192.168.1.31:3000"
+const localhost = "http://localhost:3000"
 
 const API_v1 = `${localhost}/api/v1`
 const signinURL = `${localhost}/api/v1/signin`

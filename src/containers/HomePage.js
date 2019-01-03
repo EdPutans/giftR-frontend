@@ -5,6 +5,8 @@ import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
 import ProfileShow from './ProfileShow'
+import { Animate } from 'react-simple-animate'
+
 
 // import Wish from '../components/Wish'
 
@@ -64,8 +66,33 @@ export default class HomePage extends React.Component {
         )
     }
 
+    animateMe = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "opacity": 0 } }
+            endStyle={ { "opacity": 1 } }
+            durationSeconds="0.2"
+            delaySeconds='0.1'
+        >
+            { component }
+        </Animate>
+    }
+    animateList = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "transform": "translateX(100px)" } }
+            endStyle={ { "transform": "translateX(0)" } }
+            durationSeconds="0.3"
+            delaySeconds='0'
+        >
+            { component }
+        </Animate>
+    }
+
+
     renderUserList=()=>{
         return (
+            this.animateMe(
             <div style={{textAlign:'center', paddingTop: '3em', paddingBottom: '2 em'}}>
                 <h1>Welcome to GiftR!</h1><br/>
                 <h5>Start by looking up a person or creating your very own wishlist!</h5>
@@ -100,14 +127,14 @@ export default class HomePage extends React.Component {
                 } }
                 >
                 </div>
-                <SearchArea
+                {this.animateList(<SearchArea
                     friends={ this.props.friends }
                     selectUser={ this.selectUser }
                     users={ this.state.users }
                     search={ this.state.search }
-                />
+                />)}
                 
-            </div>
+            </div>)
         )
     }
 

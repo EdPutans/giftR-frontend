@@ -34,6 +34,38 @@ export default class SantaMain extends React.Component {
         return ;
     }
 
+
+    animateList = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ {
+                "transform": "translateX(30px)", "opacity": 0
+            } }
+            endStyle={ {
+                "transform": "translateX(0)", "opacity": 1
+            } }
+            reverseDurationSeconds='0.2'
+
+            durationSeconds="0.1"
+            delaySeconds='0'
+        >
+            { component }
+        </Animate>
+    }
+
+    animateDown = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
+            endStyle={ { "transform": "translateY(0)", "opacity": 1 } }
+            durationSeconds="0.3"
+            delaySeconds='0'
+        >
+            { component }
+        </Animate>
+    }
+
+
     animateMe = (component) => {
         return <Animate
             play={true}
@@ -161,7 +193,7 @@ export default class SantaMain extends React.Component {
         const { budgetSet,  randomizedSet, deadlineSet, calendarActive, users } = this.state
        
 
-        return(<div>
+        return this.animateDown(<div>
 
             <h3>Create new Secret Santa</h3>
             <div style={ { margin: '0 3em 0 3em' } }>
@@ -190,22 +222,14 @@ export default class SantaMain extends React.Component {
                     
                     { users.map(e =>
                         <div key={e.id} style={ { margin: '1em auto 0 auto' } }>
-                        <Animate
-                            play={true}
-                            startStyle={{"transform":"translateX(15px)"}}
-                            endStyle={{"transform":"translateX(0)"}}
-                            durationSeconds="0.2"
-                            delaySeconds='0'
-                            reverseDurationSeconds="0.2"
-                            delaySeconds='0'
-                         >
+                            {this.animateList(
                             <div style={ { textAlign: 'center', display: 'inline-block' } } >
                                 <Card
                                     description={ `${e.first_name} ${e.last_name}` }
                                     key={ e.id }
                                 />
                             </div>
-                            </Animate>
+                            )}
                         </div>
                     )
 
@@ -264,6 +288,7 @@ export default class SantaMain extends React.Component {
                             { !calendarActive &&
                                 <div>
                                     <Button
+                                        size='tiny'
                                         onClick={ this.toggleCalendar }
                                     >
                                         Change deadline
@@ -305,6 +330,7 @@ export default class SantaMain extends React.Component {
                         <Button
                             color='teal'
                             basic
+                            size='huge'
                             onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
                         >
                             {this.state.randomizedSet? 'Randomize again' : 'Randomize list' }
@@ -328,6 +354,7 @@ export default class SantaMain extends React.Component {
                 <Button
                 onClick={ this.toggleNewSanta }
                 basic
+                size='tiny'
                 color='red'
             >
                 Cancel

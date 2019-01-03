@@ -69,7 +69,7 @@ export default class Wishlist extends React.Component {
                     />
                     Already a mate
                 </div>
-                <hr></hr>
+                
             </div>
     }
 
@@ -149,18 +149,20 @@ export default class Wishlist extends React.Component {
                     paddingTop: "3em",
                     paddingBottom: "6em"
                 } }>
-                    <Header 
-                        title={
-                            this.props.search? `${user.first_name}'s wishlist`
-                            :
-                            'My wishlist'
-                            } />
+                    
 
 
                     { this.props.search && this.userProfile() }
+                    <Header
+                        title={
+                            this.props.search ? `${user.first_name}'s wishlist`
+                                :
+                                'My wishlist'
+                        } />
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } style={ {
                         marginRight: '0px'
                     } } >
+                    
                     { this.props.gifts.length > 0 ? this.props.gifts
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
                         .map(w =>

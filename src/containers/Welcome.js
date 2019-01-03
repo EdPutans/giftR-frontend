@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
-
+import { Animate } from 'react-simple-animate'
 
 
 export default class Welcome extends React.Component {
@@ -14,31 +14,32 @@ export default class Welcome extends React.Component {
     //     // maxWidth: '1280px '
     // }
 
+    animateMe = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "opacity": 0 } }
+            endStyle={ { "opacity": 1 } }
+            durationSeconds="0.2"
+            delaySeconds='0.5'
+        >
+            { component }
+        </Animate>
+    }
+
+
     render() {
         return (
-            <div style={{
+            this.animateMe(<div style={{
                 
                 backgroundColor: '#FFFFFF',
             }}
            
             >
                 <img alt='giftR logo'
-
-                //     style={{
-
-                // height: 'auto',
-                // maxWidth: '400px',
-                // position: 'absolute',
-                // left: '50%',
-                // top: '10%',
-                // transform: 'translate(-50%, -50%)',
-             
-            
-                //                 }}
                     style={ {
                         display: 'block',
                         overflow: 'hidden',
-                        maxWidth: '400px',
+                        maxWidth: '80%',
                         marginLeft: 'auto',
                         marginRight: 'auto',
                         height: 'auto',
@@ -70,7 +71,7 @@ export default class Welcome extends React.Component {
                     <h4>GiftR takes care of your holiday gifting headache</h4>
                     <h6>Find out what other people would like to get as a gift!</h6>
                 </div>
-            </div>
+            </div>)
 
         )
     }
