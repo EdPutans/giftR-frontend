@@ -3,7 +3,7 @@ import ProfileForm from './ProfileForm'
 import ProfileShow from './ProfileShow'
 import {Route} from 'react-router'
 import Header from '../components/Header'
-
+import { Animate } from 'react-simple-animate'
 
 export default class Profile extends 
 React.Component {
@@ -12,6 +12,19 @@ React.Component {
         editing: false
         // starts off empty and only tracks field data
     }
+
+    animateMe = (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ { "opacity": 0 } }
+            endStyle={ { "opacity": 1 } }
+            durationSeconds="0.2"
+            delaySeconds='0.1'
+        >
+            { component }
+        </Animate>
+    }
+
 
     toggleEdit = () => this.setState({ editing: !this.state.editing }) 
     
@@ -26,7 +39,7 @@ React.Component {
     render() {
         const {user} = this.props
         if(!this.state.editing){
-            return (
+            return this.animateMe(
             
             <div 
                 style={{marginTop:'3em'}}

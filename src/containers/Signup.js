@@ -22,12 +22,15 @@ checkPasswords = () =>{
 }
 
 handleSignup = () => {
-    if(this.checkPasswords()){
-        const {first_name, last_name, email, age, password, img_url} = this.state
-        let user = { first_name, last_name, email, age, password, img_url }
-        return adapter.postUser(user)
-            .then(() => this.props.handleLogin({email,password}))
-    }else{ alert('Passwords have to match.')}
+    const { first_name, last_name, email, age, password, img_url } = this.state
+    if(email.includes('@') && age < 100){
+        if (this.checkPasswords()) {
+            let user = { first_name, last_name, email, age, password, img_url }
+            return adapter.postUser(user)
+                .then(() => this.props.handleLogin({ email, password }))
+        } else { alert('Passwords have to match.') }
+    }
+    
 }
 
 
@@ -40,7 +43,7 @@ handleChange = (value, type) => {
     case "email":
         return this.setState({ email : value})
     case "age":
-        return this.setState({ age : value})
+        return this.setState({ age : parseInt(value)})
     case "password":
         return this.setState({ password: value })
     case "repeat_password":
@@ -90,7 +93,13 @@ handleImageSet = (img_url) =>{
                         <input maxLength='40' onChange={ event => this.handleChange(event.target.value, "email") } placeholder={'Email' } type="email" />
                 </Form.Field>
                 <Form.Field>
-                        <input maxLength='2' type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={"Age"} />
+                        <input max={100} 
+
+                            error={ this.state.number > 99 ? 'Enter a number less than 99' : '' }
+                            
+                            type="number"
+                            step={ 1 }
+                            onChange={ event => this.handleChange(event.target.value, "age") } placeholder={"Age"} />
                 </Form.Field>
                  <Form.Field>
                         <input maxLength='50' onChange={ event => this.handleChange(event.target.value, "password")} placeholder='Password' type="password" />

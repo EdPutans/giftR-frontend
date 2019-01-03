@@ -24,6 +24,10 @@ export default class WishForm extends React.Component {
         { value: 5, label: "★★★★★" }
     ]
 
+    handleBack=()=>{
+        this.props.history.push('/wishlist')
+    }
+
     deleteWish=()=>{
         this.props.deleteWishFromDB(this.props.wish.id).then( () =>
         this.props.deleteWish(this.props.wish.id) )
@@ -165,17 +169,27 @@ export default class WishForm extends React.Component {
                 <Button color="red" floated='right' onClick={ this.deleteWish }>Delete</Button>
                 </div>
                 :
-                <Button 
-                    color="teal" 
-                    onClick={ this.handleSubmit }
-                    disabled={
-                        !this.state.name ||
-                        !this.state.description ||
-                        !this.state.url ||
-                        !this.state.price 
-                    }
-                >
-                Make a wish!</Button>
+                <div>
+                    <Button 
+                        color="teal" 
+                        onClick={ this.handleSubmit }
+                        disabled={
+                            !this.state.name ||
+                            !this.state.description ||
+                            !this.state.url ||
+                            !this.state.price 
+                        }
+                    >
+                        Make a wish!
+                    </Button>
+                    <Button
+                        onClick={this.handleBack}
+                        color='red'
+                        basic
+                    >
+                        Cancel
+                    </Button>
+                </div>
             }
 
                 </div>
