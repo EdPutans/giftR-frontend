@@ -104,7 +104,7 @@ export default class NotificationList extends React.Component{
                 } 
             }
             ><div>
-            <Animate
+        <Animate
              play={true}
              startStyle={{"opacity":0}}
              endStyle={{"opacity":1}}

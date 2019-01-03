@@ -39,7 +39,7 @@ export default class SantaMain extends React.Component {
             play={true}
             startStyle={{"opacity":0}}
             endStyle={{"opacity":1}}
-            durationSeconds="0.3"
+            durationSeconds="0.2"
             delaySeconds='0.1'
         >
         {component}
