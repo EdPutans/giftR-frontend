@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { Component,PureComponent } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Login from './containers/Login'
 import WishForm from './components/WishForm'
@@ -20,7 +20,7 @@ import { Animate } from "react-simple-animate";
 
 
 
-class App extends PureComponent {
+class App extends Component {
 
   // the actual working one... use this if screwed up again. milestone -  correct notifications when creating friend requests
   // ----------- state and mounting ----------- //
@@ -193,6 +193,7 @@ toggleAppear = () =>{
             <Route path='/friends' component={ props => 
           <Animate
              play={true}
+             notif={this.state.notificationsClicked}
              startStyle={{"opacity":0}}
              endStyle={{"opacity":1}}
              durationSeconds="0.3"

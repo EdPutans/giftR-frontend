@@ -11,6 +11,7 @@ export default class NotificationList extends React.Component{
     }
 
 
+
     componentDidMount = async () => {
         const unacceptedFriendRequests = await Adapter.getUnaccepted(this.props.currentUser.id)
         const resp = await Adapter.getUserSantas(this.props.currentUser.id)

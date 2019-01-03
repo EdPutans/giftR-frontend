@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Label} from 'semantic-ui-react'
+import { Form, Button, Label, Message} from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import Uploader from '../components/Uploader'
 import { Animate } from 'react-simple-animate'
@@ -7,10 +7,33 @@ import { Animate } from 'react-simple-animate'
 
 export default class ProfileForm extends React.Component {
 
-    state={
-
+    state = {
+        first_name: '',
+        last_name: '',
+        age: '',
+        email: '',
+        old_password: '',
+        new_password: '',
+        repeat_password: ''
     }
 
+
+    checkFields = () => {
+        const { first_name, last_name, email, age, new_password, repeat_password, old_password, img_url } = this.state
+        if (
+            (!email || email.includes('@'))
+            && (!age || age < 100)
+            && old_password 
+            && (!new_password || new_password.length > 5)
+            && (!first_name || first_name.length > 1)
+            && (!last_name || last_name.length > 1)
+            && (!new_password || new_password === repeat_password)
+        ) {
+            return true
+        } else {
+            return false
+        }
+    }
     checkPasswordFields = () => {
         const { new_password, repeat_password } = this.state
         return new_password === repeat_password ? true : false
@@ -23,6 +46,8 @@ export default class ProfileForm extends React.Component {
     handleSubmit = () => {
         if (
             this.checkPasswordFields() 
+            &&
+            this.checkFields()
             && 
             this.checkForPasswordPresense()) {
             const { first_name, last_name, email, age, old_password, new_password, img_url } = this.state
@@ -48,7 +73,7 @@ export default class ProfileForm extends React.Component {
                         
                 })
         } else {
-            alert("Please check your password fields.")
+            alert("Please check the information in the fields")
         }
     }
 
@@ -98,6 +123,7 @@ export default class ProfileForm extends React.Component {
 
     render() {
         const { user } = this.props
+        const { first_name, last_name, email, age, new_password, repeat_password, old_password, img_url } = this.state
         return (
         this.animateDown(<div style={ {
                     zIndex: 1,
@@ -120,36 +146,58 @@ export default class ProfileForm extends React.Component {
 
                         <Form.Field>
                             { !this.checkForPasswordPresense() && <Label>Note: To save changes enter current password below.</Label> }
-                            <input style={ { marginTop: '15px' } }
+                            <Form.Input style={ { marginTop: '15px' } }
                                 onChange={ event => this.handleChange(event.target.value, "first_name") }
                                 placeholder={ 'First name: ' + user.first_name }
-                                maxLength="20" />
+                                maxLength="20"
+                                error={ first_name && first_name.length < 2 } 
+                            />
+                            
                         </Form.Field>
                         <Form.Field>
-                            <input onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ "Last Name: " + user.last_name } maxLength="30" />
+                            <Form.Input
+                                onChange={ event => this.handleChange(event.target.value, "last_name") } placeholder={ "Last Name: " + user.last_name } maxLength="30" 
+                                error={ last_name && last_name.length < 2 } 
+                            />
+                        
                         </Form.Field>
                         <Form.Field>
-                            <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ "Email: " + user.email } type="text" maxLength="30" />
+                            <Form.Input onChange={ event => this.handleChange(event.target.value, "email") } placeholder={ "Email: " + user.email } type="text" maxLength="30" 
+                        error={ email && email.length < 3 && !email.includes('@') }/>
+                         
                         </Form.Field>
                         <Form.Field>
-                            <input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } maxLength="2" />
+                            <Form.Input type="number" step={ 1 } onChange={ event => this.handleChange(event.target.value, "age") } placeholder={ "Age: " + user.age } maxLength="2" 
+                        error={ age && parseInt(age) > 100}
+                            />
+                            
                         </Form.Field>
                         <Form.Field>
-                            <input type="password" 
+                            <Form.Input type="password" 
+                                maxLength='50'
+                                onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password'
+                                error={!old_password}
+                            />
+                        </Form.Field>
+                        <Form.Field>
+                            <Form.Input onChange={ event => this.handleChange(event.target.value, "new_password") } placeholder='New password'
                             maxLength='50'
-                            onChange={ event => this.handleChange(event.target.value, "old_password") } placeholder='Current password' />
+                            type="password"
+                            error={ new_password && new_password.length < 6 && '6 chars'}   
+                            />
+                        
                         </Form.Field>
                         <Form.Field>
-                            <input onChange={ event => this.handleChange(event.target.value, "new_password") } placeholder='New password'
+                            <Form.Input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } 
                             maxLength='50'
-                            type="password" />
+                            placeholder='Repeat password' 
+                            error={ repeat_password && repeat_password !== new_password }
+                            />
+                        
                         </Form.Field>
-                        <Form.Field>
-                            <input type="password" onChange={ event => this.handleChange(event.target.value, "repeat_password") } 
-                            maxLength='50'
-                            placeholder='Repeat password' />
-                        </Form.Field>
-                        <Button onClick={ this.handleSubmit } color='teal' floated='right' type='submit'>Save</Button>
+                        <Button onClick={ this.handleSubmit } color='teal' floated='right' 
+                        disabled={!old_password}
+                        type='submit'>Save</Button>
                         <Button onClick={ this.props.toggleEdit } color='red' basic type='submit'>Cancel</Button>
                     </Form>
                     { !this.props.user && <a href="/login">Already a member? Log in here!</a> }
