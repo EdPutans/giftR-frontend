@@ -15,7 +15,7 @@ export default class SearchArea extends React.Component {
             play={ true }
             startStyle={ { "transform": "translateX(30px)",'opacity': 0 } }
             endStyle={ { "transform": "translateX(0)", 'opacity':1 } }
-            durationSeconds="0.2"
+            durationSeconds="0.1"
             delaySeconds='0'
         >
             { component }
@@ -32,7 +32,7 @@ export default class SearchArea extends React.Component {
                         style={
                         {
                             zIndex: 1,
-                            width: '500px',
+                            minWidth: '375px',
                             paddingTop: "1em"
                         }
                     }>

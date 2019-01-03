@@ -275,6 +275,7 @@ export default class SantaMain extends React.Component {
                             }
                         
                             {this.animateMe(<Calendar
+                                locale='en-EN'
                                 onChange={ this.onCalendarChange }
                                 value={ this.state.date }
                             />)}
@@ -330,7 +331,7 @@ export default class SantaMain extends React.Component {
                         <Button
                             color='teal'
                             basic
-                            size='huge'
+                            size='big'
                             onClick={ () => this.randomizer(this.mapIdsForRandomizer(this.state.users)) }
                         >
                             {this.state.randomizedSet? 'Randomize again' : 'Randomize list' }
@@ -345,6 +346,7 @@ export default class SantaMain extends React.Component {
                     <Button
                         onClick={ this.createSecretSanta }
                         color='teal'
+                        size='huge'
                     >
                         Complete secret santa
                     </Button>

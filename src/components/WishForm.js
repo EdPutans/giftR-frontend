@@ -176,7 +176,6 @@ export default class WishForm extends React.Component {
                         disabled={
                             !this.state.name ||
                             !this.state.description ||
-                            !this.state.url ||
                             !this.state.price 
                         }
                     >

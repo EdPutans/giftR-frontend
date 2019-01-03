@@ -57,7 +57,7 @@ toggleAppear = () =>{
 
   toggleNotificationsClicked=()=>
     this.setState({notificationsClicked: !this.state.notificationsClicked})
-  
+
 
   handleNavBarChange = (item) => {
     this.setState({ navBarItem: item, notificationsClicked: false })
@@ -121,7 +121,7 @@ toggleAppear = () =>{
 
   async componentDidMount() {
     let r = await adapter.validate()
-    if (r.error) {
+    if (r && r.error) {
       this.handleLogout()
     }
     else {
@@ -129,7 +129,7 @@ toggleAppear = () =>{
       }
 
   }
-  
+
 
   handleLogout = () => {
     localStorage.removeItem('currentUser')
@@ -148,29 +148,29 @@ toggleAppear = () =>{
 
     if (this.state.currentUser) {
       return (
-        
-       
+
+
         <div>
             <div>
               {this.state.notificationsClicked &&
-           
-            <NotificationList 
+
+            <NotificationList
                 clicked={this.state.notificationsClicked}
                 refreshFriends ={ this.getFriends}
                 currentUser={this.state.currentUser}
-              /> 
-            
+              />
+
               }
            </div>
           <Switch>
             <Route
-                component={ props => 
+                component={ props =>
                   <Navbar { ...props }
                     handleItemClick={ this.handleNavBarChange }
                     activeItem={ navBarItem }
                     toggleNotificationsClicked={this.toggleNotificationsClicked}
                     notificationsClicked={this.state.notificationsClicked}
-                /> } 
+                /> }
               />
           </Switch>
             <div
@@ -186,11 +186,11 @@ toggleAppear = () =>{
                 position: 'absolute',
                 left: 0,
                 right: 0,
-              } }> 
-             
+              } }>
+
             <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
-            <Route path='/friends' component={ props => 
+            <Route path='/friends' component={ props =>
           <Animate
              play={true}
              notif={this.state.notificationsClicked}
@@ -199,24 +199,24 @@ toggleAppear = () =>{
              durationSeconds="0.3"
             //  delaySeconds='0.1'
          >
-            <FriendList 
+            <FriendList
                 {...props}
-                currentUser={this.state.currentUser} 
+                currentUser={this.state.currentUser}
                 friends={this.state.friends}
               />
             </Animate>
               } />
 
-            <Route path='/santa' component={ props => 
+            <Route path='/santa' component={ props =>
             <div>
-              <SantaMain 
+              <SantaMain
                 currentUser={this.state.currentUser}
                 friends={this.state.friends}
                 {...props}
                   // props here
               />
             </div> } />
-            <Route path='/profile' component={ props => 
+            <Route path='/profile' component={ props =>
               <Profile { ...props }
                 self={true}
                 user={ currentUser }
@@ -227,7 +227,7 @@ toggleAppear = () =>{
                 handleSubmit={ this.handleEditProfile }
                 authenticate={ this.authenticate }
                 logout={ this.handleLogout }
-              /> 
+              />
               } />
             <Route exact path='/wishlist' component={ props => <Wishlist
               { ...props }
@@ -237,10 +237,10 @@ toggleAppear = () =>{
               gifts={ this.state.gifts }
             /> }
             />
-       
-            <Route exact path='/' component={ props => <HomePage 
-              { ...props } 
-              friends={this.state.friends} 
+
+            <Route exact path='/' component={ props => <HomePage
+              { ...props }
+              friends={this.state.friends}
               currentUser={this.state.currentUser}
               /> }
              />
@@ -253,9 +253,9 @@ toggleAppear = () =>{
               <Route path='/:error' component={ props => <Error404 { ...props } /> } />
             </Switch>
             </div>
-          
+
         </div>
-        
+
       )
     } else {
       return (
@@ -271,12 +271,12 @@ toggleAppear = () =>{
             position: 'absolute',
             left: 0,
             right: 0,
-          } }> 
+          } }>
         <Switch>
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } back={this.backToWelcome}/> } />
           <Route exact path='/signup' component={ props => <Signup { ...props } handleLogin={ this.handleLogin } back={ this.backToWelcome } /> } />
-          <Route path='/:error' component={props=> <Error404 {...props} />} />
+            <Route path='/:error' component={ props => <Error404 { ...props } /> } />
         </Switch>
         </div>
       )
