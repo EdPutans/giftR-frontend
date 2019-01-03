@@ -2,7 +2,7 @@ import React from 'react'
 import * as Adapter from '../Adapter'
 import FriendNotification from '../components/FriendNotification'
 import SantaNotification from '../components/SantaNotification'
-
+import {Animate} from 'react-simple-animate'
 export default class NotificationList extends React.Component{
 
     state={
@@ -47,6 +47,13 @@ export default class NotificationList extends React.Component{
     mapUnaccepted = ()=>{
         
         return( 
+            <Animate
+             play={true}
+             startStyle={{"opacity":0}}
+             endStyle={{"opacity":1}}
+             durationSeconds="0.2"
+             delaySeconds='0.1'
+         >
         <div>
             {this.state.santas && this.state.santas.map(s =>
                 <SantaNotification
@@ -64,6 +71,7 @@ export default class NotificationList extends React.Component{
                 />
             </div>) }
       </div>
+      </Animate>
       )
     }
 
@@ -78,6 +86,7 @@ export default class NotificationList extends React.Component{
     render(){
         const {santas, unacceptedFriendRequests} = this.state
         return(
+            
             this.props.clicked && <div style={
                 {
                     overflowY: 'scroll',
@@ -94,9 +103,18 @@ export default class NotificationList extends React.Component{
                     position: 'fixed'
                 } 
             }
-            >
-                {unacceptedFriendRequests.length === 0 && santas.length === 0? <h4>There are no notifications</h4> : this.mapUnaccepted() }
-
+            ><div>
+            <Animate
+             play={true}
+             startStyle={{"opacity":0}}
+             endStyle={{"opacity":1}}
+             durationSeconds="0.2"
+             delaySeconds='0.1'
+         >
+         
+                {unacceptedFriendRequests.length === 0 && santas.length === 0? <h4>No new notifications</h4> : this.mapUnaccepted() }
+                </Animate>
+            </div>
             </div>
         )
     }

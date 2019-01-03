@@ -3,6 +3,7 @@ import { Card } from 'semantic-ui-react'
 
 export default class FriendCard extends React.Component{
 
+
 mapWishCount=(friend)=>{
     if(friend.wishes && friend.wishes.length>0){
         return `has made ${friend.wishes.length} wishes`
@@ -18,7 +19,8 @@ handleClick(friend){
 
 
 friendCard =(friend) => {
-    return <Card
+    return (
+    <Card
         key={friend.id}
         onClick={()=>this.handleClick(friend)}
             style={ {
@@ -43,6 +45,7 @@ friendCard =(friend) => {
         <Card.Content extra>
         </Card.Content>
     </Card>
+    )
 }
 
 

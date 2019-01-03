@@ -1,0 +1,33 @@
+[1mdiff --git a/src/App.js b/src/App.js[m
+[1mindex caa39a1..5a7cf41 100644[m
+[1m--- a/src/App.js[m
+[1m+++ b/src/App.js[m
+[36m@@ -94,10 +94,10 @@[m [mclass App extends PureComponent {[m
+ [m
+  handleLogin = async (object) => {[m
+     const r = await adapter.signin(object.email, object.password);[m
+[31m-   if (r.error) {[m
+[32m+[m[32m   if (r && r.error) {[m
+      alert(r.error);[m
+    }[m
+[31m-   else {[m
+[32m+[m[32m   else if(r){[m
+      localStorage.removeItem('currentUser');[m
+      localStorage.setItem('currentUser', JSON.stringify(r.user));[m
+      localStorage.setItem('token', r.token);[m
+[36m@@ -108,12 +108,13 @@[m [mclass App extends PureComponent {[m
+ [m
+   async componentDidMount() {[m
+     let r = await adapter.validate()[m
+[31m-    if (r.error) {[m
+[32m+[m
+[32m+[m[32m    if (r && r.error) {[m
+       this.handleLogout()[m
+     }[m
+     else {[m
+       this.setUserData(r)[m
+[31m-      }[m
+[32m+[m[32m    }[m
+ [m
+   }[m
+   [m

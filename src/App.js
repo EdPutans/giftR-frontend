@@ -15,17 +15,29 @@ import './App.css';
 import Error404 from './components/Error404'
 import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
+
+import { Animate } from "react-simple-animate";
+
+
+
 class App extends PureComponent {
 
   // the actual working one... use this if screwed up again. milestone -  correct notifications when creating friend requests
   // ----------- state and mounting ----------- //
   state = {
+    play: false,
     notificationsClicked: false,
     navBarItem: null,
     currentUser: null,
     gifts: [],
     friends: []
   }
+
+
+
+toggleAppear = () =>{
+    this.setState({appear: !this.state.appear})
+}
 
   // dasd
 
@@ -132,18 +144,22 @@ class App extends PureComponent {
 
   render() {
 
-    const { currentUser, navBarItem } = this.state
+    const { currentUser, navBarItem, play } = this.state
 
     if (this.state.currentUser) {
       return (
+        
+       
         <div>
             <div>
               {this.state.notificationsClicked &&
+           
             <NotificationList 
                 clicked={this.state.notificationsClicked}
                 refreshFriends ={ this.getFriends}
                 currentUser={this.state.currentUser}
               /> 
+            
               }
            </div>
           <Switch>
@@ -174,11 +190,21 @@ class App extends PureComponent {
              
             <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
-            <Route path='/friends' component={ props => <FriendList 
+            <Route path='/friends' component={ props => 
+          <Animate
+             play={true}
+             startStyle={{"opacity":0}}
+             endStyle={{"opacity":1}}
+             durationSeconds="0.3"
+            //  delaySeconds='0.1'
+         >
+            <FriendList 
                 {...props}
                 currentUser={this.state.currentUser} 
                 friends={this.state.friends}
-              /> } />
+              />
+            </Animate>
+              } />
 
             <Route path='/santa' component={ props => 
             <div>
@@ -228,6 +254,7 @@ class App extends PureComponent {
             </div>
           
         </div>
+        
       )
     } else {
       return (

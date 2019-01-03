@@ -5,7 +5,7 @@ import SantaList from '../components/SantaList'
 import { Button, Grid, Card, Checkbox } from 'semantic-ui-react'
 import Calendar from 'react-calendar'
 import * as Adapter from '../Adapter'
-
+import {Animate} from 'react-simple-animate'
 
 export default class SantaMain extends React.Component {
 
@@ -33,6 +33,19 @@ export default class SantaMain extends React.Component {
         }
         return ;
     }
+
+    animateMe = (component) => {
+        return <Animate
+            play={true}
+            startStyle={{"opacity":0}}
+            endStyle={{"opacity":1}}
+            durationSeconds="0.3"
+            delaySeconds='0.1'
+        >
+        {component}
+         </Animate>
+    }
+
 
     mapIdsForRandomizer = (objectArray) => {
         return objectArray.map(o => o.id)
@@ -99,19 +112,19 @@ export default class SantaMain extends React.Component {
 
     renderSantaList = () => {
         return (
-            <div>
+            this.animateMe(<div>
                 < SantaList
                     friends={ this.props.friends }
                     currentUser={ this.props.currentUser }
                 />
+                  
                 <Button
                     onClick={ this.toggleNewSanta }
                     color='teal'
                 >
                     New Secret Santa
-                  </Button>
-                  
-            </div>
+                  </Button> 
+            </div>)
         )
     }
 
@@ -153,6 +166,8 @@ export default class SantaMain extends React.Component {
             <h3>Create new Secret Santa</h3>
             <div style={ { margin: '0 3em 0 3em' } }>
                 <div style={ { margin: '1em 0 1em 0' } }>
+
+                
                 1. Add people to the randomizer:
                 </div>
                 <AutosuggestForm
@@ -170,15 +185,27 @@ export default class SantaMain extends React.Component {
             {
                 users.length > 0 &&
                 <div>
-                    <h4>Selected users:</h4>
+                     
+                    {this.animateMe(<h4>Selected users:</h4>)}
+                    
                     { users.map(e =>
                         <div key={e.id} style={ { margin: '1em auto 0 auto' } }>
+                        <Animate
+                            play={true}
+                            startStyle={{"transform":"translateX(15px)"}}
+                            endStyle={{"transform":"translateX(0)"}}
+                            durationSeconds="0.2"
+                            delaySeconds='0'
+                            reverseDurationSeconds="0.2"
+                            delaySeconds='0'
+                         >
                             <div style={ { textAlign: 'center', display: 'inline-block' } } >
                                 <Card
                                     description={ `${e.first_name} ${e.last_name}` }
                                     key={ e.id }
                                 />
                             </div>
+                            </Animate>
                         </div>
                     )
 
@@ -189,7 +216,7 @@ export default class SantaMain extends React.Component {
             <div>
                 {
                     (users.length > 1) &&
-                    <div>
+                    this.animateMe(<div>
                         <h5>2. Set budget:</h5>
                         £<div className='ui input'
                             style={
@@ -206,7 +233,7 @@ export default class SantaMain extends React.Component {
                                 onChange={ event => this.budgetSet(event.target.value) }
                             />
                         </div>
-                    </div>
+                    </div>)
                 }
             </div>
             {
@@ -222,15 +249,16 @@ export default class SantaMain extends React.Component {
                                     :
                                     <h5>3. Set deadline</h5>
                             }
-                            <Calendar
+                        
+                            {this.animateMe(<Calendar
                                 onChange={ this.onCalendarChange }
                                 value={ this.state.date }
-                            />
+                            />)}
                         </div>
                     </div>
                     :
                     (
-
+                        this.animateMe(
                         <div>
                             <p>{ this.state.date && `Deadline: ${this.formatDate(this.state.date)}` }</p>
                             { !calendarActive &&
@@ -244,21 +272,27 @@ export default class SantaMain extends React.Component {
                                 </div>
                             }<br />
                         </div>
+                        )
                     )
 
             }
            
             {
                 this.state.mappedPeople && this.state.mappedPeople.map(u =>
-                    <div key={u.id} style={ { margin: '2em auto 2em auto' } }>
+                    { 
+                        return <div key={u.id} style={ { margin: '2em auto 2em auto' } }>
                         <div
                             style={ { textAlign: 'center', display: 'inline-block' } }
                         >
+                        {this.animateMe(
                             <Card
                                 header={ `${u.gifter.first_name} ${u.gifter.last_name} → ${u.receiver.first_name} ${u.receiver.last_name} ` }
                             />
+                        )}
+
                         </div>
                     </div>
+                    }
                 )
             }
             {
@@ -278,7 +312,7 @@ export default class SantaMain extends React.Component {
                      </div>
             }
             <br />
-            { this.state.done && <h4>Secret Santa created. Now hold on to your shoes...</h4>}
+            { this.state.done && this.animateMe(<h4>Secret Santa created. Now hold on to your shoes...</h4>)}
             {
                 randomizedSet &&
                 <div style={ { margin: '1em 0 1em 0' } }>
