@@ -1,10 +1,15 @@
 import React from 'react'
 import * as Adapter from '../Adapter'
 import {Card} from 'semantic-ui-react'
-import Header from './Header'
 import Wishlist from '../containers/Wishlist'
-import ProfileShow from '../containers/ProfileShow'
-export default class SantaList extends React.Component {
+
+import * as Styles from '../Styles'
+
+
+export default class SantaList 
+
+
+extends React.Component {
 
     state={
         users: [],
@@ -66,9 +71,9 @@ export default class SantaList extends React.Component {
         
         if (!selectedUser) {
             return(
-                <div style={ {
-                    margin: 'auto auto auto 1em',
-                } }>
+                <div style={ 
+                    Styles.left1em
+                 }>
                     {users.length>0 && <h3>Active Secret Santas:</h3>}
                     { users.length>0 && users.map(e =>
                         <Card

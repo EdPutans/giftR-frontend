@@ -15,14 +15,12 @@ import { Menu } from 'semantic-ui-react'
                 >
                 
                 <Menu.Item   
-                    // style={ {width:"12%"}}
                     color='teal'
                     icon="home"
                     active={ this.props.activeItem === "" }
                     onClick={() => this.props.handleItemClick("") }
                 /> 
                 <Menu.Item
-                    // style={ { width:"22%" } }
                     icon="gift"
                     color='teal'
                     name='Secret Santa'
@@ -38,7 +36,6 @@ import { Menu } from 'semantic-ui-react'
                     onClick={ () => this.props.handleItemClick("wishlist") }
                 />   
                 <Menu.Item 
-                    // style={ { width:"22%"} }
                     color='teal'
                     icon='users'
                     // name='Friends'
@@ -53,7 +50,6 @@ import { Menu } from 'semantic-ui-react'
                     onClick={ () => this.props.toggleNotificationsClicked() }
                 />
                 <Menu.Item 
-                    // style={ { width: "22%" } }
                     color='teal'
                     icon='user'
                     floated='right'

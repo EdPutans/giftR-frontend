@@ -17,7 +17,7 @@ state = {
 }
 
 checkFields=()=>{
-    const { first_name, last_name, email, age, password, repeat_password, img_url } = this.state
+    const { first_name, last_name, email, age, password, repeat_password } = this.state
     if (
         email.includes('@')
         && age < 100
@@ -38,7 +38,7 @@ checkPasswords = () =>{
 }
 
 handleSignup = () => {
-    const { first_name, last_name, email, age, password,repeat_password, img_url } = this.state
+    const { first_name, last_name, email, age, password, img_url } = this.state
     if(this.checkFields())
         {if (this.checkPasswords()) {
             let user = { first_name, last_name, email, age, password, img_url }
@@ -87,7 +87,7 @@ handleImageSet = (img_url) =>{
 // pass different props to the function to sign up or to edit the user.
 
     render() {
-        const { first_name, last_name, email, age, password, img_url,repeat_password } = this.state
+        const { first_name, last_name, email, age, password,repeat_password } = this.state
         return (
         <div>
                <img

@@ -2,12 +2,12 @@ import React from 'react'
 import Header from '../components/Header'
 import AutosuggestForm from '../components/AutosuggestForm'
 import SantaList from '../components/SantaList'
-import { Button, Grid, Card, Checkbox } from 'semantic-ui-react'
+import { Button, Card, Checkbox } from 'semantic-ui-react'
 import Calendar from 'react-calendar'
 import * as Adapter from '../Adapter'
 // import {Animate} from 'react-simple-animate'
 import * as animate from '../Animations'
-
+import * as Styles from '../Styles'
 
 
 // After trying to render a ton of components which can not realistically be reused, I created a bunch of functions to make the final render methods look crispy and readable.
@@ -313,11 +313,13 @@ export default class SantaMain extends React.Component {
     renderRandomizedButton=() => {
         const { users, budgetSet, deadlineSet, randomizedSet} = this.state
         return ((users.length < 2 || !budgetSet || !deadlineSet) ?
-            <div style={ { margin: '1em 0 1em 0' } }>
+            <div style={ Styles.betweenTwo1ems }>
                 <Button disabled >Randomize list</Button>
             </div>
             :
-            <div style={ { margin: '1em 0 1em 0' } }>
+
+            
+            <div style={ Styles.betweenTwo1ems }>
                 <Button
                     color='teal'
                     basic
@@ -331,24 +333,24 @@ export default class SantaMain extends React.Component {
 
 
     renderSantaForm = () => {
-        const { budgetSet,  randomizedSet, deadlineSet, calendarActive, users } = this.state
+        const { self, randomizedSet, users } = this.state
        
         return animate.down(<div>
 
             <h3>Create new Secret Santa</h3>
             <div style={ { margin: '0 3em 0 3em' } }>
-                <div style={ { margin: '1em 0 1em 0' } }>
+                <div style={ Styles.betweenTwo1ems }>
                     1. Add people to the randomizer:
                  </div>
                 <AutosuggestForm
                     currentUser={this.props.currentUser}
-                    users={this.state.users}
+                    users={users}
                     addUser={ this.addUser }
                 />
                 <Checkbox
                     name='Include myself' 
                     label='Include myself'
-                    checked={this.state.self===true}
+                    checked={self===true}
                     onChange={ () => this.handleCheckboxIncludeSelf() }
                 ></Checkbox>
                 
@@ -378,7 +380,7 @@ export default class SantaMain extends React.Component {
             { this.state.done && animate.fade(<h4>Secret Santa created. Now hold on to your shoes...</h4>)}
             {
                 randomizedSet &&
-                <div style={ { margin: '1em 0 1em 0' } }>
+                <div style={ Styles.betweenTwo1ems }>
                     <Button
                         onClick={ this.createSecretSanta }
                         color='teal'
@@ -388,7 +390,7 @@ export default class SantaMain extends React.Component {
                     </Button>
                 </div>
             }<br />
-            <div style={ { margin: '1em 0 1em 0' } }>
+            <div style={ Styles.betweenTwo1ems }>
                 <Button
                 onClick={ this.toggleNewSanta }
                 basic

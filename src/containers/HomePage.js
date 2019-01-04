@@ -1,6 +1,5 @@
 import React from 'react'
 import { Input, Button, Icon, Form } from 'semantic-ui-react'
-import {Route, Redirect, Switch} from 'react-router-dom'
 import * as adapter from '../Adapter'
 import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'

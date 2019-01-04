@@ -1,5 +1,5 @@
 import React from 'react'
-import { Form, Button, Label, Message} from 'semantic-ui-react'
+import { Form, Button, Label} from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import Uploader from '../components/Uploader'
 import * as animate from '../Animations'
@@ -18,7 +18,7 @@ export default class ProfileForm extends React.Component {
 
 
     checkFields = () => {
-        const { first_name, last_name, email, age, new_password, repeat_password, old_password, img_url } = this.state
+        const { first_name, last_name, email, age, new_password, repeat_password, old_password } = this.state
         if (
             (!email || email.includes('@'))
             && (!age || age < 100)
@@ -110,7 +110,7 @@ export default class ProfileForm extends React.Component {
 
     render() {
         const { user } = this.props
-        const { first_name, last_name, email, age, new_password, repeat_password, old_password, img_url } = this.state
+        const { first_name, last_name, email, age, new_password, repeat_password, old_password } = this.state
         return (
         animate.down(<div style={ {
                     zIndex: 1,

@@ -48,7 +48,7 @@ export default class Wish extends React.Component {
 
 
     render() {
-        const {user, currentUser} = this.props
+        const {currentUser} = this.props
         const {wish} = this.state
         if(this.state.wish){return (<div>
             <br />

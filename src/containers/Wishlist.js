@@ -64,6 +64,7 @@ export default class Wishlist extends React.Component {
             !this.props.currentUser.id !== this.props.user.id && <div>
                 <div style={ { marginTop: '5px', textAlign: 'center' } }>
                     <img
+                        alt='green tick'
                         src='https://us.123rf.com/450wm/stas11/stas111706/stas11170600111/80189104-green-check-mark-icon-tick-symbol-in-green-color-vector-illustration.jpg?ver=6'
                         style={ { maxHeight: '20px', width: 'auto' } }
                     />
