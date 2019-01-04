@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-import { Animate } from 'react-simple-animate'
+import * as animate from '../Animations'
 export default class SearchArea extends React.Component {
 
     isFriend=(id)=>{
@@ -10,17 +10,6 @@ export default class SearchArea extends React.Component {
         }
     }
 
-    animateList = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ { "transform": "translateX(30px)",'opacity': 0 } }
-            endStyle={ { "transform": "translateX(0)", 'opacity':1 } }
-            durationSeconds="0.1"
-            delaySeconds='0'
-        >
-            { component }
-        </Animate>
-    }
 
 
     render() {
@@ -37,7 +26,7 @@ export default class SearchArea extends React.Component {
                         }
                     }>
                         
-                        {this.animateList(<Card
+                        {animate.list(<Card
                             key={u.id}
                             fluid
                             onClick={ () => this.props.selectUser(u) }

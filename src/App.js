@@ -15,8 +15,7 @@ import './App.css';
 import Error404 from './components/Error404'
 import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
-
-import { Animate } from "react-simple-animate";
+import * as animate from './Animations'
 
 
 
@@ -190,20 +189,13 @@ toggleAppear = () =>{
             <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
             <Route path='/friends' component={ props =>
-          <Animate
-             play={true}
-             notif={this.state.notificationsClicked}
-             startStyle={{"opacity":0}}
-             endStyle={{"opacity":1}}
-             durationSeconds="0.3"
-            //  delaySeconds='0.1'
-         >
-            <FriendList
-                {...props}
-                currentUser={this.state.currentUser}
-                friends={this.state.friends}
-              />
-            </Animate>
+                animate.list(
+                <FriendList
+                  { ...props }
+                  currentUser={ this.state.currentUser }
+                  friends={ this.state.friends }
+                />
+                )
               } />
 
             <Route path='/santa' component={ props =>

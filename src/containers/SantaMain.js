@@ -5,7 +5,8 @@ import SantaList from '../components/SantaList'
 import { Button, Grid, Card, Checkbox } from 'semantic-ui-react'
 import Calendar from 'react-calendar'
 import * as Adapter from '../Adapter'
-import {Animate} from 'react-simple-animate'
+// import {Animate} from 'react-simple-animate'
+import * as animate from '../Animations'
 
 
 
@@ -77,7 +78,6 @@ export default class SantaMain extends React.Component {
         return mapper
     }
 
-    // --------------- external functions -------------
 
     onCalendarChange = date => {
         this.setState({ date })
@@ -110,52 +110,6 @@ export default class SantaMain extends React.Component {
     }
 
 
-    // ---------- animation presets ----------//
-
-
-    animateList = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ {
-                "transform": "translateX(30px)", "opacity": 0
-            } }
-            endStyle={ {
-                "transform": "translateX(0)", "opacity": 1
-            } }
-            reverseDurationSeconds='0.2'
-
-            durationSeconds="0.1"
-            delaySeconds='0'
-        >
-            { component }
-        </Animate>
-    }
-
-    animateDown = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
-            endStyle={ { "transform": "translateY(0)", "opacity": 1 } }
-            durationSeconds="0.3"
-            delaySeconds='0'
-        >
-            { component }
-        </Animate>
-    }
-
-
-    animateFade = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ { "opacity": 0 } }
-            endStyle={ { "opacity": 1 } }
-            durationSeconds="0.2"
-            delaySeconds='0.1'
-        >
-            { component }
-        </Animate>
-    }
-
 
 
     redirectBack = () =>{
@@ -164,7 +118,7 @@ export default class SantaMain extends React.Component {
 
     renderSantaList = () => {
         return (
-            this.animateFade(
+            animate.fade(
                 <div>
                     < SantaList
                         friends={ this.props.friends }
@@ -260,11 +214,11 @@ export default class SantaMain extends React.Component {
             users.length > 0 &&
                 <div>
 
-                    { this.animateFade(<h4>Selected users:</h4>) }
+                    { animate.fade(<h4>Selected users:</h4>) }
 
                     { users.map(e =>
                         <div key={ e.id } style={ { margin: '1em auto 0 auto' } }>
-                            { this.animateList(
+                            { animate.santaList(
                                 <div style={ { textAlign: 'center', display: 'inline-block' } } >
                                     <Card
                                         description={ `${e.first_name} ${e.last_name}` }
@@ -287,7 +241,7 @@ export default class SantaMain extends React.Component {
                 <div
                     style={ { textAlign: 'center', display: 'inline-block' } }
                 >
-                    { this.animateFade(
+                    { animate.fade(
                         <Card
                             header={ `${u.gifter.first_name} ${u.gifter.last_name} → ${u.receiver.first_name} ${u.receiver.last_name} ` }
                         />
@@ -333,7 +287,7 @@ export default class SantaMain extends React.Component {
         return <div>
             {
                 (this.state.users.length > 1) &&
-                this.animateFade(<div>
+                animate.fade(<div>
                     <h5>2. Set budget:</h5>
                     £<div className='ui input'
                         style={
@@ -379,7 +333,7 @@ export default class SantaMain extends React.Component {
     renderSantaForm = () => {
         const { budgetSet,  randomizedSet, deadlineSet, calendarActive, users } = this.state
        
-        return this.animateDown(<div>
+        return animate.down(<div>
 
             <h3>Create new Secret Santa</h3>
             <div style={ { margin: '0 3em 0 3em' } }>
@@ -421,7 +375,7 @@ export default class SantaMain extends React.Component {
             }
 
             <br />
-            { this.state.done && this.animateFade(<h4>Secret Santa created. Now hold on to your shoes...</h4>)}
+            { this.state.done && animate.fade(<h4>Secret Santa created. Now hold on to your shoes...</h4>)}
             {
                 randomizedSet &&
                 <div style={ { margin: '1em 0 1em 0' } }>

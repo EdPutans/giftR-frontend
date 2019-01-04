@@ -1,4 +1,9 @@
-export const animateList = (component) => {
+import { Animate } from 'react-simple-animate'
+import React from 'react'
+// import * as animate from '../Animations'
+
+
+export const list = (component) => {
     return <Animate
         play={ true }
         startStyle={ { "transform": "translateX(100px)" } }
@@ -11,7 +16,7 @@ export const animateList = (component) => {
 }
 
 
-export const animateFade = (component) => {
+export const fade = (component) => {
     return <Animate
         play={ true }
         startStyle={ { "opacity": 0 } }
@@ -24,7 +29,7 @@ export const animateFade = (component) => {
 }
 
 
-export const animateDown = (component) => {
+export const down = (component) => {
     return <Animate
         play={ true }
         startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
@@ -35,3 +40,21 @@ export const animateDown = (component) => {
         { component }
     </Animate>
 }
+
+export const santaList =  (component) => {
+        return <Animate
+            play={ true }
+            startStyle={ {
+                "transform": "translateX(30px)", "opacity": 0
+            } }
+            endStyle={ {
+                "transform": "translateX(0)", "opacity": 1
+            } }
+            reverseDurationSeconds='0.2'
+
+            durationSeconds="0.1"
+            delaySeconds='0'
+        >
+            { component }
+        </Animate>
+    }

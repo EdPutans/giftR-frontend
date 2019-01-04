@@ -1,19 +1,12 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
-import { Animate } from 'react-simple-animate'
+import * as animate from '../Animations'
 
 
 export default class Error404 extends React.Component {
 
 render(){
-    return(
-        <Animate
-            play={ true }
-            startStyle={ { "opacity": 0 } }
-            endStyle={ { "opacity": 1 } }
-            durationSeconds="0.1"
-            delaySeconds='0.2'
-        >
+    return animate.fade(
         <div>
        
             <div style={ { textAlign: 'center' } }>
@@ -27,8 +20,7 @@ render(){
             </div>
         </div>
         </div>
-        </Animate>
-    )
+        )
 
 }
 

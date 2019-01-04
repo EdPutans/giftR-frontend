@@ -1,23 +1,8 @@
 import React from 'react'
 import { Button, Card } from 'semantic-ui-react'
-import { Animate } from 'react-simple-animate'
 
 
 export default class ProfileShow extends React.Component {
-
-
-    animateDown = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
-            endStyle={ { "transform": "translateY(0)", "opacity": 1 } }
-            durationSeconds="0.3"
-            delaySeconds='0'
-        >
-            { component }
-        </Animate>
-    }
-
 
 
     render(){

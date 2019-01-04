@@ -4,7 +4,7 @@ import { Button, Icon, Card } from 'semantic-ui-react'
 import * as Adapter from '../Adapter'
 import ProfileShow from './ProfileShow'
 import Header from '../components/Header'
-import {Animate} from 'react-simple-animate'
+import * as animate from '../Animations'
 
 export default class Wishlist extends React.Component {
 
@@ -120,30 +120,14 @@ export default class Wishlist extends React.Component {
 
     }       
     
-    animateMe = (component) => {
-        return <Animate
-            play={true}
-            startStyle={{"opacity":0}}
-            endStyle={{"opacity":1}}
-            durationSeconds="0.3"
-            delaySeconds='0.1'
-        >
-            {component}
-         </Animate>
-    }
+  
 
     createWish = () => this.props.history.push('/new_wish')
 
     render() {
         let user = this.props.user ? this.props.user : this.props.currentUser
         if (user && this.props.gifts) {
-            return <Animate
-            play={true}
-            startStyle={{"opacity":0}}
-            endStyle={{"opacity":1}}
-            durationSeconds="0.2"
-            delaySeconds='0.1'
-        >
+            return animate.fade(
                 <div style={ {
                     zIndex: 1,
                     paddingTop: "3em",
@@ -188,7 +172,7 @@ export default class Wishlist extends React.Component {
                     { this.renderButton() }
                 </div>
                 
-             </Animate>
+             )
         }
     }
 }

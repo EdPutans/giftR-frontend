@@ -2,8 +2,7 @@ import React from 'react'
 import { Form, Button, Label, Message} from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import Uploader from '../components/Uploader'
-import { Animate } from 'react-simple-animate'
-
+import * as animate from '../Animations'
 
 export default class ProfileForm extends React.Component {
 
@@ -106,18 +105,6 @@ export default class ProfileForm extends React.Component {
     setImage=(img_url)=>
         this.setState({img_url})
     
-// animation
-    animateDown = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ { "transform": "translateY(-10px)", "opacity": 0 } }
-            endStyle={ { "transform": "translateY(0)", "opacity": 1 } }
-            durationSeconds="0.3"
-            delaySeconds='0'
-        >
-            { component }
-        </Animate>
-    }
     
 
 
@@ -125,7 +112,7 @@ export default class ProfileForm extends React.Component {
         const { user } = this.props
         const { first_name, last_name, email, age, new_password, repeat_password, old_password, img_url } = this.state
         return (
-        this.animateDown(<div style={ {
+        animate.down(<div style={ {
                     zIndex: 1,
                     
                 } }>

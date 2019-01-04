@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
-import { Animate } from 'react-simple-animate'
+import * as animate from '../Animations'
 
 
 export default class Welcome extends React.Component {
@@ -14,25 +14,12 @@ export default class Welcome extends React.Component {
     //     // maxWidth: '1280px '
     // }
 
-    animateMe = (component) => {
-        return <Animate
-            play={ true }
-            startStyle={ { "opacity": 0 } }
-            endStyle={ { "opacity": 1 } }
-            durationSeconds="0.2"
-            delaySeconds='0.5'
-        >
-            { component }
-        </Animate>
-    }
-
+   
 
     render() {
         return (
-            this.animateMe(<div style={{
-                
-                backgroundColor: '#FFFFFF',
-            }}
+            animate.fade(
+            <div style={{ backgroundColor: '#FFFFFF' }}
            
             >
                 <img alt='giftR logo'
