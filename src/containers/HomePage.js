@@ -77,6 +77,7 @@ export default class HomePage extends React.Component {
             { component }
         </Animate>
     }
+    
     animateList = (component) => {
         return <Animate
             play={ true }
