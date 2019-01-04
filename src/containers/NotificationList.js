@@ -97,7 +97,7 @@ export default class NotificationList extends React.Component{
                     borderRadius: '5px',
                     backgroundColor: '#FFFFFF',
                     height: '300px',
-                    minWidth: '200px',
+                    minWidth: '250px',
                     width: '20%',
                     right: '15px',
                     top: '50px',

@@ -1,4 +1,4 @@
-import React, { Component,PureComponent } from 'react';
+import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Login from './containers/Login'
 import WishForm from './components/WishForm'
@@ -25,7 +25,6 @@ class App extends Component {
   // the actual working one... use this if screwed up again. milestone -  correct notifications when creating friend requests
   // ----------- state and mounting ----------- //
   state = {
-    play: false,
     notificationsClicked: false,
     navBarItem: '',
     currentUser: null,
@@ -97,9 +96,9 @@ toggleAppear = () =>{
   }
 
   setUserData = async (response) =>{
-    await this.setState({ currentUser: response.user });
+    if(response.user){await this.setState({ currentUser: response.user });
     await this.getWishes()
-    return await this.getFriends(response.user)
+    return await this.getFriends(response.user)}
   }
 
   // -------------- log in/out, sign up --------------
@@ -115,7 +114,7 @@ toggleAppear = () =>{
      localStorage.setItem('currentUser', JSON.stringify(r.user));
      localStorage.setItem('token', r.token);
      this.props.history.push('/');
-     this.setUserData(r)
+     r && this.setUserData(r)
    }
   }
 
@@ -125,7 +124,7 @@ toggleAppear = () =>{
       this.handleLogout()
     }
     else {
-      this.setUserData(r)
+      r && this.setUserData(r)
       }
 
   }
@@ -144,7 +143,7 @@ toggleAppear = () =>{
 
   render() {
 
-    const { currentUser, navBarItem, play } = this.state
+    const { currentUser, navBarItem } = this.state
 
     if (this.state.currentUser) {
       return (

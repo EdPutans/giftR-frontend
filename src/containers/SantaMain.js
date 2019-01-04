@@ -7,6 +7,14 @@ import Calendar from 'react-calendar'
 import * as Adapter from '../Adapter'
 import {Animate} from 'react-simple-animate'
 
+// export default class SelectedSantaParticipants extends React.Component {
+
+
+// }
+
+
+
+
 export default class SantaMain extends React.Component {
 
     state = {
@@ -189,6 +197,32 @@ export default class SantaMain extends React.Component {
         this.setState({calendarActive: !this.state.calendarActive})
     }
 
+    renderSelectedUsers = () => {
+        const { users } = this.state
+        return (
+            users.length > 0 &&
+                <div>
+
+                    { this.animateMe(<h4>Selected users:</h4>) }
+
+                    { users.map(e =>
+                        <div key={ e.id } style={ { margin: '1em auto 0 auto' } }>
+                            { this.animateList(
+                                <div style={ { textAlign: 'center', display: 'inline-block' } } >
+                                    <Card
+                                        description={ `${e.first_name} ${e.last_name}` }
+                                        key={ e.id }
+                                    />
+                                </div>
+                            ) }
+                        </div>
+                    )
+
+                    }
+                </div>
+        )
+    }
+
     renderSantaForm = () => {
         const { budgetSet,  randomizedSet, deadlineSet, calendarActive, users } = this.state
        
@@ -214,27 +248,11 @@ export default class SantaMain extends React.Component {
                     onChange={ () => this.handleSelfTick() }
                 ></Checkbox>
             </div>
+            
             {
-                users.length > 0 &&
-                <div>
-                     
-                    {this.animateMe(<h4>Selected users:</h4>)}
-                    
-                    { users.map(e =>
-                        <div key={e.id} style={ { margin: '1em auto 0 auto' } }>
-                            {this.animateList(
-                            <div style={ { textAlign: 'center', display: 'inline-block' } } >
-                                <Card
-                                    description={ `${e.first_name} ${e.last_name}` }
-                                    key={ e.id }
-                                />
-                            </div>
-                            )}
-                        </div>
-                    )
-
-                    }
-                </div>
+                // renders the list of users
+                this.renderSelectedUsers()
+                
             }
             <br />
             <div>

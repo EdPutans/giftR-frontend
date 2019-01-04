@@ -1,7 +1,5 @@
-import Autosuggest from 'react-autosuggest'
 import React from 'react'
-import * as Adapter from '../Adapter'
-import { Button, Card } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 import { Animate } from 'react-simple-animate'
 
 
