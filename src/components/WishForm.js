@@ -19,48 +19,6 @@ export default class WishForm extends React.Component {
     }
 
 
-    formFields = [
-        {
-            defaultValue: this.state.name,
-            type: 'text',
-            maxLength: '20',
-            name: 'name',
-            placeholder: 'Title',
-            onChange: event => this.setState({ name: event.target.value })
-        },
-        {
-            defaultValue: this.state.description,
-            type: 'text',
-            maxLength: '20',
-            name: 'name',
-            placeholder: "Description (up to 500 characters)",
-            onChange: event => this.setState({ dscription: event.target.value })
-        },
-        {
-            defaultValue: this.state.url,
-            maxLength: "500",
-            type: "text",
-            name: "url",
-            placeholder: "Link to purchase",
-            onChange: event => this.setState({ url: event.target.value })
-        },
-        {
-            defaultValue: this.state.img_url,
-            maxLength: "500",
-            type: "text",
-            name: "img_url",
-            placeholder: "Image link (optional)",
-            onChange: event => this.setState({ img_url: event.target.value })
-        },
-        {
-            defaultValue: this.state.price,
-            maxLength: "20",
-            type: "number",
-            name: "price",
-            placeholder: "Price",
-            onChange: event => this.setState({ price: parseInt(event.target.value) })
-        }
-    ]
 
     selection = [
         { value: 1, label: "★" },
@@ -109,6 +67,48 @@ export default class WishForm extends React.Component {
     }
 
 
+    formFields = [
+        {
+            defaultValue: this.state.name,
+            type: 'text',
+            maxLength: '20',
+            name: 'name',
+            placeholder: 'Title',
+            onChange: event => this.setState({ name: event.target.value })
+        },
+        {
+            defaultValue: this.state.description,
+            type: 'text',
+            maxLength: '20',
+            name: 'name',
+            placeholder: "Description (up to 500 characters)",
+            onChange: event => this.setState({ dscription: event.target.value })
+        },
+        {
+            defaultValue: this.state.url,
+            maxLength: "500",
+            type: "text",
+            name: "url",
+            placeholder: "Link to purchase",
+            onChange: event => this.setState({ url: event.target.value })
+        },
+        {
+            defaultValue: this.state.img_url,
+            maxLength: "500",
+            type: "text",
+            name: "img_url",
+            placeholder: "Image link (optional)",
+            onChange: event => this.setState({ img_url: event.target.value })
+        },
+        {
+            defaultValue: this.state.price,
+            maxLength: "20",
+            type: "number",
+            name: "price",
+            placeholder: "Price",
+            onChange: event => this.setState({ price: parseInt(event.target.value) })
+        }
+    ]
 
     render() {
         return (

@@ -8,7 +8,6 @@ import Profile from './containers/Profile'
 import HomePage from './containers/HomePage'
 import Navbar from './components/Navbar'
 import Wishlist from './containers/Wishlist'
-import EditWish from './components/EditWish'
 import SantaMain from './containers/SantaMain'
 import NotificationList from './containers/NotificationList'
 import './App.css';
@@ -237,9 +236,7 @@ toggleAppear = () =>{
             <Route exact path='/new_wish' component={ props =>
               <WishForm { ...props } handleSubmit={ this.handleNewWish } /> }
             />
-            <Route exact path='/edit_wish' component={ props =>
-              <EditWish { ...props } /> }
-            />
+           
               <Route path='/:error' component={ props => <Error404 { ...props } /> } />
             </Switch>
             </div>
