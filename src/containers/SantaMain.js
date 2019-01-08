@@ -113,7 +113,7 @@ export default class SantaMain extends React.Component {
 
 
     redirectBack = () =>{
-        return setTimeout(() => this.props.history.push('/santa'), 4000)
+        return setTimeout(() => this.props.history.push('/santa'), 2500)
     }
 
     renderSantaList = () => {
@@ -164,7 +164,7 @@ export default class SantaMain extends React.Component {
 
     renderCalendar = () => {
         const { budgetSet, calendarActive, deadlineSet, date } = this.state
-        const {toggleCalendar, animateFade, onCalendarChange} = this;
+        const {toggleCalendar, onCalendarChange} = this;
         return ((budgetSet && calendarActive) ?
             <div>
                 <div style={ {
@@ -178,7 +178,7 @@ export default class SantaMain extends React.Component {
                             <h5>3. Set deadline</h5>
                     }
 
-                    { animateFade(<Calendar
+                    { animate.fade(<Calendar
                         locale='en-EN'
                         onChange={ onCalendarChange }
                         value={ date }
@@ -187,7 +187,7 @@ export default class SantaMain extends React.Component {
             </div>
             :
             (
-                animateFade(
+                animate.fade(
                     <div>
                         <p>{ date && `Deadline: ${this.formatDate(date)}` }</p>
                         { !calendarActive &&

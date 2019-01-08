@@ -2,6 +2,8 @@ import React from 'react'
 import * as Adapter from '../Adapter'
 import {Card} from 'semantic-ui-react'
 import Wishlist from '../containers/Wishlist'
+import * as animate from '../Animations'
+
 
 import * as Styles from '../Styles'
 
@@ -70,7 +72,8 @@ extends React.Component {
         const {users, selectedUser} = this.state
         
         if (!selectedUser) {
-            return(
+            return (
+                
                 <div style={ 
                     Styles.left1em
                  }>
@@ -86,6 +89,9 @@ extends React.Component {
                             meta={ `Deadline on ${this.formatDate(e.deadline)}` }
                             description={ `Budget - £${e.budget}` }
                         />)
+                        
+                        
+                        
                     }
 
                 </div>

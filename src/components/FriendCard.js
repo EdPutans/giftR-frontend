@@ -1,6 +1,6 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
-
+import * as animate from '../Animations'
 export default class FriendCard extends React.Component{
 
 
@@ -19,7 +19,7 @@ handleClick(friend){
 
 
 friendCard =(friend) => {
-    return (
+    return animate.fade(
     <Card
         key={friend.id}
         onClick={()=>this.handleClick(friend)}
