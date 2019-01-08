@@ -2,7 +2,6 @@ import React from 'react'
 import * as Adapter from '../Adapter'
 import {Card} from 'semantic-ui-react'
 import Wishlist from '../containers/Wishlist'
-import * as animate from '../Animations'
 
 
 import * as Styles from '../Styles'
@@ -80,6 +79,7 @@ extends React.Component {
                     {users.length>0 && <h3>Active Secret Santas:</h3>}
                     { users.length>0 && users.map(e =>
                         <Card
+                            key={e.id}
                             onClick={ () => this.selectUser(e) }
                             style={ {
                                 textAlign: 'center',
