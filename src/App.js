@@ -1,3 +1,4 @@
+// styling done
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom'
 import Login from './containers/Login'
@@ -14,6 +15,7 @@ import './App.css';
 import Error404 from './components/Error404'
 import * as adapter from './Adapter'
 import FriendList from './containers/FriendList'
+import * as styles from './Styles'
 
 
 
@@ -169,21 +171,7 @@ toggleAppear = () =>{
                 /> }
               />
           </Switch>
-            <div
-              style={ {
-                // marginTop: '5%',
-                borderRadius: '5px',
-                backgroundColor: '#FFFFFF',
-                paddingBottom: '6%',
-                // maxWidth: '700px',
-                margin: '60px auto ',
-                minWidth: '375px',
-                width: '80%',
-                position: 'absolute',
-                left: 0,
-                right: 0,
-              } }>
-
+            <div style={ styles.mainDiv }>
             <Switch>
             {/* because user is signed out, we currently only work on these ;p */ }
             <Route path='/friends' component={ props =>
@@ -247,18 +235,7 @@ toggleAppear = () =>{
     } else {
       return (
         <div
-          style={ {
-            // marginTop: '5%',
-            borderRadius: '5px',
-            backgroundColor: '#FFFFFF',
-            paddingBottom: '5%',
-            // maxWidth: '700px',
-            margin: '60px auto',
-            width: '80%',
-            position: 'absolute',
-            left: 0,
-            right: 0,
-          } }>
+          style={ styles.mainDiv }>
         <Switch>
           <Route exact path='/' component={ props => <Welcome { ...props } /> } />
           <Route exact path='/login' component={ props => <Login { ...props } handleLogin={ this.handleLogin } back={this.backToWelcome}/> } />

@@ -3,6 +3,8 @@ import { Card } from 'semantic-ui-react'
 import FriendCard from '../components/FriendCard'
 import Wishlist from './Wishlist'
 import Header from '../components/Header'
+import * as Styles from '../Styles'
+
 
 export default class HomePage extends React.Component {
 
@@ -44,11 +46,7 @@ export default class HomePage extends React.Component {
 
 
     noFriendsExist = () => {
-        return <div style={ {
-            zIndex: 1,
-            paddingTop: "3em",
-            paddingBottom: "6em"
-        } }>
+        return <div style={ Styles.topSpace }>
             <Header title={ 'Friends' } />
              <h5 style={{textAlign:'center'}}> No friends added yet</h5>
         </div>
@@ -57,11 +55,7 @@ export default class HomePage extends React.Component {
     friendsExist = () => {
         if (this.state.friends) {
             return <div>
-                <div style={ {
-                    zIndex: 1,
-                    paddingTop: "3em",
-                    paddingBottom: "6em"
-                } }>
+                <div style={ Styles.topSpace }>
                     <Header title={'Friends'} />
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } 
                     style={{

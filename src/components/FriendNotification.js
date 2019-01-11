@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button, Card} from 'semantic-ui-react'
-
+// styling not required in this file
 
 
 export default class FriendNotification extends React.Component {

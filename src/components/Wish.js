@@ -1,6 +1,7 @@
 import React from 'react'
 import { Card, Icon, Button } from 'semantic-ui-react'
 import WishForm from './WishForm'
+import * as Styles from '../Styles'
 
 export default class Wish extends React.Component {
 
@@ -60,11 +61,7 @@ export default class Wish extends React.Component {
                 }}>
                 <img 
                     alt='wish'
-                    style={ { maxHeight: '80%', maxWidth: '80%', margin: '0 auto', display: 'block', 
-                    padding: '5% 0 5% 0 '
-                } 
-                } 
-               
+                    style={ Styles.mapImage } 
                     src={ 
                         wish.img_url ||
                         'https://images.immediate.co.uk/volatile/sites/3/2017/11/imagenotavailable1-39de324.png'

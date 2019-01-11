@@ -1,8 +1,10 @@
+// styling done
 import Dropzone from 'react-dropzone'
 import request from 'superagent'
 import React from 'react'
-// const CLOUDINARY_URL = 'https://api.cloudinary.com/v1_1/dotvnvsga/upload'
-// const CLOUDINARY_UPLOAD_PRESET   =  'eeeeee'
+
+import * as Styles from '../Styles'
+
 const loadingGif = 'https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif'
 
 export default class Uploader extends React.Component {
@@ -47,13 +49,24 @@ export default class Uploader extends React.Component {
     render() {
         return <div>
             { this.state.uploadedImageURL && <div>
-                { this.state.uploadedImageURL === '' ? <img alt='uploaded' style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.props.profilePicURL } /> :
-                    <div>
-                        <img alt='uploaded file' style={ { height: '200px', width: 'auto', margin: ' 15px auto 15px auto', display: 'block', border: '1px dotted black', borderRadius: '3px', textAlign: 'center' } } src={ this.state.uploading ? loadingGif : this.state.uploadedImageURL } />
-                        </div>
+                { this.state.uploadedImageURL === '' ?
+                <div> 
+                <img         
+                    alt='uploaded'
+                    style={ Styles.uploadedImage }
+                    src={ this.props.profilePicURL } 
+                />
+                </div>
+                 :
+                <div>
+                    <img 
+                        alt='uploaded file'
+                        style={ Styles.uploadedImage }
+                        src={ this.state.uploading ? loadingGif : this.state.uploadedImageURL } />
+                </div>
                     } 
             </div>}
-            <div style={ { height: '100px', width: '300px', margin: 'auto', display: 'block', border: '1px dotted black', borderRadius:'3px', textAlign: 'center' } }>
+            <div style={ Styles.dropZoneDiv }>
                 <Dropzone multiple={false} onDrop={ this.onImageDrop }>
                     { ({ getRootProps, getInputProps, isDragActive }) => {
                         return (

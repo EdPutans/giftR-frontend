@@ -5,6 +5,7 @@ import * as Adapter from '../Adapter'
 import ProfileShow from './ProfileShow'
 import Header from '../components/Header'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
 
 export default class Wishlist extends React.Component {
 
@@ -129,11 +130,7 @@ export default class Wishlist extends React.Component {
         let user = this.props.user ? this.props.user : this.props.currentUser
         if (user && this.props.gifts) {
             return animate.fade(
-                <div style={ {
-                    zIndex: 1,
-                    paddingTop: "3em",
-                    paddingBottom: "6em"
-                } }>
+                <div style={ Styles.listDiv }>
                     
 
 

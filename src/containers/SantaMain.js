@@ -410,12 +410,9 @@ export default class SantaMain extends React.Component {
 
     render() {
         return (
-            <div style={ {
-                zIndex: 1,
-                paddingTop: "3em",
-                paddingBottom: "6em",
-                textAlign: 'center'
-            } }>
+            <div style={ 
+                Styles.listDiv
+             }>
                 <Header title={ 'Secret Santa' } />
                 { this.state.newSantaActive ?
                     this.renderSantaListAndForm() : this.renderSantaList()

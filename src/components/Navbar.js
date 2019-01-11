@@ -1,5 +1,8 @@
 import React from 'react'
 import { Menu } from 'semantic-ui-react'
+import * as Styles from '../Styles'
+
+
  export default class Navbar extends React.Component {
 
 
@@ -8,10 +11,7 @@ import { Menu } from 'semantic-ui-react'
     render() {
         return (<div >
             <Menu fluid inverted color='black' 
-                style={ {position: 'fixed',
-                maxWidth:'100%',
-                zIndex: "100"
-            } }
+                style={ Styles.navBar}
                 >
                 
                 <Menu.Item   

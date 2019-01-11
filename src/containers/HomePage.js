@@ -5,6 +5,8 @@ import SearchArea from '../components/SearchArea'
 import Wishlist from '../containers/Wishlist'
 import ProfileShow from './ProfileShow'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
+
 
 export default class HomePage extends React.Component {
 
@@ -66,15 +68,12 @@ export default class HomePage extends React.Component {
     renderUserList=()=>{
         return (
             animate.fade(
-            <div style={{textAlign:'center', paddingTop: '3em', paddingBottom: '2 em'}}>
+            <div style={Styles.listDiv}>
                 <h1>Welcome to GiftR!</h1><br/>
                 <h5>Start by looking up a person or creating your very own wishlist!</h5>
-                <div style={ {
-                    zIndex: '1',
-                    padding: "3em auto 3em auto "
-                } }>
+                <div style={ Styles.betweenTwo3ems }>
                 <div 
-                    style={{ marginTop: '1em', marginBottom: '1em'}}
+                    style={Styles.betweenTwo1ems}
                 >
                 <Form>
                     <Input  

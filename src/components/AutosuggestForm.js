@@ -2,7 +2,8 @@ import Autosuggest from 'react-autosuggest'
 import React from 'react'
 import * as Adapter from '../Adapter'
 import {Button,Card} from 'semantic-ui-react'
- 
+ import * as Styles from '../Styles'
+
 export default class AutosuggestForm extends React.Component{
 
     
@@ -100,7 +101,7 @@ export default class AutosuggestForm extends React.Component{
                     renderSuggestion={this.renderSuggestion}
                     inputProps={inputProps}
                 /><br />
-                <div style={{margin:'0 0 3em 0'}}>
+                <div style={ Styles.bottomSpace}>
                 <Button
                   color='teal'
                   basic
