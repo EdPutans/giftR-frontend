@@ -1,6 +1,11 @@
 import React from 'react'
 import { Card } from 'semantic-ui-react'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
+
+// div with key had a styling : minWidth:375px, marginTop: 1em, zindex: 1 , paste back in if necessary
+
+
 export default class SearchArea extends React.Component {
 
     isFriend=(id)=>{
@@ -13,19 +18,10 @@ export default class SearchArea extends React.Component {
 
 
     render() {
-            return (<div>
+            return (<div style={Styles.betweenTwo1ems}>
                 <Card.Group className="ui center aligned grid">
                 { this.props.users && this.props.users.map(u =>
-                    <div 
-                        key={u.id}
-                        style={
-                        {
-                            zIndex: 1,
-                            minWidth: '375px',
-                            paddingTop: "1em"
-                        }
-                    }>
-                        
+                    <div key={u.id}>
                         {animate.list(<Card
                             key={u.id}
                             fluid

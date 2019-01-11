@@ -3,6 +3,7 @@ import * as Adapter from '../Adapter'
 import FriendNotification from '../components/FriendNotification'
 import SantaNotification from '../components/SantaNotification'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
 
 
 
@@ -12,7 +13,6 @@ export default class NotificationList extends React.Component {
         unacceptedFriendRequests: [],
         santas: []
     }
-
 
 
     componentDidMount = async () => {
@@ -48,9 +48,7 @@ export default class NotificationList extends React.Component {
     }
 
     mapUnaccepted = () => {
-
         return animate.fade(
-
             <div>
                 { this.state.santas && this.state.santas.map(s =>
                     <SantaNotification
@@ -85,20 +83,7 @@ export default class NotificationList extends React.Component {
         return (
 
             this.props.clicked && <div style={
-                {
-                    overflowY: 'scroll',
-                    zIndex: 120,
-                    border: '1px solid grey',
-                    padding: '5px 5px 5px 5px',
-                    borderRadius: '5px',
-                    backgroundColor: '#FFFFFF',
-                    height: '300px',
-                    minWidth: '250px',
-                    width: '20%',
-                    right: '15px',
-                    top: '50px',
-                    position: 'fixed'
-                }
+                Styles.notification
             }
             >
                 {

@@ -48,7 +48,9 @@ export default class HomePage extends React.Component {
     noFriendsExist = () => {
         return <div style={ Styles.topSpace }>
             <Header title={ 'Friends' } />
-             <h5 style={{textAlign:'center'}}> No friends added yet</h5>
+             <h5 style={Styles.centerBlock}>
+                No friends added yet
+            </h5>
         </div>
     }
 
@@ -58,9 +60,7 @@ export default class HomePage extends React.Component {
                 <div style={ Styles.topSpace }>
                     <Header title={'Friends'} />
                     <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } 
-                    style={{
-                        marginRight: '0px'
-                    }}
+                    style={Styles.noRightMargin}
                     >
                         { this.state.friends.map(f =>
                             <FriendCard

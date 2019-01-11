@@ -91,14 +91,6 @@ export default class HomePage extends React.Component {
                         </Form>
                     </div>
                 </div>
-                <div
-                 style={ {
-                    width: '20%',
-                    zIndex: '1',
-                    paddingTop: "1em"
-                } }
-                >
-                </div>
                 {animate.list(<SearchArea
                     friends={ this.props.friends }
                     selectUser={ this.selectUser }

@@ -3,6 +3,8 @@ import {Link} from 'react-router-dom'
 import { Form, Button, Message } from 'semantic-ui-react'
 import Uploader from '../components/Uploader'
 import * as adapter from '../Adapter'
+import * as Styles from '../Styles'
+
 
 export default class Signup extends React.Component {
 
@@ -93,21 +95,11 @@ handleImageSet = (img_url) =>{
                <img
                     alt='giftR logo'
                     onClick={ this.props.back }
-                    style={ {
-                        zIndex: 1,
-                        width: '70%',
-                        height: 'auto',
-                        paddingLeft: "30%"
-                    } }
+                    style={ Styles.giftrLogo }
                     src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
                 />
                 <Uploader propFunction={ this.handleImageSet } />
-            <Form error style={{
-                // marginTop: '20%',
-                width: '80%',
-                marginLeft: '10%'
-            }
-            }>
+            <Form error style={Styles.form}>
                 <Form.Field>
                     <Form.Input
                         onChange={event => this.handleChange(event.target.value, "first_name")} placeholder ='First Name' maxLength='20'
@@ -170,15 +162,12 @@ handleImageSet = (img_url) =>{
                               }
                color="teal"
                type='submit'
-                    style={ { 
-                        marginLeft: 'calc(50% - 43px)'
-                    }}
+                    style={Styles.submitButton}
                 >
-                Submit</Button>
+                    Submit
+                </Button>
             </Form>
-                <div style={ {
-                    textAlign: 'center'
-                } }>
+                <div style={ Styles.centerBlock}>
                 
                 { !this.props.user && 
                 <Link 

@@ -54,11 +54,7 @@ export default class Wish extends React.Component {
         if(this.state.wish){return (<div>
             <br />
             <Card 
-                style={ {
-                    minHeight: '433px',
-                    maxHeight: '1050px',
-                    width: '300px',
-                }}>
+                style={ Styles.editableCard}>
                 <img 
                     alt='wish'
                     style={ Styles.mapImage } 

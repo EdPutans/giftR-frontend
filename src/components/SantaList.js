@@ -73,18 +73,13 @@ extends React.Component {
         if (!selectedUser) {
             return (
                 
-                <div style={ 
-                    Styles.left1em
-                 }>
+                <div style={ Styles.left1em }>
                     {users.length>0 && <h3>Active Secret Santas:</h3>}
                     { users.length>0 && users.map(e =>
                         <Card
                             key={e.id}
                             onClick={ () => this.selectUser(e) }
-                            style={ {
-                                textAlign: 'center',
-                                margin: '1em auto',
-                            } }
+                            style={ Styles.card }
                             header={ `${e.first_name} ${e.last_name}` }
                             meta={ `Deadline on ${this.formatDate(e.deadline)}` }
                             description={ `Budget - £${e.budget}` }

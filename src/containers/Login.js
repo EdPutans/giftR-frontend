@@ -1,6 +1,8 @@
 import React from 'react'
 import { Form, Button } from 'semantic-ui-react'
 import {Link} from 'react-router-dom'
+import * as Styles from '../Styles'
+
 
 export default class Login extends React.Component {
 
@@ -32,43 +34,28 @@ export default class Login extends React.Component {
                 <img
                     onClick={this.props.back}
                     alt = 'giftR logo'
-                    style={ {
-                        zIndex: 1,
-                        width: '70%',
-                        height: 'auto',
-                        paddingLeft: "30%"
-                    } }
+                    style={ Styles.giftrLogo }
                     src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
                 />
-                <Form style={ {
-                    // marginTop: '20%',
-                    width: '80%',
-                    marginLeft: '10%'
-                }}>
-                    <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder='Email' />
-                    </Form.Field>
-                    <Form.Field>
-                        <input onChange={ event => this.handleChange(event.target.value, "password") } placeholder='Password' type="password" />
-                    </Form.Field>
-
-                    <Button 
-                        onClick={ this.handleSubmit } type='submit'
-                        style={ {
-                            marginLeft: 'calc(50% - 43px)'
-                        } }
-                    >
-                        Submit
-                    </Button><br></br>
-                    <div style={ {
-                        textAlign: 'center'
-                    } }>
-                    <Link 
-                        to="/signup"
-                        
-                    >
-                        Not a member yet? Sign up here!
-                    </Link>
+                <Form style={ Styles.form }>
+                        <Form.Field>
+                            <input onChange={ event => this.handleChange(event.target.value, "email") } placeholder='Email' />
+                        </Form.Field>
+                        <Form.Field>
+                            <input onChange={ event => this.handleChange(event.target.value, "password") } placeholder='Password' type="password" />
+                        </Form.Field>
+                        <Button 
+                            onClick={ this.handleSubmit } type='submit'
+                            style={ Styles.submitButton }
+                        >
+                            Submit
+                        </Button><br></br>
+                        <div style={ Styles.centerBlock}>
+                        <Link 
+                            to="/signup"
+                        >
+                            Not a member yet? Sign up here!
+                        </Link>
                     </div>
                 </Form>
             </div>

@@ -3,6 +3,8 @@ import { Form, Button, Label} from 'semantic-ui-react'
 import * as adapter from '../Adapter'
 import Uploader from '../components/Uploader'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
+
 
 export default class ProfileForm extends React.Component {
 
@@ -112,28 +114,22 @@ export default class ProfileForm extends React.Component {
         const { user } = this.props
         const { first_name, last_name, email, age, new_password, repeat_password, old_password } = this.state
         return (
-        animate.down(<div style={ {
-                    zIndex: 1,
-                    
-                } }>
+        animate.down(<div
+        // zIndex: 1
+        >
                 <div>
-                    
                     <Uploader 
                         profilePicURL={user.img_url}
                         propFunction={this.setImage}
                     />
                 </div>
                     <Form
-                        style={ {
-                            // marginTop: '10%',
-                            width: '80%',
-                            marginLeft: '10%'
-                        } }
+                        style={ Styles.form }
                     ><br />
 
                         <Form.Field>
                             { !this.checkForPasswordPresense() && <Label>Note: To save changes enter current password below.</Label> }
-                            <Form.Input style={ { marginTop: '15px' } }
+                            <Form.Input style={ Styles.topSpace }
                                 onChange={ event => this.handleChange(event.target.value, "first_name") }
                                 placeholder={ 'First name: ' + user.first_name }
                                 maxLength="20"

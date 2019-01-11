@@ -3,6 +3,7 @@ import * as adapter from '../Adapter'
 import { Form, Button, Radio, Label } from 'semantic-ui-react'
 import Header from './Header'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
 
 export default class WishForm extends React.Component {
 
@@ -82,7 +83,7 @@ export default class WishForm extends React.Component {
             maxLength: '20',
             name: 'name',
             placeholder: "Description (up to 500 characters)",
-            onChange: event => this.setState({ dscription: event.target.value })
+            onChange: event => this.setState({ description: event.target.value })
         },
         {
             defaultValue: this.state.url,
@@ -114,16 +115,10 @@ export default class WishForm extends React.Component {
         return (
            
         <div style={ !this.props.editing ?
-            {
-                zIndex: 1,
-                paddingTop: "3em",
-                marginLeft: '10%',
-                marginRight: '10%'
-            }
+            Styles.wishForm
             :
-            {
-                paddingTop: "1em"
-            } }
+            Styles.betweenTwo1ems
+        }
         >
                 { !this.props.editing && <Header title={ 'Make a wish!' } />}
             {animate.down(

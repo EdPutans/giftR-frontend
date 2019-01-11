@@ -40,19 +40,23 @@ export default class Wishlist extends React.Component {
     renderCorrectButton = (id) =>{
         if (this.state.unaccepted_ids && this.state.unaccepted_ids.find(digit => digit === id))
         {
-            return <div style={ { marginTop: '5px', textAlign: 'center' } }>
+            return <div style={ 
+                Styles.wishListMessageToUser
+            }>
                 <h5>You were added as a friend. Accept request from notifications.</h5>
                 </div>
         }
         if(this.props.currentUser.id === this.props.user.id){return;}
         if (this.state.active_request_ids && this.state.active_request_ids.find(digit => digit === id)){
-            return <div style={ { marginTop: '5px', textAlign: 'center' } }>
+            return <div style={ 
+                Styles.wishListMessageToUser
+                }>
                    <h5>Friend request sent</h5>
                 </div>
         }
 
         return this.props.friends && !this.props.friends.find(u => u.id === id) ?
-            <div style={ { marginTop: '5px', textAlign: 'center' } }>
+            <div style={Styles.wishListMessageToUser}>
                 <Button
                     basic
                     color='teal'
@@ -63,11 +67,13 @@ export default class Wishlist extends React.Component {
             </div>
             :
             !this.props.currentUser.id !== this.props.user.id && <div>
-                <div style={ { marginTop: '5px', textAlign: 'center' } }>
+                <div style={ Styles.wishListMessageToUser}>
                     <img
                         alt='green tick'
                         src='https://us.123rf.com/450wm/stas11/stas111706/stas11170600111/80189104-green-check-mark-icon-tick-symbol-in-green-color-vector-illustration.jpg?ver=6'
-                        style={ { maxHeight: '20px', width: 'auto' } }
+                        style={ 
+                            Styles.greenTick
+                        }
                     />
                     Already a mate
                 </div>
@@ -93,13 +99,7 @@ export default class Wishlist extends React.Component {
             className="circular"
             color="teal"
             onClick={ this.props.resetUser }
-            style={ {
-                position: 'fixed',
-                marginLeft: 'calc(50% - 56px)',
-                margin: 'auto',
-                bottom: '1em',
-                textAlign: 'center'
-            } }
+            style={ Styles.returnButton }
         >
             <Icon name='angle left' /> Go back
         </Button>
@@ -109,13 +109,7 @@ export default class Wishlist extends React.Component {
             circular
             color="red"
             onClick={ this.createWish }
-            style={ {
-                
-                right: '10px',
-                position: 'fixed',
-                top: '90%',
-            
-            } }
+            style={ Styles.plusButton }
         >
             <h1>+</h1>
         </Button>
@@ -141,9 +135,7 @@ export default class Wishlist extends React.Component {
                                 :
                                 'My wishlist'
                         } />
-                    <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } style={ {
-                        marginRight: '0px'
-                    } } >
+                    <Card.Group className="ui center aligned grid" itemsPerRow={ 2 } style={ Styles.noRightMargin } >
                     
                     { this.props.gifts.length > 0 ? this.props.gifts
                         .sort((a, b) => parseInt(a.price) - parseInt(b.price))
@@ -159,9 +151,7 @@ export default class Wishlist extends React.Component {
                         :
                         <div
                             style={
-                                {
-                                    marginTop: '5em'
-                                }
+                               Styles.topSpace
                             }>
                             <h4>No wishes were made yet</h4>
                         </div> }

@@ -167,10 +167,7 @@ export default class SantaMain extends React.Component {
         const {toggleCalendar, onCalendarChange} = this;
         return ((budgetSet && calendarActive) ?
             <div>
-                <div style={ {
-                    display: 'inline-block',
-                    margin: 'auto auto 3em'
-                } }>
+                <div style={ Styles.calendarDiv }>
                     {
                         deadlineSet ?
                             <h5>Change deadline:</h5>
@@ -217,9 +214,11 @@ export default class SantaMain extends React.Component {
                     { animate.fade(<h4>Selected users:</h4>) }
 
                     { users.map(e =>
-                        <div key={ e.id } style={ { margin: '1em auto 0 auto' } }>
+                        <div key={ e.id } style={ 
+                                Styles.betweenTwo1ems
+                            }>
                             { animate.santaList(
-                                <div style={ { textAlign: 'center', display: 'inline-block' } } >
+                                <div style={ Styles.santaList} >
                                     <Card
                                         description={ `${e.first_name} ${e.last_name}` }
                                         key={ e.id }
@@ -237,9 +236,13 @@ export default class SantaMain extends React.Component {
 
     renderRandomizedPeople = () => {
         return this.state.mappedPeople && this.state.mappedPeople.map(u => {
-            return <div key={ u.id } style={ { margin: '2em auto 2em auto' } }>
+            return (
+            <div 
+                key={ u.id } 
+                style={ Styles.betweenTwo3ems }
+            >
                 <div
-                    style={ { textAlign: 'center', display: 'inline-block' } }
+                    style={ Styles.santaList }
                 >
                     { animate.fade(
                         <Card
@@ -249,6 +252,7 @@ export default class SantaMain extends React.Component {
 
                 </div>
             </div>
+            )
         }
         )
     }
@@ -291,10 +295,7 @@ export default class SantaMain extends React.Component {
                     <h5>2. Set budget:</h5>
                     £<div className='ui input'
                         style={
-                            {
-                                marginBottom: '3em'
-
-                            }
+                            Styles.bottomSpace
                         }
                     >
                         <input
@@ -338,7 +339,10 @@ export default class SantaMain extends React.Component {
         return animate.down(<div>
 
             <h3>Create new Secret Santa</h3>
-            <div style={ { margin: '0 3em 0 3em' } }>
+            <div 
+                // style={ { margin: '0 3em 0 3em' } }
+                
+            >
                 <div style={ Styles.betweenTwo1ems }>
                     1. Add people to the randomizer:
                  </div>

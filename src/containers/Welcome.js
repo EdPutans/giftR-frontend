@@ -1,6 +1,7 @@
 import React from 'react'
 import { Button } from 'semantic-ui-react'
 import * as animate from '../Animations'
+import * as Styles from '../Styles'
 
 
 export default class Welcome extends React.Component {
@@ -19,27 +20,17 @@ export default class Welcome extends React.Component {
     render() {
         return (
             animate.fade(
-            <div style={{ backgroundColor: '#FFFFFF' }}
-           
-            >
+            <div >
                 <img alt='giftR logo'
-                    style={ {
-                        display: 'block',
-                        overflow: 'hidden',
-                        maxWidth: '80%',
-                        marginLeft: 'auto',
-                        marginRight: 'auto',
-                        height: 'auto',
-                    } }
-
-                                src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
+                    style={ Styles.welcomeGiftrLogo }
+                    src="https://cdn.dribbble.com/users/333998/screenshots/3062664/giftr.png"
                  />
                  <div>
                 <Button
                     // style={ this.buttonStyle}
-                    style={{
-                        marginLeft:'calc(50% - 80px)'
-                    }}
+                    style={
+                        Styles.welcomeLoginButton
+                    }
                     onClick={ () => this.props.history.push('/login') }
                     color='red'
                 >
@@ -54,7 +45,7 @@ export default class Welcome extends React.Component {
                     Sign up
                 </Button>
                 </div >
-                <div style={ { textAlign: 'center', margin: '10% 5% 0 5%' } }>
+                <div style={ Styles.welcomePitch}>
                     <h4>GiftR takes care of your holiday gifting headache</h4>
                     <h6>Find out what other people would like to get as a gift!</h6>
                 </div>

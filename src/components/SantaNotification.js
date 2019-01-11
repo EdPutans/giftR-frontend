@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Card} from 'semantic-ui-react'
 import * as Adapter from '../Adapter'
-
+// styling not applicable
 
 export default class SantaNotification extends React.Component {
 
@@ -16,7 +16,7 @@ export default class SantaNotification extends React.Component {
            this.props.handleClick()
 
         }else{
-           return alert("The 'Cool' Button broke for some reason ")
+           return alert("The 'Cool' Button broke for some reason")
         }
         
     }
