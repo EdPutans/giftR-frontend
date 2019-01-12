@@ -1,7 +1,8 @@
+You can try out the application here: https://giftr-frontend.herokuapp.com/
+
+
 GiftR is a social application which allows a user to look up other registered users and see their gift preferences.
 
-
-You can try out the application here: https://giftr-frontend.herokuapp.com/
 Test credentials:
 
 To test out the notifications functionality you will likely need another account. To make the process easier, here'
