@@ -15,6 +15,12 @@ export const mainDiv = {
     right: 0,
 }
 
+export const searchCard = {
+    zIndex: 1,
+    minWidth: '375px',
+    paddingTop: "1em"
+}
+
 // highly reusable styling components
 export const betweenTwo1ems =  { margin: '1em 0 1em 0' }
 export const betweenTwo3ems = { 
@@ -69,12 +75,16 @@ export const giftrLogo ={
     paddingLeft: "30%"
 }
 
+export const mapImageContainer = { overflow: 'hidden', margin: '5% 5% 5% 5%' }
+
 export const mapImage = {
-    maxHeight: '80%',
-    maxWidth: '80%',
+    
+    height: '200px',
+    width: 'auto',
+    overflow: 'hidden',
     margin: '0 auto',
     display: 'block',
-    padding: '5% 0 5% 0 '
+    // padding: '5% 5% 5% 5%'
 }
 
 export const submitButton = {

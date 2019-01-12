@@ -27,9 +27,11 @@ friendCard =(friend) => {
         onClick={()=>this.handleClick(friend)}
         style={ Styles.topSpace }
         >
+            <div style={ Styles.mapImageContainer}>
         <img alt='user profile pic'
          style={  Styles.mapImage } 
          src={ friend.img_url || 'https://pngimage.net/wp-content/uploads/2018/05/default-user-png-2.png' } />
+        </div>
         <Card.Content>
            
             <Card.Header>{ (friend.first_name ? friend.first_name : "") + ' ' + (friend.last_name? friend.last_name : "") }</Card.Header>

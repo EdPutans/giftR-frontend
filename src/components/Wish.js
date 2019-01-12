@@ -54,15 +54,18 @@ export default class Wish extends React.Component {
         if(this.state.wish){return (<div>
             <br />
             <Card 
-                style={ Styles.editableCard}>
-                <img 
-                    alt='wish'
-                    style={ Styles.mapImage } 
-                    src={ 
-                        wish.img_url ||
-                        'https://images.immediate.co.uk/volatile/sites/3/2017/11/imagenotavailable1-39de324.png'
-                     } 
-                />
+                style={ Styles.editableCard}
+            >
+                <div style={Styles.mapImageContainer}>
+                    <img 
+                        alt='wish'
+                        style={ Styles.mapImage } 
+                        src={ 
+                            wish.img_url ||
+                            'https://images.immediate.co.uk/volatile/sites/3/2017/11/imagenotavailable1-39de324.png'
+                        } 
+                    />
+                </div>
                 <Card.Content>
                     <Card.Header><Icon name='star'/>{wish.name}</Card.Header>
                     

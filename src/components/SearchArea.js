@@ -19,9 +19,11 @@ export default class SearchArea extends React.Component {
 
     render() {
             return (<div style={Styles.betweenTwo1ems}>
+            
                 <Card.Group className="ui center aligned grid">
                 { this.props.users && this.props.users.map(u =>
-                    <div key={u.id}>
+                    <div key={u.id}
+                        style={ Styles.searchCard}>
                         {animate.list(<Card
                             key={u.id}
                             fluid
@@ -30,6 +32,7 @@ export default class SearchArea extends React.Component {
                             meta={ u.gifts.length + " wish(es)" }
                             description={this.isFriend(u.id)}
                         />)}
+                        
                     </div>
                 ) }
                 

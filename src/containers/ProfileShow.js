@@ -17,9 +17,12 @@ export default class ProfileShow extends React.Component {
                     <Card fluid
                     style={ Styles.userProfile }
                     >
-                        <img alt='user profile pic' 
-                        style={ Styles.mapImage } 
-                    src={ user.img_url ? user.img_url : 'https://pngimage.net/wp-content/uploads/2018/05/default-user-png-2.png'} />
+                        <div style={Styles.mapImageContainer}>
+                            <img alt='user profile pic' 
+                                style={ Styles.mapImage } 
+                                src={ user.img_url ? user.img_url : 'https://pngimage.net/wp-content/uploads/2018/05/default-user-png-2.png' }
+                            />
+                            </div>
                         <Card.Content>
                             
                             <Card.Header>{`${user.first_name} ${user.last_name}`}</Card.Header>
