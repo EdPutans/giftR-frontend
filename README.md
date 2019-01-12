@@ -11,8 +11,8 @@ s a test account:
 login: ed@ed.com
 password: reeeee
 
-thomas@train.com
-choochoo
+login: thomas@train.com
+password: choochoo
 
 The applications is built using React on the front end and Ruby on Rails on the back end.
 The back end of the app can be located here: https://github.com/edPutans/giftr-backend
