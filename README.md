@@ -1,6 +1,7 @@
 GiftR is a social application which allows a user to look up other registered users and see their gift preferences.
 
-Demo: https://youtu.be/mJNI9xsNJ_k
+
+You can try out the application here: https://giftr-frontend.herokuapp.com/
 
 The applications is built using React on the front end and Ruby on Rails on the back end.
 The back end of the app can be located here: https://github.com/edPutans/giftr-backend
