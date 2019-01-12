@@ -2,6 +2,16 @@ GiftR is a social application which allows a user to look up other registered us
 
 
 You can try out the application here: https://giftr-frontend.herokuapp.com/
+Test credentials:
+
+To test out the notifications functionality you will likely need another account. To make the process easier, here'
+s a test account:
+
+login: ed@ed.com
+password: reeeee
+
+thomas@train.com
+choochoo
 
 The applications is built using React on the front end and Ruby on Rails on the back end.
 The back end of the app can be located here: https://github.com/edPutans/giftr-backend
@@ -30,6 +40,5 @@ The application allows a user:
 (note: Users on both sides only become friends when the addressant accepts the request from the notification area)
 - Secret santa generator (currently in development) allows creating a list of users and after clicking "Randomize" allocates a gift receiver for each person on the list. Randomization can be done as many times as the user likes. After confirming the lists, everybody on the list receives a notification with the details, which can later be viewed in the Secret Santa tab. Once the Secret santa deadline has passed, the information will no longer be shown to the user.
 
-Contributing:
-
-At this stage the application is still in the development stage. All suggestions are welcome. Pull requests will also be reviewed.
+The main issue is "cannot GET route" when refreshing the page outside of the homepage. 
+This is due to the way the node server is currently set up and will be addressed soon.
