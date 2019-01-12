@@ -28,6 +28,12 @@ export const betweenTwo3ems = {
     margin: '3em 0 3em 0' 
 }
 
+
+// export const profileForm = {
+//     ...form, marginTop: '3em'
+// }
+
+
 export const form = {
     width: '80%',
     marginLeft: '10%'

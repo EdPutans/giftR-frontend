@@ -19,6 +19,7 @@ export default class SantaMain extends React.Component {
 
     state = {
         self: false,
+        loading: false,
         // steps:
         deadlineSet: false,
         randomizedSet: false,
@@ -95,6 +96,7 @@ export default class SantaMain extends React.Component {
 
 
     createSecretSanta = async () => {
+        this.setState({ loading: true })
         let { date, randomized, budget } = this.state
         let deadline = [date.getYear() + 1900, date.getMonth() + 1, date.getDate()]
         let body = {
@@ -113,6 +115,7 @@ export default class SantaMain extends React.Component {
 
 
     redirectBack = () =>{
+        
         return setTimeout(() => this.props.history.push('/santa'), 2500)
     }
 
@@ -325,6 +328,7 @@ export default class SantaMain extends React.Component {
                     color='teal'
                     basic
                     size='big'
+                    disabled={this.state.loading}
                     onClick={ () => this.randomizer(this.mapIdsForRandomizer(users)) }
                 >
                     { randomizedSet ? 'Randomize again' : 'Randomize list' }
@@ -400,6 +404,7 @@ export default class SantaMain extends React.Component {
                 basic
                 size='tiny'
                 color='red'
+                disabled={this.state.loading}
             >
                 Cancel
             </Button>

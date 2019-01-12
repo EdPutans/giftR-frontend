@@ -115,7 +115,7 @@ export default class ProfileForm extends React.Component {
         const { first_name, last_name, email, age, new_password, repeat_password, old_password } = this.state
         return (
         animate.down(<div
-        // zIndex: 1
+            style={Styles.topSpace}
         >
                 <div>
                     <Uploader 
